@@ -1,0 +1,60 @@
+<div class="container min-vh-75 py-4 px-40">
+  <div
+    class="container-fluid border-2 border-start border-end min-vh-50 position-static mt-5"
+  >
+    <form [formGroup]="form" (ngSubmit)="register($event)">
+      <h2 class="">Registrate</h2>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" formControlName="name" />
+          <div class="alert alert-danger mt-2" [hidden]="name.valid || name.pristine">
+            El nombre es obligatorio
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="phone" class="form-label">Tel&eacute;fono</label>
+          <input type="number" class="form-control" formControlName="phone"/>
+          <div class="alert alert-danger mt-2" [hidden]="phone.valid || phone.pristine">
+            El tel&eacute;fono es obligatorio
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electr&oacute;nico</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+        />
+        <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
+          El correo electr&oacute;nico es obligatorio
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" formControlName="password" />
+          <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
+            La contraseña es obligatorio
+          </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="confirmPassword" class="form-label"
+            >Confirmar contraseña</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            formControlName="confirmPassword"
+          />
+          <div class="alert alert-danger mt-2" [hidden]="confirmPassword.valid || confirmPassword.pristine">
+            Confirmar la contraseña es obligatorio
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Registrarse</button>
+    </form>
+  </div>
+</div>

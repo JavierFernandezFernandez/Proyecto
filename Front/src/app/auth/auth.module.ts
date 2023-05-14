@@ -9,6 +9,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,11 +21,14 @@ import { CustomerServiceComponent } from './customer-service/customer-service.co
     OrdersComponent,
     ReviewsComponent,
     PaymentMethodsComponent,
-    CustomerServiceComponent
+    CustomerServiceComponent,
+    LoginComponent,
+    RegistrationComponent,
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

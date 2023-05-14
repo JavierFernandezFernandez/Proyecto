@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { PageRoutingModule } from './page-routing.module';
 import { ProductComponent } from './product/product.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
+import { FormsModule } from '@angular/forms';
+import { CarrouselMarcasComponent } from './carrousel-marcas/carrousel-marcas.component';
 
 
 
@@ -11,11 +13,13 @@ import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.compo
   declarations: [
     HomeComponent,
     ProductComponent,
-    ShoppingBasketComponent
+    ShoppingBasketComponent,
+    CarrouselMarcasComponent,
   ],
   imports: [
     CommonModule,
-    PageRoutingModule
+    PageRoutingModule,
+    
   ]
 })
 export class PageModule { }

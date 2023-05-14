@@ -6,6 +6,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 // configuration/informacion
 // lista de deseos
@@ -40,6 +42,14 @@ const routes: Routes = [
       {
         path: 'customer-service',
         component: CustomerServiceComponent
+      },
+      {
+        path:'login',
+        component: LoginComponent
+     },
+      {
+        path:'registration',
+        component: RegistrationComponent
       },
       {
         path: '**',

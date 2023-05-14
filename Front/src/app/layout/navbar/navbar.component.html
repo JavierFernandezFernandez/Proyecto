@@ -28,14 +28,6 @@
           <li><a href="#" class="nav-link px-2 link-dark">Clientes</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">Productos</a></li>
         </ul>
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Buscar..."
-            aria-label="Buscar"
-          />
-        </form>
         <!-- sesion iniciada -->
         <div class="dropdown text-end d-none">
           <a
@@ -63,17 +55,17 @@
         </div>
         <!-- sesion NO iniciada -->
         <div class="text-end">
-          <button type="button" class="btn btn-outline-primary me-2">
-            Ingresar
+          <button type="button" class="btn btn-outline-primary me-2" routerLink="auth/login">
+            Iniciar sesi&oacute;n
           </button>
-          <button type="button" class="btn btn-primary">Registrarse</button>
+          <button type="button" class="btn btn-primary" routerLink="auth/registration">Registrarse</button>
         </div>
       </div>
     </div>
   </div>
   <!-- SubEncabezado -->
   <div class="pt-2">
-    <div class="container">
+    <div class="container d-flex">
       <div class="dropdown">
         <a
           class="btn btn-secondary dropdown-toggle"
@@ -91,6 +83,14 @@
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div>
+      <form class=" w-100 ms-3 pe-0" role="search">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Buscar..."
+          aria-label="Buscar"
+        />
+      </form>
     </div>
   </div>
 </header>
