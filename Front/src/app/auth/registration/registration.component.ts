@@ -1,7 +1,13 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
+
+interface FormControls {
+  [key: string]: any;
+}
 
 @Component({
   selector: 'app-registration',
@@ -9,15 +15,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(45)]),
-    phone: new FormControl('',[Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
-    email: new FormControl('',[Validators.required,Validators.email, Validators.minLength(4), Validators.maxLength(45)]),
-    password: new FormControl('',[Validators.required,Validators.email, Validators.minLength(8), Validators.maxLength(45)]),
-    confirmPassword: new FormControl('',[Validators.required,Validators.email, Validators.minLength(8), Validators.maxLength(45)]),
+  form = this.formB.group({
+    name: ['', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(45),
+    ]],
+    phone: ['', [
+      Validators.required,
+      Validators.pattern(/^[6-9]\d{8}$/),
+    ]],
+    email: ['', [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(45),
+    ]],
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(255),
+    ]],
+    confirmPassword: ['', [
+      Validators.required,
+    ]],
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  equalsPassword:boolean = true;
+
+  constructor(private authService: AuthService, private router: Router, private formB:FormBuilder) {}
 
   get name(): FormControl {
     return this.form.get('name') as FormControl;
@@ -35,22 +60,26 @@ export class RegistrationComponent {
     return this.form.get('confirmPassword') as FormControl;
   }
 
-  register(
-    event: SubmitEvent
-  ) {
+  register(event: SubmitEvent) {
     if (this.password.value === this.confirmPassword.value) {
-      // console.log(
-      //   `${name.value}\n${phone.value}\n${email.value}\n${password.value}\n${confirmPassword.value}`
-      // );
-
-      this.authService
-        .saveUser(this.name.value, this.phone.value, this.email.value, this.password.value, 6)
-        .subscribe((response) => {
-          console.log(response);
-        });
-      this.router.navigate(['/']);
+      this.equalsPassword = true;
+      console.log(
+        `${this.name.value}\n${this.phone.value}\n${this.email.value}\n${this.password.value}\n${this.confirmPassword.value}`
+      );
+      // this.authService
+      //   .saveUser(
+      //     this.name.value,
+      //     this.phone.value,
+      //     this.email.value,
+      //     this.password.value,
+      //     6
+      //   )
+      //   .subscribe((response) => {
+      //     console.log(response);
+      //   });
+      // this.router.navigate(['/']);
     } else {
-      console.log('contaseñas no coinciden');
+      this.equalsPassword = false;
       event.preventDefault();
     }
   }

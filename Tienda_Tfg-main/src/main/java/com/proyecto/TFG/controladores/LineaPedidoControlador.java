@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lineaPedido")
+@CrossOrigin(origins = "*")
 public class LineaPedidoControlador {
 
     @Autowired

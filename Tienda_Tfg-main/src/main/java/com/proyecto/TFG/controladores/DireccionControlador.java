@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/direccion")
+@CrossOrigin(origins = "*")
 public class DireccionControlador {
 
     @Autowired

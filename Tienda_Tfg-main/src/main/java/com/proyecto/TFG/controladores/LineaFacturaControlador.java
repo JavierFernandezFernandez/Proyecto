@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/lineaFactura")
+@CrossOrigin(origins = "*")
 public class LineaFacturaControlador {
 
     @Autowired

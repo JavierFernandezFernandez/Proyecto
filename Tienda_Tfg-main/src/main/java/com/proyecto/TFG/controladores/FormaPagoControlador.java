@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/formaPago")
+@CrossOrigin(origins = "*")
 public class FormaPagoControlador {
 
     @Autowired

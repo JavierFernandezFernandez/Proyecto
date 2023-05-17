@@ -13,13 +13,13 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
+        path: 'shopping_basket',
+        component: ShoppingBasketComponent
+      },
+      {
         path: ':id',
         component: ProductComponent
       },
-      {
-        path: 'shopping_basket',
-        component: ShoppingBasketComponent
-      }
     ],
   },
 ];

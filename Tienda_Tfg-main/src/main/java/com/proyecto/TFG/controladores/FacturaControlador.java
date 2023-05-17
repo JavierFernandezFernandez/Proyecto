@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/factura")
+@CrossOrigin(origins = "*")
 public class FacturaControlador {
 
     @Autowired

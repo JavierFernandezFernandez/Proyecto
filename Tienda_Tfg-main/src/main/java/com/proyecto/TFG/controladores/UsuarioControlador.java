@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioControlador {
 
     @Autowired
@@ -49,4 +50,5 @@ public class UsuarioControlador {
         estadoUsuarioEliminado.put("eliminado", true);
         return  ResponseEntity.ok(estadoUsuarioEliminado);
     }
+
 }

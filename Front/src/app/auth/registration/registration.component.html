@@ -8,53 +8,103 @@
         <div class="mb-3 col-6">
           <label for="name" class="form-label">Nombre</label>
           <input type="text" class="form-control" formControlName="name" />
-          <div class="alert alert-danger mt-2" [hidden]="name.valid || name.pristine">
-            El nombre es obligatorio
+          <div
+            class="alert alert-danger mt-2"
+            [hidden]="name.valid || name.pristine"
+          >
+            <span *ngIf="name.errors?.['required']">
+              El nombre es obligatorio
+            </span>
+            <span *ngIf="name.errors?.['minll']">
+              El nombre es demasiado corto
+            </span>
+            <span *ngIf="name.errors?.['maxlength']">
+              El nombre es demasiado largo
+            </span>
           </div>
         </div>
         <div class="mb-3 col-6">
           <label for="phone" class="form-label">Tel&eacute;fono</label>
-          <input type="number" class="form-control" formControlName="phone"/>
-          <div class="alert alert-danger mt-2" [hidden]="phone.valid || phone.pristine">
-            El tel&eacute;fono es obligatorio
+          <input type="number" class="form-control" formControlName="phone" />
+          <div
+            class="alert alert-danger mt-2"
+            [hidden]="phone.valid || phone.pristine"
+          >
+            <span *ngIf="phone.errors?.['required']">
+              El tel&eacute;fono es obligatorio
+            </span>
+            <span *ngIf="phone.errors?.['pattern']">
+              El tel&eacute;fono debe ser v&aacute;lido
+            </span>
           </div>
         </div>
       </div>
 
       <div class="mb-3">
         <label for="email" class="form-label">Correo electr&oacute;nico</label>
-        <input
-          type="email"
-          class="form-control"
-          formControlName="email"
-        />
-        <div class="alert alert-danger mt-2" [hidden]="email.valid || email.pristine">
-          El correo electr&oacute;nico es obligatorio
+        <input type="email" class="form-control" formControlName="email" />
+        <div
+          class="alert alert-danger mt-2"
+          [hidden]="email.valid || email.pristine"
+        >
+          <span *ngIf="email.errors?.['required']">
+            El correo electr&oacute;nico es obligatorio
+          </span>
+          <span *ngIf="email.errors?.['email']">
+            Formato de correo electr&oacute;nico invalido
+          </span>
+          <span *ngIf="email.errors?.['maxlength']">
+            El correo electr&oacute;nico es demasiado largo
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="mb-3 col-6">
           <label for="password" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="password" formControlName="password" />
-          <div class="alert alert-danger mt-2" [hidden]="password.valid || password.pristine">
-            La contraseña es obligatorio
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+          <div
+            class="alert alert-danger mt-2"
+            [hidden]="password.valid || password.pristine"
+          >
+            <span *ngIf="password.errors?.['required']">
+              La contraseña es obligatoria
+            </span>
+            <span *ngIf="password.errors?.['minlength']">
+              La contraseña es demasiado corta
+            </span>
+            <span *ngIf="password.errors?.['maxlength']">
+              La contraseña es demasiado larga
+            </span>
           </div>
         </div>
         <div class="mb-3 col-6">
-          <label for="confirmPassword" class="form-label"
-            >Confirmar contraseña</label
-          >
+          <label for="confirmPassword" class="form-label">
+            Confirmar contraseña
+          </label>
           <input
             type="password"
             class="form-control"
             formControlName="confirmPassword"
           />
-          <div class="alert alert-danger mt-2" [hidden]="confirmPassword.valid || confirmPassword.pristine">
+          <div
+            class="alert alert-danger mt-2"
+            [hidden]="confirmPassword.valid || confirmPassword.pristine"
+          >
             Confirmar la contraseña es obligatorio
+          </div>
+          <div class="alert alert-danger mt-2" [hidden]="equalsPassword">
+            Las contraseñas no coinciden
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Registrarse</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Registrarse
+      </button>
     </form>
   </div>
 </div>

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
+@CrossOrigin(origins = "*")
 public class PedidoControlador {
 
     @Autowired
