@@ -21,8 +21,8 @@ public class Usuario implements Serializable {
     private String email;
     @Column(name = "Telefono")
     private String telefono;
-    @Column(name = "Contraseña")
-    private String contraseña;
+    @Column(name = "Password")
+    private String password;
     @ManyToOne()
     @JoinColumn(name = "Roles_Id")
     private Rol rol;
@@ -75,12 +75,12 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Rol getRol() {

@@ -16,7 +16,7 @@ public class UsuarioDTO{
     private String nombre;
     private String email;
     private String telefono;
-    private String contraseña;
+    private String password;
     private RolDTO rol;
 
     public UsuarioDTO(){
@@ -55,12 +55,12 @@ public class UsuarioDTO{
         this.telefono = telefono;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public RolDTO getRol() {

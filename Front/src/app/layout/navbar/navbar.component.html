@@ -29,7 +29,7 @@
           <li><a href="#" class="nav-link px-2 link-dark">Productos</a></li>
         </ul>
         <!-- sesion iniciada -->
-        <div class="dropdown text-end d-none">
+        <div class="dropdown text-end" *ngIf="isLoggedIn">
           <a
             href="#"
             class="d-block link-dark text-decoration-none dropdown-toggle"
@@ -50,15 +50,25 @@
             <li><a class="dropdown-item" href="#">Configuración</a></li>
             <li><a class="dropdown-item" href="#">Perfil</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            <li><a class="dropdown-item" href="#" (click)="closeSesion()">Cerrar sesión</a></li>
           </ul>
         </div>
         <!-- sesion NO iniciada -->
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-primary me-2" routerLink="auth/login">
+        <div class="text-end" *ngIf="!isLoggedIn">
+          <button
+            type="button"
+            class="btn btn-outline-primary me-2"
+            routerLink="auth/login"
+          >
             Iniciar sesi&oacute;n
           </button>
-          <button type="button" class="btn btn-primary" routerLink="auth/registration">Registrarse</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            routerLink="auth/registration"
+          >
+            Registrarse
+          </button>
         </div>
       </div>
     </div>
@@ -83,7 +93,7 @@
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div>
-      <form class=" w-100 ms-3 pe-0" role="search">
+      <form class="w-100 ms-3 pe-0" role="search">
         <input
           type="search"
           class="form-control"

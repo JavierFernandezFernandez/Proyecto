@@ -16,6 +16,7 @@ public class ProductoDTO{
     private String nombre;
     private double precio;
     private double iva;
+    private String descripcion;
     private MarcaDTO marca;
     private CategoriaDTO categoria;
 
@@ -53,6 +54,14 @@ public class ProductoDTO{
 
     public void setIva(double iva) {
         this.iva = iva;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public MarcaDTO getMarca() {

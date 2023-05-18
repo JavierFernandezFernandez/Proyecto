@@ -1,5 +1,5 @@
-import { FormBuilder,FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './../services/auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UsuarioService } from '../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -40,9 +40,9 @@ export class RegistrationComponent {
     ]],
   });
 
-  equalsPassword:boolean = true;
+  equalsPassword: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router, private formB:FormBuilder) {}
+  constructor(private usuarioService: UsuarioService, private router: Router, private formB: FormBuilder) { }
 
   get name(): FormControl {
     return this.form.get('name') as FormControl;
@@ -61,25 +61,29 @@ export class RegistrationComponent {
   }
 
   register(event: SubmitEvent) {
-    if (this.password.value === this.confirmPassword.value) {
-      this.equalsPassword = true;
-      console.log(
-        `${this.name.value}\n${this.phone.value}\n${this.email.value}\n${this.password.value}\n${this.confirmPassword.value}`
-      );
-      // this.authService
-      //   .saveUser(
-      //     this.name.value,
-      //     this.phone.value,
-      //     this.email.value,
-      //     this.password.value,
-      //     6
-      //   )
-      //   .subscribe((response) => {
-      //     console.log(response);
-      //   });
-      // this.router.navigate(['/']);
+    if (this.form.valid) {
+      if (this.password.value === this.confirmPassword.value) {
+        this.equalsPassword = true;
+        console.log(
+          `${this.name.value}\n${this.phone.value}\n${this.email.value}\n${this.password.value}\n${this.confirmPassword.value}`
+        );
+        this.
+          usuarioService.saveUser(
+            this.name.value,
+            this.phone.value,
+            this.email.value,
+            this.password.value,
+            6
+          )
+          .subscribe((response) => {
+            console.log(response);
+            this.router.navigate(['/']);
+          });
+      } else {
+        this.equalsPassword = false;
+        event.preventDefault();
+      }
     } else {
-      this.equalsPassword = false;
       event.preventDefault();
     }
   }

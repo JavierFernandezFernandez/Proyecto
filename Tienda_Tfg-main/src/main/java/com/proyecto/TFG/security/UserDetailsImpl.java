@@ -1,19 +1,17 @@
 package com.proyecto.TFG.security;
 
 import com.proyecto.TFG.modelos.Usuario;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public class UserDetailsImpl  implements UserDetails {
+@AllArgsConstructor
+public class UserDetailsImpl implements UserDetails {
 
     private final Usuario usuario;
-
-    public UserDetailsImpl(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -22,7 +20,7 @@ public class UserDetailsImpl  implements UserDetails {
 
     @Override
     public String getPassword() {
-        return usuario.getContraseña();
+        return usuario.getPassword();
     }
 
     @Override
@@ -50,7 +48,8 @@ public class UserDetailsImpl  implements UserDetails {
         return true;
     }
 
-    public  String  getNombre(){
-        return usuario.getNombre();
+    public String getNombre(){
+        return  usuario.getNombre();
     }
+
 }

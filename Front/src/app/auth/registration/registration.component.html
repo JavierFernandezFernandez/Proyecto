@@ -15,7 +15,7 @@
             <span *ngIf="name.errors?.['required']">
               El nombre es obligatorio
             </span>
-            <span *ngIf="name.errors?.['minll']">
+            <span *ngIf="name.errors?.['minlength']">
               El nombre es demasiado corto
             </span>
             <span *ngIf="name.errors?.['maxlength']">
@@ -39,7 +39,6 @@
           </div>
         </div>
       </div>
-
       <div class="mb-3">
         <label for="email" class="form-label">Correo electr&oacute;nico</label>
         <input type="email" class="form-control" formControlName="email" />

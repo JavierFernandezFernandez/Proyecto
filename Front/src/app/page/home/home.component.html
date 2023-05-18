@@ -44,19 +44,17 @@
   </div>
 
   <!-- productos -->
-  <div class="card" style="width: 18rem">
+  <div class="card" style="width: 18rem" *ngFor="let product of products" (click)="goToProduct(product.id)">
     <img
       src="../../../assets/img/familia-pccom-500x500.webp"
       class="card-img-top m-3 w-auto"
       alt=""
     />
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title">{{product.nombre}}</h5>
       <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        Descripcion del producto
       </p>
-      <a href="2" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
   <!-- carrousel multi item -->
