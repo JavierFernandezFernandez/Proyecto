@@ -31,6 +31,28 @@ public class LineaFacturaServicioImpl implements  ILineaFacturaServicio{
 
     }
 
+    public List<LineaFacturaDTO> findByProductoId(Long productoId){
+        List<LineaFactura> lineaFacturas = lineaFacturaRepositorio.findByProductoId(productoId);
+        List<LineaFacturaDTO> lineaFacturasDTO = new ArrayList<>();
+        if (!lineaFacturas.isEmpty()) {
+
+            lineaFacturasDTO = ModelMapperUtil.transformDtoList(lineaFacturas, LineaFacturaDTO.class);
+        }
+
+        return lineaFacturasDTO;
+    }
+
+    public List<LineaFacturaDTO> findByFacturaId(Long facturaId){
+        List<LineaFactura> lineaFacturas = lineaFacturaRepositorio.findByFacturaId(facturaId);
+        List<LineaFacturaDTO> lineaFacturasDTO = new ArrayList<>();
+        if (!lineaFacturas.isEmpty()) {
+
+            lineaFacturasDTO = ModelMapperUtil.transformDtoList(lineaFacturas, LineaFacturaDTO.class);
+        }
+
+        return lineaFacturasDTO;
+    }
+
     @Override
     public LineaFacturaDTO guardar(LineaFacturaDTO lineaFactura) {
 

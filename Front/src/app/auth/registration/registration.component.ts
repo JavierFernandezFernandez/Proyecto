@@ -14,7 +14,7 @@ interface FormControls {
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   form = this.formB.group({
     name: ['', [
       Validators.required,
@@ -43,6 +43,12 @@ export class RegistrationComponent {
   equalsPassword: boolean = true;
 
   constructor(private usuarioService: UsuarioService, private router: Router, private formB: FormBuilder) { }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('token')){
+      this.router.navigate(['/'])
+    }
+  }
 
   get name(): FormControl {
     return this.form.get('name') as FormControl;

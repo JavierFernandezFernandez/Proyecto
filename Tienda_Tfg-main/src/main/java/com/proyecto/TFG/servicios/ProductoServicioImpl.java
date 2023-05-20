@@ -58,6 +58,32 @@ public class ProductoServicioImpl implements IProductoServicio {
 
     }
 
+    public List<ProductoDTO> findByMarcaId(Long marcaId){
+
+        List<Producto> productos = productoRepositorio.findByMarcaId(marcaId);
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        if (!productos.isEmpty()) {
+
+            productosDTO = ModelMapperUtil.transformDtoList(productos, ProductoDTO.class);
+        }
+
+        return productosDTO;
+
+    }
+
+    public List<ProductoDTO> findByCategoriaId(Long categoriaId){
+
+        List<Producto> productos = productoRepositorio.findByCategoriaId(categoriaId);
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        if (!productos.isEmpty()) {
+
+            productosDTO = ModelMapperUtil.transformDtoList(productos, ProductoDTO.class);
+        }
+
+        return productosDTO;
+
+    }
+
     @Override
     public void eliminar(long id) {
         productoRepositorio.deleteById(id);

@@ -44,17 +44,20 @@
   </div>
 
   <!-- productos -->
-  <div class="card" style="width: 18rem" *ngFor="let product of products" (click)="goToProduct(product.id)">
-    <img
-      src="../../../assets/img/familia-pccom-500x500.webp"
-      class="card-img-top m-3 w-auto"
-      alt=""
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{product.nombre}}</h5>
-      <p class="card-text">
-        Descripcion del producto
-      </p>
+  <h2 class="my-3">Productos destacados</h2>
+  <div class="d-flex">
+    <div class="card me-4" style="width: 18rem" *ngFor="let product of products" (click)="goToProduct(product.id)">
+      <img
+        src="../../../assets/img/familia-pccom-500x500.webp"
+        class="card-img-top m-3 w-auto"
+        alt=""
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{product.nombre}}</h5>
+        <p class="card-text">
+          Descripcion del producto
+        </p>
+      </div>
     </div>
   </div>
   <!-- carrousel multi item -->

@@ -1,6 +1,7 @@
 package com.proyecto.TFG.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collections;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -43,9 +45,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token =  TokenUtils.createToken(userDetails.getNombre(), userDetails.getUsername());
 
-        response.addHeader("Authorization", "Bearer" + token);
-        response.getWriter().flush();
+        response.setContentType("application/json");
 
+        // Construir un objeto JSON que contiene el token
+        JsonObject jsonResponse = new JsonObject();
+        jsonResponse.addProperty("Authorization", token);
+
+        // Obtener el PrintWriter para escribir en el cuerpo de la respuesta
+        PrintWriter writer = response.getWriter();
+        writer.println(jsonResponse.toString());
+        writer.flush();
         super.successfulAuthentication(request, response, chain, authResult);
     }
 }

@@ -1,1 +1,57 @@
-<p>data works!</p>
+<div class="container min-vh-75">
+  <div class="row">
+    <div class="col-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="container-fluid col-10 mt-3">
+      <div class="row">
+        <div class="col-3">
+          <img
+            src="../../../assets/img/user-image.png"
+            alt=""
+            class="img-fluid"
+          />
+        </div>
+        <div class="ms-4 col-4">
+          <input
+            type="text"
+            class="form-control mb-3 w-100"
+            placeholder="Email del usuario"
+            readonly
+          />
+          <input
+            type="text"
+            class="form-control my-3 w-100"
+            placeholder="Nombre del usuario"
+            readonly
+          />
+          <input
+            type="number"
+            class="form-control my-3 w-100"
+            placeholder="Numero de telefono"
+            readonly
+          />
+        </div>
+        <div class="ms-4 col-4">
+          <!-- Modo visualizacion -->
+          <span>
+            <button class="btn btn-secondary" type="submit">
+              <span class="">Editar</span>
+            </button>
+            <br />
+          </span>
+          <!-- Modo edicion -->
+          <span hidden>
+            <button class="btn btn-secondary" type="submit">
+              <span class="">Guardar</span>
+            </button>
+            <br />
+            <button class="btn btn-secondary" type="submit">
+              <span class="">Cancelar</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

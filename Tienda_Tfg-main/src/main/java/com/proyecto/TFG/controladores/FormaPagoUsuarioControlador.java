@@ -24,6 +24,16 @@ public class FormaPagoUsuarioControlador {
         return formaPagoUsuarioServicio.obtenerTodo();
     }
 
+//    @GetMapping("/listar")
+//    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByUsuario(Long usuarioId){
+//        return formaPagoUsuarioServicio.findByUsuarioId(usuarioId);
+//    }
+//
+//    @GetMapping("/listar")
+//    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByFormaPago(Long formaPagoId){
+//        return formaPagoUsuarioServicio.findByFormaPagoId(formaPagoId);
+//    }
+
     @PostMapping("/guardar")
     public ResponseEntity<FormaPagoUsuarioDTO> guardarFormaPagoUsuario(@RequestBody FormaPagoUsuarioDTO formaPagoUsuario){
         formaPagoUsuarioServicio.guardar(formaPagoUsuario);

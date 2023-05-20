@@ -35,7 +35,7 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/producto/listar", "/api/producto/{id}")
+                .requestMatchers("/api/producto/listar", "/api/producto/{id}","/usuario/guardar","/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -67,4 +67,5 @@ public class WebSecurityConfig {
 
 
 }
+
 

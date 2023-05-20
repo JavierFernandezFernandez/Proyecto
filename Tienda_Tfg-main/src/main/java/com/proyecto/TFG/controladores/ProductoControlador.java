@@ -24,6 +24,16 @@ public class ProductoControlador {
         return productoServicio.obtenerTodo();
     }
 
+    @GetMapping("/marca/{id}")
+    public List<ProductoDTO> obtenerProductoMarca(@PathVariable Long marcaId){
+        return productoServicio.findByCategoriaId(marcaId);
+    }
+
+    @GetMapping("/categoria/{id}")
+    public List<ProductoDTO> obtenerProductosCategoria(@PathVariable Long categoriaId){
+        return productoServicio.findByCategoriaId(categoriaId);
+    }
+
     @PostMapping("/guardar")
     public ResponseEntity<ProductoDTO> guardarProducto(@RequestBody ProductoDTO producto){
         productoServicio.guardar(producto);

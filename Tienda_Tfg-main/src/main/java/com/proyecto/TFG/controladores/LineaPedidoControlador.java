@@ -25,6 +25,21 @@ public class LineaPedidoControlador {
         return lineaPedidoServicio.obtenerTodo();
     }
 
+//    @GetMapping("listar")
+//    public List<LineaPedidoDTO> obtenerLineasPedidoFactura(Long facturaId){
+//        return lineaPedidoServicio.findByFacturaId(facturaId);
+//    }
+//
+//    @GetMapping("listar")
+//    public List<LineaPedidoDTO> obtenerLineasPedidoPedido(Long pedidoId){
+//        return lineaPedidoServicio.findByPedidoId(pedidoId);
+//    }
+//
+//    @GetMapping("listar")
+//    public List<LineaPedidoDTO> obtenerLineasPedidoProducto(Long productoId){
+//        return lineaPedidoServicio.findByProductoId(productoId);
+//    }
+
     @PostMapping("/guardar")
     public ResponseEntity<LineaPedidoDTO> guardarLineaPedido(@RequestBody LineaPedidoDTO lineaPedido){
         lineaPedidoServicio.guardar(lineaPedido);

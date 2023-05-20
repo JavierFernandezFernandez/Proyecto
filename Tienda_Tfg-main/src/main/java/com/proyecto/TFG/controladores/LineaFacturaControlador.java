@@ -25,6 +25,16 @@ public class LineaFacturaControlador {
         return lineaFacturaService.obtenerTodo();
     }
 
+//    @GetMapping("listar")
+//    public List<LineaFacturaDTO> obtenerLineasFacturaProducto(Long productoId){
+//        return lineaFacturaService.findByProductoId(productoId);
+//    }
+//
+//    @GetMapping("listar")
+//    public List<LineaFacturaDTO> obtenerLineasFacturaFactura(Long facturaId){
+//        return lineaFacturaService.findByFacturaId(facturaId);
+//    }
+
     @PostMapping("/guardar")
     public ResponseEntity<LineaFacturaDTO> guardarLineaFactura(@RequestBody LineaFacturaDTO lineaFactura){
         lineaFacturaService.guardar(lineaFactura);

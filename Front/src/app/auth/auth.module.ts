@@ -12,6 +12,7 @@ import { CustomerServiceComponent } from './customer-service/customer-service.co
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CustomerServiceComponent,
     LoginComponent,
     RegistrationComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,

@@ -31,6 +31,28 @@ public class FormaPagoUsuarioServicioImpl implements IFormaPagoUsuarioServicio{
 
     }
 
+    public List<FormaPagoUsuarioDTO> findByUsuarioId(Long usuarioId){
+        List<FormaPagoUsuario> formaPagoUsuarios = formaPagoUsuarioRepositorio.findByUsuarioId(usuarioId);
+        List<FormaPagoUsuarioDTO> formasPagosUsuarioDTO = new ArrayList<>();
+        if (!formaPagoUsuarios.isEmpty()) {
+
+            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(formaPagoUsuarios, FormaPagoUsuarioDTO.class);
+        }
+
+        return formasPagosUsuarioDTO;
+    }
+
+    public List<FormaPagoUsuarioDTO> findByFormaPagoId(Long formaPagoId){
+        List<FormaPagoUsuario> formaPagoUsuarios = formaPagoUsuarioRepositorio.findByFormaPagoId(formaPagoId);
+        List<FormaPagoUsuarioDTO> formasPagosUsuarioDTO = new ArrayList<>();
+        if (!formaPagoUsuarios.isEmpty()) {
+
+            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(formaPagoUsuarios, FormaPagoUsuarioDTO.class);
+        }
+
+        return formasPagosUsuarioDTO;
+    }
+
     @Override
     public FormaPagoUsuarioDTO guardar(FormaPagoUsuarioDTO formaPagoUsuario) {
 

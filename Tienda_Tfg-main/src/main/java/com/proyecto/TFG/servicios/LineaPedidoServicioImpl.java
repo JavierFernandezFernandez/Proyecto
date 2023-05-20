@@ -32,6 +32,39 @@ public class LineaPedidoServicioImpl implements IlineaPedidoServicio{
 
     }
 
+    public List<LineaPedidoDTO> findByPedidoId(Long pedidoId){
+        List<LineaPedido> lineasPedidos = lineaPedidoRepositorio.findByPedidoId(pedidoId);
+        List<LineaPedidoDTO> lineasPedidosDTO = new ArrayList<>();
+        if (!lineasPedidos.isEmpty()) {
+
+            lineasPedidosDTO = ModelMapperUtil.transformDtoList(lineasPedidos, LineaPedidoDTO.class);
+        }
+
+        return lineasPedidosDTO;
+    }
+
+    public List<LineaPedidoDTO> findByFacturaId(Long facturaId){
+        List<LineaPedido> lineasPedidos = lineaPedidoRepositorio.findByFacturaId(facturaId);
+        List<LineaPedidoDTO> lineasPedidosDTO = new ArrayList<>();
+        if (!lineasPedidos.isEmpty()) {
+
+            lineasPedidosDTO = ModelMapperUtil.transformDtoList(lineasPedidos, LineaPedidoDTO.class);
+        }
+
+        return lineasPedidosDTO;
+    }
+
+    public List<LineaPedidoDTO> findByProductoId(Long productoId){
+        List<LineaPedido> lineasPedidos = lineaPedidoRepositorio.findByProductoId(productoId);
+        List<LineaPedidoDTO> lineasPedidosDTO = new ArrayList<>();
+        if (!lineasPedidos.isEmpty()) {
+
+            lineasPedidosDTO = ModelMapperUtil.transformDtoList(lineasPedidos, LineaPedidoDTO.class);
+        }
+
+        return lineasPedidosDTO;
+    }
+
     @Override
     public LineaPedidoDTO guardar(LineaPedidoDTO lineaPedido) {
 

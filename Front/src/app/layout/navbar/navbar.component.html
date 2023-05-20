@@ -22,16 +22,15 @@
           class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
         >
           <li>
-            <a href="#" class="nav-link px-2 link-secondary">Overview</a>
+            <a href="" class="nav-link px-2 link-secondary">Overview</a>
           </li>
-          <li><a href="#" class="nav-link px-2 link-dark">Inventario</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Clientes</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Productos</a></li>
+          <li><a href="" class="nav-link px-2 link-dark">Inventario</a></li>
+          <li><a href="" class="nav-link px-2 link-dark">Clientes</a></li>
+          <li><a href="" class="nav-link px-2 link-dark">Productos</a></li>
         </ul>
         <!-- sesion iniciada -->
         <div class="dropdown text-end" *ngIf="isLoggedIn">
           <a
-            href="#"
             class="d-block link-dark text-decoration-none dropdown-toggle"
             id="dropdownUser1"
             data-bs-toggle="dropdown"
@@ -48,7 +47,7 @@
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li>
             <li><a class="dropdown-item" href="#">Configuración</a></li>
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" href="/auth/data-user">Mis perfil</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#" (click)="closeSesion()">Cerrar sesión</a></li>
           </ul>
@@ -79,7 +78,6 @@
       <div class="dropdown">
         <a
           class="btn btn-secondary dropdown-toggle"
-          href="#"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"

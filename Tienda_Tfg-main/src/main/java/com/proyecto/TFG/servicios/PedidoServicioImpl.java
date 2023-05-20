@@ -58,6 +58,39 @@ public class PedidoServicioImpl implements  IPedidoServicio{
 
     }
 
+    public List<PedidoDTO> findByUsuarioId(Long usuarioId){
+        List<Pedido> pedidos = pedidoRepositorio.findByUsuarioId(usuarioId);
+        List<PedidoDTO> pedidosDTO = new ArrayList<>();
+        if (!pedidos.isEmpty()) {
+
+            pedidosDTO = ModelMapperUtil.transformDtoList(pedidos, PedidoDTO.class);
+        }
+
+        return pedidosDTO;
+    }
+
+    public List<PedidoDTO> findByDireccionId(Long direccionId){
+        List<Pedido> pedidos = pedidoRepositorio.findByDireccionId(direccionId);
+        List<PedidoDTO> pedidosDTO = new ArrayList<>();
+        if (!pedidos.isEmpty()) {
+
+            pedidosDTO = ModelMapperUtil.transformDtoList(pedidos, PedidoDTO.class);
+        }
+
+        return pedidosDTO;
+    }
+
+    public List<PedidoDTO> findByFormaPagoId(Long formaPagoId){
+        List<Pedido> pedidos = pedidoRepositorio.findByFormaPagoId(formaPagoId);
+        List<PedidoDTO> pedidosDTO = new ArrayList<>();
+        if (!pedidos.isEmpty()) {
+
+            pedidosDTO = ModelMapperUtil.transformDtoList(pedidos, PedidoDTO.class);
+        }
+
+        return pedidosDTO;
+    }
+
     @Override
     public void eliminar(long id) {
         pedidoRepositorio.deleteById(id);

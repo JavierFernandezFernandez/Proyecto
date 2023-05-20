@@ -1,7 +1,7 @@
 import { LayoutService } from './../../layout/services/layout.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from './../services/usuario.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
@@ -12,7 +12,7 @@ import { catchError } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form = this.formB.group({
     email: ['', [
       Validators.required,
@@ -37,6 +37,11 @@ export class LoginComponent {
     private router: Router,
     private layoutService: LayoutService
   ) { }
+  ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['/'])
+    }
+  }
 
   login(event: SubmitEvent) {
     if (this.form.valid) {
