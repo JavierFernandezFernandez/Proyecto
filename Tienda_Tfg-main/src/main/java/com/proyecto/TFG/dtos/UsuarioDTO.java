@@ -1,15 +1,5 @@
 package com.proyecto.TFG.dtos;
 
-import com.proyecto.TFG.modelos.Direccion;
-import com.proyecto.TFG.modelos.Factura;
-import com.proyecto.TFG.modelos.FormaPagoUsuario;
-import com.proyecto.TFG.modelos.Pedido;
-import com.proyecto.TFG.modelos.Rol;
-import jakarta.persistence.*;
-
-import java.io.Serializable;
-import java.util.List;
-
 public class UsuarioDTO{
 
     private long Id;
@@ -17,6 +7,7 @@ public class UsuarioDTO{
     private String email;
     private String telefono;
     private String password;
+    private String cesta;
     private RolDTO rol;
 
     public UsuarioDTO(){
@@ -71,4 +62,11 @@ public class UsuarioDTO{
         this.rol = rol;
     }
 
+    public String getCesta() {
+        return cesta;
+    }
+
+    public void setCesta(String cesta) {
+        this.cesta = cesta;
+    }
 }

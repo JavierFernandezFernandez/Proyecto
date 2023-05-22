@@ -35,7 +35,7 @@ public class WebSecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/producto/listar", "/api/producto/{id}","/usuario/guardar","/login")
+                .requestMatchers("/producto/listar", "/producto/{id}","/usuario/guardar","/login","/producto/random/{num}","/producto/random/categoria/{id}/{num}","/producto/random/marca/{id}/{num}","/producto/nombre/{texto}","/media/upload","/media/{filename:.+}")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

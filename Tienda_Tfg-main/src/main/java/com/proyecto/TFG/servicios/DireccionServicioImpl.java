@@ -30,6 +30,17 @@ public class DireccionServicioImpl implements IDireccionServicio {
         return direccionesDTO;
     }
 
+    public List<DireccionDTO> findByUsuarioId(Long usuarioId){
+        List<Direccion> direcciones = direccionRepositorio.findByUsuarioId(usuarioId);
+        List<DireccionDTO> direccionesDTO = new ArrayList<>();
+        if (!direcciones.isEmpty()) {
+
+            direccionesDTO = ModelMapperUtil.transformDtoList(direcciones, DireccionDTO.class);
+        }
+
+        return direccionesDTO;
+    }
+
     @Override
     public DireccionDTO guardar(DireccionDTO direccion) {
 

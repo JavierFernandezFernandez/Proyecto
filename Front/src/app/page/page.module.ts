@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { PageRoutingModule } from './page-routing.module';
 import { ProductComponent } from './product/product.component';
-import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
-import { FormsModule } from '@angular/forms';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CarrouselMarcasComponent } from './carrousel-marcas/carrousel-marcas.component';
 
 
@@ -13,13 +12,12 @@ import { CarrouselMarcasComponent } from './carrousel-marcas/carrousel-marcas.co
   declarations: [
     HomeComponent,
     ProductComponent,
-    ShoppingBasketComponent,
+    ShoppingCartComponent,
     CarrouselMarcasComponent,
   ],
   imports: [
     CommonModule,
     PageRoutingModule,
-    
   ]
 })
 export class PageModule { }

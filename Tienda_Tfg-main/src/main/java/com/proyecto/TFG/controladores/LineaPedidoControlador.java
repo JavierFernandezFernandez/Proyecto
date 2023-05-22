@@ -20,25 +20,25 @@ public class LineaPedidoControlador {
     @Autowired
     LineaPedidoServicioImpl lineaPedidoServicio;
 
-    @GetMapping("listar")
+    @GetMapping("/listar")
     public List<LineaPedidoDTO> obtenerLineasPedido(){
         return lineaPedidoServicio.obtenerTodo();
     }
 
-//    @GetMapping("listar")
-//    public List<LineaPedidoDTO> obtenerLineasPedidoFactura(Long facturaId){
-//        return lineaPedidoServicio.findByFacturaId(facturaId);
-//    }
-//
-//    @GetMapping("listar")
-//    public List<LineaPedidoDTO> obtenerLineasPedidoPedido(Long pedidoId){
-//        return lineaPedidoServicio.findByPedidoId(pedidoId);
-//    }
-//
-//    @GetMapping("listar")
-//    public List<LineaPedidoDTO> obtenerLineasPedidoProducto(Long productoId){
-//        return lineaPedidoServicio.findByProductoId(productoId);
-//    }
+    @GetMapping("/factura/{facturaId}")
+    public List<LineaPedidoDTO> obtenerLineasPedidoByFactura(Long facturaId){
+        return lineaPedidoServicio.findByFacturaId(facturaId);
+    }
+
+    @GetMapping("/pedido/{pedidoId}")
+    public List<LineaPedidoDTO> obtenerLineasPedidoByPedido(Long pedidoId){
+        return lineaPedidoServicio.findByPedidoId(pedidoId);
+    }
+
+    @GetMapping("/producto/{productoId}")
+    public List<LineaPedidoDTO> obtenerLineasPedidoByProducto(Long productoId){
+        return lineaPedidoServicio.findByProductoId(productoId);
+    }
 
     @PostMapping("/guardar")
     public ResponseEntity<LineaPedidoDTO> guardarLineaPedido(@RequestBody LineaPedidoDTO lineaPedido){

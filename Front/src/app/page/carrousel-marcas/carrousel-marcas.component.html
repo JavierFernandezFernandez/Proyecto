@@ -6,7 +6,7 @@ class="carousel slide"
 <!-- data-bs-ride="carousel" -->
 <!-- Marcas -->
 <div class="carousel-inner active" >
-  <div class="carousel-item active">
+  <!-- <div class="carousel-item active">
     <div class="card">
       <div class="img-wrapper">
         <img src="" class="d-block w-100" alt="..." />
@@ -20,23 +20,12 @@ class="carousel slide"
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
+  </div> -->
+  <!-- Items -->
+  <div class="carousel-item active" *ngFor="let brand of brandsNames">
+   <img src="../../../assets/img/marcas/{{brand}}.png" alt="" class="img-fluid">
   </div>
-  <div class="carousel-item active">
-    <div class="card">
-      <div class="img-wrapper">
-        <img src="" class="d-block w-100" alt="..." />
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Card title 2</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="carousel-item active">
+  <!-- <div class="carousel-item active">
     <div class="card">
       <div class="img-wrapper">
         <img src="" class="d-block w-100" alt="..." />
@@ -95,7 +84,7 @@ class="carousel slide"
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Botones -->
 </div>
 <button

@@ -20,9 +20,14 @@ public class EjemplarControlador {
     @Autowired
     EjemplarServicioImpl ejemplarServicio;
 
-    @GetMapping("listar")
+    @GetMapping("/listar")
     public List<EjemplarDTO> obtenerEjemplares(){
         return ejemplarServicio.obtenerTodo();
+    }
+
+    @GetMapping("/producto/{productoId}")
+    public List<EjemplarDTO> obtenerEjemplaresByProducto(Long productoId){
+        return ejemplarServicio.findByProductoId(productoId);
     }
 
     @PostMapping("/guardar")

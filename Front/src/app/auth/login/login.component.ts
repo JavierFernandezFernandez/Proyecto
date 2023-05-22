@@ -13,6 +13,8 @@ import { catchError } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  emailOrPasswordIncorrect: boolean = false;
+
   form = this.formB.group({
     email: ['', [
       Validators.required,
@@ -47,18 +49,20 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.usuarioService.login(this.email.value, this.password.value)
         .pipe(catchError(error => {
+          console.log(error.message);
           return error.message
-
         }))
         .subscribe(
           (response: RespuestaLogin | string) => {
             if (!(typeof response === 'string')) {
+              this.emailOrPasswordIncorrect = true;
               const token = response.body.Authorization;
               localStorage.setItem('token', token);
               localStorage.setItem('email', this.email.value);
               this.layoutService.setLoggedIn(true);
               this.router.navigate(['/']);
             } else {
+              this.emailOrPasswordIncorrect = true;
               console.log('Email o contraseña incorrectos');
             }
           });

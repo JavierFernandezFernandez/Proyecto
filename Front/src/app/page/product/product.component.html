@@ -1,5 +1,5 @@
 <div class="container min-vh-75">
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-5">
       <img
         src="../../../assets/img/familia-pccom-500x500.webp"
@@ -7,24 +7,58 @@
         class="img-fluid mt-2 rounded-top"
       />
     </div>
-    <div class="col-7">
-      <h1 class="display-3">Producto</h1>
+    <div class="col-7 text-end">
+      <p class="display-6 fw-bold">{{ product.nombre }}</p>
       <div class="border-1 border-top border-bottom">
-        <p class="pt-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti nam
-          numquam nisi assumenda, ex amet accusantium libero hic ipsa delectus
-          deleniti pariatur doloremque fuga tenetur ut ullam odio error autem!
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam non
-          ipsam asperiores praesentium porro magni, ad quod placeat distinctio!
-          Voluptas nulla blanditiis ipsa quos, placeat animi. Eum delectus
-          dolorum ullam.
+        <p class="display-4 pt-2 fw-bolder">
+          {{ (product.precio + (product.precio % product.iva)).toFixed(2) }}€
         </p>
+        <span class="" style="line-height: 2">Cantidad:</span>
+        <div class="input-group float-end quantity-selector">
+          <button class="btn btn-outline-secondary" type="button">-</button>
+          <input
+            type="text"
+            class="form-control text-center"
+            aria-label="Example text with two button addons"
+            value="1"
+          />
+          <button class="btn btn-outline-secondary" type="button">+</button>
+        </div>
+        <br /><br />
+        <span>Disponivilidad:</span>
+        <br /><br />
+        <span>Marca:</span>
       </div>
       <div class="mt-4">
-        <button type="button" class="btn btn-primary btn-lg me-2">Comprar</button>
+        <button type="button" class="btn btn-primary btn-lg me-2">
+          Comprar
+        </button>
         <button type="button" class="btn btn-primary btn-lg ms-2">
           Añadir al carrito
         </button>
+      </div>
+    </div>
+  </div>
+  <div class="row m-3">
+    <h2>Descripci&oacute;n</h2>
+    <p>{{ product.descripcion }}</p>
+  </div>
+
+  <div class="row m-3">
+    <h2>Comentarios</h2>
+    <h3>{{ averageNote.toFixed(1) }}</h3>
+    <p>{{ comments.length }} comentarios</p>
+    <div
+      class="card w-48 min-vh-20 m-2"
+      style="width: 18rem"
+      *ngFor="let comment of comments"
+    >
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">{{comment.puntuacion}}</h5>
+        <p class="card-text">
+          {{comment.mensaje}}
+        </p>
       </div>
     </div>
   </div>

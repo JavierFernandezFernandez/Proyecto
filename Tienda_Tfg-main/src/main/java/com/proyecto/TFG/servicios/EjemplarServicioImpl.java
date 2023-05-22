@@ -31,6 +31,17 @@ public class EjemplarServicioImpl implements IEjemplarServicio{
 
     }
 
+    public List<EjemplarDTO> findByProductoId(Long productoId){
+        List<Ejemplar> categorias = ejemplarRepositorio.findByProductoId(productoId);
+        List<EjemplarDTO> ejemplaresDTO = new ArrayList<>();
+        if (!categorias.isEmpty()) {
+
+            ejemplaresDTO = ModelMapperUtil.transformDtoList(categorias, EjemplarDTO.class);
+        }
+
+        return ejemplaresDTO;
+    }
+
     @Override
     public EjemplarDTO guardar(EjemplarDTO ejemplar) {
 

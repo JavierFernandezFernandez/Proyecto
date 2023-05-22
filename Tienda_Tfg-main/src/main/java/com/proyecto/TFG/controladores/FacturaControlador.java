@@ -24,6 +24,16 @@ public class FacturaControlador {
         return facturaServicio.obtenerTodo();
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<FacturaDTO> obtenerFacturasByUsuario(Long usuarioId){
+        return facturaServicio.findByUsuarioId(usuarioId);
+    }
+
+    @GetMapping("/direccion/{direccionId}")
+    public List<FacturaDTO> obtenerFacturasByDireccionId(Long direccionId){
+        return facturaServicio.findByDireccionId(direccionId);
+    }
+
     @PostMapping("/guardar")
     public ResponseEntity<FacturaDTO> guardarFactura(@RequestBody FacturaDTO factura){
         facturaServicio.guardar(factura);

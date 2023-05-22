@@ -16,37 +16,37 @@
           <input
             type="text"
             class="form-control mb-3 w-100"
-            placeholder="Email del usuario"
-            readonly
+            value="{{email}}"
+            [readOnly]="!editing"
           />
           <input
             type="text"
             class="form-control my-3 w-100"
-            placeholder="Nombre del usuario"
-            readonly
+            value="{{nombre}}"
+            [readonly]="!editing"
           />
           <input
             type="number"
             class="form-control my-3 w-100"
-            placeholder="Numero de telefono"
-            readonly
+            value="{{telefono}}"
+            [readonly]="!editing"
           />
         </div>
         <div class="ms-4 col-4">
           <!-- Modo visualizacion -->
-          <span>
-            <button class="btn btn-secondary" type="submit">
+          <span *ngIf="!editing">
+            <button class="btn btn-secondary" type="submit" (click)="editing=true">
               <span class="">Editar</span>
             </button>
-            <br />
+            <br/>
           </span>
           <!-- Modo edicion -->
-          <span hidden>
-            <button class="btn btn-secondary" type="submit">
+          <span *ngIf="editing">
+            <button class="btn btn-secondary mb-3" type="submit" (click)="editing=false">
               <span class="">Guardar</span>
             </button>
             <br />
-            <button class="btn btn-secondary" type="submit">
+            <button class="btn btn-secondary" type="submit" (click)="editing=false">
               <span class="">Cancelar</span>
             </button>
           </span>

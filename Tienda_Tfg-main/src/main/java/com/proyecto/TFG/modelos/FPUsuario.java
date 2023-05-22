@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name  = "FormasPagosUsuarios", catalog = "tfg")
-public class FormaPagoUsuario implements Serializable {
+@Table(name  = "fpusuarios", catalog = "tfg")
+public class FPUsuario implements Serializable {
 
     private static final long serialVersionUID = 4104961599731493478L;
 
@@ -22,10 +22,10 @@ public class FormaPagoUsuario implements Serializable {
     private Usuario usuario;
 
     @ManyToOne()
-    @JoinColumn(name = "FormasPago_Id")
+    @JoinColumn(name = "Formaspagos_Id")
     private FormaPago formaPago;
 
-    public FormaPagoUsuario(){
+    public FPUsuario(){
 
     }
 

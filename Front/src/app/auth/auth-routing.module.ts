@@ -1,7 +1,6 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DataComponent } from './data/data.component';
-import { BucketListComponent } from './bucket-list/bucket-list.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
@@ -22,10 +21,6 @@ const routes: Routes = [
       {
         path: 'data-user',
         component: DataComponent
-      },
-      {
-        path: 'bucket-list',
-        component: BucketListComponent
       },
       {
         path:'orders',

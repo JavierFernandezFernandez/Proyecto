@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as bootstrap from 'bootstrap';
+import { BRANDS } from 'src/app/config';
 
 @Component({
   selector: 'app-carrousel-marcas',
@@ -22,14 +23,16 @@ export class CarrouselMarcasComponent implements OnInit {
   marcasCarrousel?: any;
   marcas?: HTMLCollection;
 
+  brandsNames: string[] = BRANDS;
+
   constructor() {}
 
   ngOnInit(): void {
     this.marcasCarrousel = this.inicializarMarcasCarrousel();
     console.log(JSON.stringify(this.marcasCarrousel));
     this.marcas = this.marcasCarrousel._element.children[0].children;
-    console.log(this.marcas);
-    console.log(this.marcasCarrousel);
+    // console.log(this.marcas);
+    // console.log(this.marcasCarrousel);
   }
 
   prev3(): void {

@@ -19,7 +19,7 @@ public class FormaPago implements Serializable {
     private String tipo;
 
     @OneToMany(mappedBy = "formaPago",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FormaPagoUsuario> formaPagoUsuarios;
+    private List<FPUsuario> FPUsuarios;
 
     @OneToMany(mappedBy = "formaPago",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
@@ -43,12 +43,12 @@ public class FormaPago implements Serializable {
         this.tipo = tipo;
     }
 
-    public List<FormaPagoUsuario> getFormaPagoUsuarios() {
-        return formaPagoUsuarios;
+    public List<FPUsuario> getFormaPagoUsuarios() {
+        return FPUsuarios;
     }
 
-    public void setFormaPagoUsuarios(List<FormaPagoUsuario> formaPagoUsuarios) {
-        this.formaPagoUsuarios = formaPagoUsuarios;
+    public void setFormaPagoUsuarios(List<FPUsuario> FPUsuarios) {
+        this.FPUsuarios = FPUsuarios;
     }
 
     public List<Pedido> getPedidos() {

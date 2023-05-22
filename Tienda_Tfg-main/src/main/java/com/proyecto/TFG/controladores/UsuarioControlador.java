@@ -40,7 +40,7 @@ public class UsuarioControlador {
         return ResponseEntity.ok(clienteId);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable long id, @RequestBody UsuarioDTO usuario){
         usuarioServicio.guardar(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
@@ -61,8 +61,9 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<UsuarioDTO> obtenerUsuarioEmail(@PathVariable String email){
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioByEmail(@PathVariable String email){
         UsuarioDTO clienteId = usuarioServicio.findByEmail(email);
+        clienteId.setPassword(null);
         return ResponseEntity.ok(clienteId);
     }
 

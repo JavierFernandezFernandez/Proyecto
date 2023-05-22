@@ -24,18 +24,18 @@ public class PedidoControlador {
         return pedidoServicio.obtenerTodo();
     }
 
-    @GetMapping("/usuario/{id}")
-    public List<PedidoDTO> obtenerPedidosUsuario(Long usuarioId){
+    @GetMapping("/usuario/{usuarioId}")
+    public List<PedidoDTO> obtenerPedidosByUsuario(Long usuarioId){
         return pedidoServicio.findByUsuarioId(usuarioId);
     }
 
-    @GetMapping("/direccion/{id}")
-    public List<PedidoDTO> obtenerPedidosDireccion(Long direccionId){
+    @GetMapping("/direccion/{direccionId}")
+    public List<PedidoDTO> obtenerPedidosByDireccion(Long direccionId){
         return pedidoServicio.findByDireccionId(direccionId);
     }
 
-    @GetMapping("/formaPago/{id}")
-    public List<PedidoDTO> obtenerPedidosFormaPago(Long formaPagoId){
+    @GetMapping("/formaPago/{formaPagoId}")
+    public List<PedidoDTO> obtenerPedidosByFormaPago(Long formaPagoId){
         return pedidoServicio.findByFormaPagoId(formaPagoId);
     }
 

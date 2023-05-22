@@ -26,6 +26,11 @@ public class DireccionControlador {
         return direccionServicio.obtenerTodo();
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<DireccionDTO> obtenerDireccionesByUsusario(Long usuarioId){
+        return direccionServicio.findByUsuarioId(usuarioId);
+    }
+
     @PostMapping("/guardar")
     public ResponseEntity<DireccionDTO> guardarDireccion(@RequestBody DireccionDTO direccion){
         direccionServicio.guardar(direccion);

@@ -1,11 +1,6 @@
 package com.proyecto.TFG.dtos;
 
-import java.io.Serializable;
 import java.util.List;
-
-import com.proyecto.TFG.modelos.FormaPagoUsuario;
-import com.proyecto.TFG.modelos.Pedido;
-import jakarta.persistence.*;
 
 public class FormaPagoDTO {
 

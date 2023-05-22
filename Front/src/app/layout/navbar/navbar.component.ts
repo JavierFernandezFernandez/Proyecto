@@ -23,4 +23,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  getAcutualRoute():string{
+    return this.router.url
+  }
 }

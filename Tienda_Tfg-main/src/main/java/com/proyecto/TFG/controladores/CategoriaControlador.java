@@ -20,7 +20,7 @@ public class CategoriaControlador {
     @Autowired
     CategoriaServicioImpl categoriaServicio;
 
-    @GetMapping("listar")
+    @GetMapping("/listar")
     public List<CategoriaDTO> obtenerCategorias(){
         return categoriaServicio.obtenerTodo();
     }
@@ -44,9 +44,9 @@ public class CategoriaControlador {
     public ResponseEntity<HashMap<String, Boolean>> eliminarCategoria(@PathVariable long id){
         this.categoriaServicio.eliminar(id);
 
-        HashMap<String, Boolean> estadoMarcaEliminado = new HashMap<>();
-        estadoMarcaEliminado.put("eliminado", true);
-        return  ResponseEntity.ok(estadoMarcaEliminado);
+        HashMap<String, Boolean> estadoCategoriaEliminado = new HashMap<>();
+        estadoCategoriaEliminado.put("eliminado", true);
+        return  ResponseEntity.ok(estadoCategoriaEliminado);
     }
 
 }

@@ -19,7 +19,7 @@ public class MarcaControlador {
     @Autowired
     MarcaServicioImpl marcaServicio;
 
-    @GetMapping("listar")
+    @GetMapping("/listar")
     public List<MarcaDTO> obtenerMarcas(){
         return marcaServicio.obtenerTodo();
     }

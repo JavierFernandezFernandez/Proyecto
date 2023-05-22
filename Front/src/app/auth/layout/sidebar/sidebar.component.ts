@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
+  constructor(private router:Router){}
+  
+  ngOnInit(): void {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['/']);
+    }
+  }
+  cerrarSesion(){
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
 }

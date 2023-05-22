@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "hwencc.html-tag-wrapper"
+        "hwencc.html-tag-wrapper",
+        "angular.ng-template",
+        "johnpapa.angular2",
+        "jakubstepien.angular-template-style-suggestions"
     ]
 }

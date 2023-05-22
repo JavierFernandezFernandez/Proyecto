@@ -8,7 +8,8 @@ import { Usuario } from 'src/app/models/Usuario.model';
   providedIn: 'root',
 })
 export class UsuarioService {
-  url = API_URL + '/usuario';
+  url = API_URL + '/usuario/';
+  headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('token') as string}`});
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +27,7 @@ export class UsuarioService {
       password: password,
       rol: null,
     };
-    return this.http.post<Usuario>(this.url + '/guardar', usuario);
+    return this.http.post<Usuario>(this.url + 'guardar', usuario);
   }
 
   login(email: string, password: string): Observable<any> {
@@ -35,8 +36,11 @@ export class UsuarioService {
     return this.http.post(
       API_URL + '/login',
       creds,
-      { observe: 'response', responseType: 'json'}
+      { observe: 'response', responseType: 'json' }
     );
+  }
+  getUserByEmail(email: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.url + `email/${localStorage.getItem('email')}`,{headers: this.headers})
   }
 
   getToken(): String | null {

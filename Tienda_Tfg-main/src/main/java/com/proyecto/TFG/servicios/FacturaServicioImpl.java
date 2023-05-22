@@ -30,6 +30,28 @@ public class FacturaServicioImpl implements IFacturaServicio{
         return facturasDTO;
     }
 
+    public List<FacturaDTO> findByUsuarioId(Long usuarioId){
+        List<Factura> facturas = facturaRepositorio.findByUsuarioId(usuarioId);
+        List<FacturaDTO> facturasDTO = new ArrayList<>();
+        if (!facturas.isEmpty()) {
+
+            facturasDTO = ModelMapperUtil.transformDtoList(facturas, FacturaDTO.class);
+        }
+
+        return facturasDTO;
+    }
+
+    public List<FacturaDTO> findByDireccionId(Long direccionId){
+        List<Factura> facturas = facturaRepositorio.findByDireccionId(direccionId);
+        List<FacturaDTO> facturasDTO = new ArrayList<>();
+        if (!facturas.isEmpty()) {
+
+            facturasDTO = ModelMapperUtil.transformDtoList(facturas, FacturaDTO.class);
+        }
+
+        return facturasDTO;
+    }
+
     @Override
     public FacturaDTO guardar(FacturaDTO factura) {
 

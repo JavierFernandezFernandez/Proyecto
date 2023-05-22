@@ -1,7 +1,6 @@
 package com.proyecto.TFG.controladores;
 
 import com.proyecto.TFG.dtos.FormaPagoUsuarioDTO;
-import com.proyecto.TFG.modelos.FormaPagoUsuario;
 import com.proyecto.TFG.servicios.FormaPagoUsuarioServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,15 +23,15 @@ public class FormaPagoUsuarioControlador {
         return formaPagoUsuarioServicio.obtenerTodo();
     }
 
-//    @GetMapping("/listar")
-//    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByUsuario(Long usuarioId){
-//        return formaPagoUsuarioServicio.findByUsuarioId(usuarioId);
-//    }
-//
-//    @GetMapping("/listar")
-//    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByFormaPago(Long formaPagoId){
-//        return formaPagoUsuarioServicio.findByFormaPagoId(formaPagoId);
-//    }
+    @GetMapping("/usuario/{usuarioId}")
+    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByUsuario(Long usuarioId){
+        return formaPagoUsuarioServicio.findByUsuarioId(usuarioId);
+    }
+
+    @GetMapping("/formaPago/{formaPagoId}")
+    public List<FormaPagoUsuarioDTO> obtenerFormasPagosUsuarioByFormaPago(Long formaPagoId){
+        return formaPagoUsuarioServicio.findByFormaPagoId(formaPagoId);
+    }
 
     @PostMapping("/guardar")
     public ResponseEntity<FormaPagoUsuarioDTO> guardarFormaPagoUsuario(@RequestBody FormaPagoUsuarioDTO formaPagoUsuario){

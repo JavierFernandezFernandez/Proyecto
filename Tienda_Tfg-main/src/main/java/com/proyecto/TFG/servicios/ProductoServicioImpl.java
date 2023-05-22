@@ -58,6 +58,17 @@ public class ProductoServicioImpl implements IProductoServicio {
 
     }
 
+    public List<ProductoDTO> findByNombreContaining(String texto){
+        List<Producto> productos = productoRepositorio.findByNombreContaining(texto);
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        if (!productos.isEmpty()) {
+
+            productosDTO = ModelMapperUtil.transformDtoList(productos, ProductoDTO.class);
+        }
+
+        return productosDTO;
+    }
+
     public List<ProductoDTO> findByMarcaId(Long marcaId){
 
         List<Producto> productos = productoRepositorio.findByMarcaId(marcaId);

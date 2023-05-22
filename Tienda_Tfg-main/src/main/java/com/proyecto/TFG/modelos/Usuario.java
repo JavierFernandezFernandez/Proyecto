@@ -21,6 +21,8 @@ public class Usuario implements Serializable {
     private String email;
     @Column(name = "Telefono")
     private String telefono;
+    @Column(name = "Cesta")
+    private String cesta;
     @Column(name = "Password")
     private String password;
     @ManyToOne()
@@ -34,10 +36,13 @@ public class Usuario implements Serializable {
     private List<Direccion> direcciones;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FormaPagoUsuario> formasPagosUsuario;
+    private List<FPUsuario> FPUsuario;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
+
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
 
     public Usuario(){
 
@@ -107,12 +112,12 @@ public class Usuario implements Serializable {
         this.direcciones = direcciones;
     }
 
-    public List<FormaPagoUsuario> getFormasPagosUsuario() {
-        return formasPagosUsuario;
+    public List<FPUsuario> getFormasPagosUsuario() {
+        return FPUsuario;
     }
 
-    public void setFormasPagosUsuario(List<FormaPagoUsuario> formasPagosUsuario) {
-        this.formasPagosUsuario = formasPagosUsuario;
+    public void setFormasPagosUsuario(List<FPUsuario> FPUsuario) {
+        this.FPUsuario = FPUsuario;
     }
 
     public List<Pedido> getPedidos() {
@@ -122,4 +127,22 @@ public class Usuario implements Serializable {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+    public String getCesta() {
+        return cesta;
+    }
+
+    public void setCesta(String cesta) {
+        this.cesta = cesta;
+    }
+
+    public List<com.proyecto.TFG.modelos.FPUsuario> getFPUsuario() {
+        return FPUsuario;
+    }
+
+    public void setFPUsuario(List<com.proyecto.TFG.modelos.FPUsuario> FPUsuario) {
+        this.FPUsuario = FPUsuario;
+    }
+
+
 }

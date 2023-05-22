@@ -50,6 +50,9 @@
           </span>
         </div>
       </div>
+      <div class="alert alert-danger mt-2" *ngIf="emailOrPasswordIncorrect">
+        El correo electr&oacute;nico o contraseña son incorrectos
+      </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="record" />
         <label class="form-check-label" for="record">Recu&eacute;rdame</label>

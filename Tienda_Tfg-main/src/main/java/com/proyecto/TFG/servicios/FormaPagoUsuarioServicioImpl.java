@@ -1,7 +1,7 @@
 package com.proyecto.TFG.servicios;
 
 import com.proyecto.TFG.dtos.FormaPagoUsuarioDTO;
-import com.proyecto.TFG.modelos.FormaPagoUsuario;
+import com.proyecto.TFG.modelos.FPUsuario;
 import com.proyecto.TFG.repositorios.FormaPagoUsuarioRepositorio;
 import com.proyecto.TFG.utils.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ public class FormaPagoUsuarioServicioImpl implements IFormaPagoUsuarioServicio{
     @Override
     public List<FormaPagoUsuarioDTO> obtenerTodo() {
 
-        List<FormaPagoUsuario> formaPagoUsuarios = formaPagoUsuarioRepositorio.findAll();
+        List<FPUsuario> FPUsuarios = formaPagoUsuarioRepositorio.findAll();
         List<FormaPagoUsuarioDTO> formasPagosUsuarioDTO = new ArrayList<>();
-        if (!formaPagoUsuarios.isEmpty()) {
+        if (!FPUsuarios.isEmpty()) {
 
-            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(formaPagoUsuarios, FormaPagoUsuarioDTO.class);
+            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(FPUsuarios, FormaPagoUsuarioDTO.class);
         }
 
         return formasPagosUsuarioDTO;
@@ -32,22 +32,22 @@ public class FormaPagoUsuarioServicioImpl implements IFormaPagoUsuarioServicio{
     }
 
     public List<FormaPagoUsuarioDTO> findByUsuarioId(Long usuarioId){
-        List<FormaPagoUsuario> formaPagoUsuarios = formaPagoUsuarioRepositorio.findByUsuarioId(usuarioId);
+        List<FPUsuario> FPUsuarios = formaPagoUsuarioRepositorio.findByUsuarioId(usuarioId);
         List<FormaPagoUsuarioDTO> formasPagosUsuarioDTO = new ArrayList<>();
-        if (!formaPagoUsuarios.isEmpty()) {
+        if (!FPUsuarios.isEmpty()) {
 
-            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(formaPagoUsuarios, FormaPagoUsuarioDTO.class);
+            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(FPUsuarios, FormaPagoUsuarioDTO.class);
         }
 
         return formasPagosUsuarioDTO;
     }
 
     public List<FormaPagoUsuarioDTO> findByFormaPagoId(Long formaPagoId){
-        List<FormaPagoUsuario> formaPagoUsuarios = formaPagoUsuarioRepositorio.findByFormaPagoId(formaPagoId);
+        List<FPUsuario> FPUsuarios = formaPagoUsuarioRepositorio.findByFormaPagoId(formaPagoId);
         List<FormaPagoUsuarioDTO> formasPagosUsuarioDTO = new ArrayList<>();
-        if (!formaPagoUsuarios.isEmpty()) {
+        if (!FPUsuarios.isEmpty()) {
 
-            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(formaPagoUsuarios, FormaPagoUsuarioDTO.class);
+            formasPagosUsuarioDTO = ModelMapperUtil.transformDtoList(FPUsuarios, FormaPagoUsuarioDTO.class);
         }
 
         return formasPagosUsuarioDTO;
@@ -56,16 +56,16 @@ public class FormaPagoUsuarioServicioImpl implements IFormaPagoUsuarioServicio{
     @Override
     public FormaPagoUsuarioDTO guardar(FormaPagoUsuarioDTO formaPagoUsuario) {
 
-        FormaPagoUsuario formaPagoUsuarioEnti = ModelMapperUtil.transformDto(formaPagoUsuario, FormaPagoUsuario.class);
+        FPUsuario FPUsuarioEnti = ModelMapperUtil.transformDto(formaPagoUsuario, FPUsuario.class);
 
-        return ModelMapperUtil.transformDto(formaPagoUsuarioRepositorio.save(formaPagoUsuarioEnti), FormaPagoUsuarioDTO.class);
+        return ModelMapperUtil.transformDto(formaPagoUsuarioRepositorio.save(FPUsuarioEnti), FormaPagoUsuarioDTO.class);
 
     }
 
     @Override
     public FormaPagoUsuarioDTO obtenerPorId(long id) {
 
-        Optional<FormaPagoUsuario> formaPagoUsuario = formaPagoUsuarioRepositorio.findById(id);
+        Optional<FPUsuario> formaPagoUsuario = formaPagoUsuarioRepositorio.findById(id);
         FormaPagoUsuarioDTO formaPagoUsuarioDTO = new FormaPagoUsuarioDTO();
 
         if (formaPagoUsuario.isPresent()) {

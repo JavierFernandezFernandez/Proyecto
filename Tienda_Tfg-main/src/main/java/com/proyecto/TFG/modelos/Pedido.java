@@ -16,6 +16,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", unique = true, nullable = true)
     private long Id;
+    @Column(name = "Fechaentrega")
     private LocalDate fechaEntrega;
 
     @ManyToOne()
@@ -27,7 +28,7 @@ public class Pedido implements Serializable {
     private Direccion direccion;
 
     @ManyToOne()
-    @JoinColumn(name = "FormasPagos_Id")
+    @JoinColumn(name = "Formaspagos_Id")
     private FormaPago formaPago;
 
     @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)

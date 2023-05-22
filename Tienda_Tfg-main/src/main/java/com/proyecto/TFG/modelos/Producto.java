@@ -24,14 +24,6 @@ public class Producto implements Serializable {
     @Column(name = "Descripcion")
     private String descripcion;
 
-    public List<LineaPedido> getLineaPedidos() {
-        return lineaPedidos;
-    }
-
-    public void setLineaPedidos(List<LineaPedido> lineaPedidos) {
-        this.lineaPedidos = lineaPedidos;
-    }
-
     @ManyToOne()
     @JoinColumn(name = "Marcas_Id")
     private Marca marca;
@@ -48,6 +40,9 @@ public class Producto implements Serializable {
 
     @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LineaPedido> lineaPedidos;
+
+    @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
 
     public Producto(){
 
@@ -124,4 +119,13 @@ public class Producto implements Serializable {
     public void setLineaFacturas(List<LineaFactura> lineaFacturas) {
         this.lineaFacturas = lineaFacturas;
     }
+
+    public List<LineaPedido> getLineaPedidos() {
+        return lineaPedidos;
+    }
+
+    public void setLineaPedidos(List<LineaPedido> lineaPedidos) {
+        this.lineaPedidos = lineaPedidos;
+    }
+
 }
