@@ -4,8 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name  = "formaspagos", catalog = "tfg")
 public class FormaPago implements Serializable {
 
@@ -24,38 +30,4 @@ public class FormaPago implements Serializable {
     @OneToMany(mappedBy = "formaPago",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
 
-    public FormaPago() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<FPUsuario> getFormaPagoUsuarios() {
-        return FPUsuarios;
-    }
-
-    public void setFormaPagoUsuarios(List<FPUsuario> FPUsuarios) {
-        this.FPUsuarios = FPUsuarios;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
 }

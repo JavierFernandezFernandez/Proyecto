@@ -1,12 +1,18 @@
 package com.proyecto.TFG.modelos;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name  = "Pedidos", catalog = "tfg")
 public class Pedido implements Serializable {
 
@@ -34,55 +40,4 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LineaPedido> lineaPedidos;
 
-    public Pedido(){
-
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public LocalDate getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(LocalDate fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-
-    public FormaPago getFormaPago() {
-        return formaPago;
-    }
-
-    public void setFormaPago(FormaPago formaPago) {
-        this.formaPago = formaPago;
-    }
-
-    public List<LineaPedido> getLineaPedidos() {
-        return lineaPedidos;
-    }
-
-    public void setLineaPedidos(List<LineaPedido> lineaPedidos) {
-        this.lineaPedidos = lineaPedidos;
-    }
 }

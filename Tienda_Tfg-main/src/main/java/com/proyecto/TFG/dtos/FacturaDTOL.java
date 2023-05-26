@@ -1,19 +1,18 @@
 package com.proyecto.TFG.dtos;
 
-import com.proyecto.TFG.modelos.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoriaDTO {
+public class FacturaDTOL {
 
     private long id;
-    private String nombre;
-    private String descripcion;
+    private String observaciones;
+    private LocalDate fecha;
 
 }

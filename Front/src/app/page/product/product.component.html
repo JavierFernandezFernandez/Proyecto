@@ -11,7 +11,7 @@
       <p class="display-6 fw-bold">{{ product.nombre }}</p>
       <div class="border-1 border-top border-bottom">
         <p class="display-4 pt-2 fw-bolder">
-          {{ (product.precio + (product.precio % product.iva)).toFixed(2) }}€
+          {{ totalPrice }}
         </p>
         <span class="" style="line-height: 2">Cantidad:</span>
         <div class="input-group float-end quantity-selector">
@@ -43,23 +43,113 @@
     <h2>Descripci&oacute;n</h2>
     <p>{{ product.descripcion }}</p>
   </div>
-
+  <!-- Comentarios -->
   <div class="row m-3">
-    <h2>Comentarios</h2>
-    <h3>{{ averageNote.toFixed(1) }}</h3>
-    <p>{{ comments.length }} comentarios</p>
-    <div
-      class="card w-48 min-vh-20 m-2"
-      style="width: 18rem"
-      *ngFor="let comment of comments"
-    >
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <h5 class="card-title">{{comment.puntuacion}}</h5>
-        <p class="card-text">
-          {{comment.mensaje}}
-        </p>
+    <div class="row">
+      <div class="col-2">
+        <h2>Comentarios</h2>
+        <h3><span class="textStar">&starf;</span>{{ averageNote.toFixed(1) }} de 5</h3>
+        <p>{{ comments.length }} comentarios</p>
+      </div>
+      <!-- Button añadir comentario -->
+
+      <div class="col-auto">
+        <button
+          type="button"
+          class="btn btn-lg btn-secondary w-auto ms-2 position-relative top-50"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Comenta este producto
+        </button>
       </div>
     </div>
+
+    <!-- Modal añadir comentario -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Comentar producto
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <!-- Formulario -->
+          <form id="form" (ngSubmit)="postComment(stars, title, messaje)">
+            <div class="modal-body">
+              <p class="clasificacion">
+                <input id="radio1" type="radio" name="option" #stars value="5" />
+                <label for="radio1">&starf;</label>
+                <input id="radio2" type="radio" name="option" #stars value="4" />
+                <label for="radio2">&starf;</label>
+                <input id="radio3" type="radio" name="option" #stars value="3" />
+                <label for="radio3">&starf;</label>
+                <input id="radio4" type="radio" name="option" #stars value="2" />
+                <label for="radio4">&starf;</label>
+                <input id="radio5" type="radio" name="option" #stars value="1" checked/>
+                <label for="radio5">&starf;</label>
+              </p>
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control mb-4"
+                  id="floatingInput"
+                  #title
+                />
+                <label for="floatingInput">
+                  Escibe aqu&iacute; el titulo de tu comentario
+                </label>
+              </div>
+              <div class="form-floating">
+                <textarea
+                  class="form-control mb-4"
+                  id="floatingTextarea2"
+                  style="height: 100px"
+                  #messaje
+                ></textarea>
+                <label for="floatingTextarea2">
+                  Escibe aqu&iacute; tu comentario sobre el producto
+                </label>
+              </div>
+            </div>
+            <div class="modal-footer text-center">
+              <button type="submit" class="btn btn-primary w-100 btn-lg" data-bs-dismiss="modal">
+                Publicar comentario
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+   <div class="mx-0 mb-1 row">
+     <div
+       class="card w-48 min-vh-20 m-2"
+       style="width: 18rem"
+       *ngFor="let comment of comments"
+     >
+       <div class="card-body">
+         <span class="fw-bold">{{ comment.usuario?.nombre }}</span>
+         <h5 class="card-title">{{ comment.titulo }}</h5>
+         <h5 class="card-title"><span class="commentStar">&starf;</span>{{ comment.puntuacion }}</h5>
+         <p class="card-text">
+           {{ comment.mensaje }}
+         </p>
+       </div>
+     </div>
+   </div>
   </div>
 </div>

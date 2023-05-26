@@ -1,11 +1,17 @@
 package com.proyecto.TFG.modelos;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name  = "Direcciones", catalog = "tfg")
 public class Direccion implements Serializable {
 
@@ -29,55 +35,4 @@ public class Direccion implements Serializable {
     @OneToMany(mappedBy = "direccion",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
 
-    public Direccion(){
-
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Factura> getFactura() {
-        return factura;
-    }
-
-    public void setFactura(List<Factura> factura) {
-        this.factura = factura;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
 }

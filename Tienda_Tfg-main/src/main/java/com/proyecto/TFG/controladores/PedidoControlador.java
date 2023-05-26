@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,6 +43,11 @@ public class PedidoControlador {
 
     @PostMapping("/guardar")
     public ResponseEntity<PedidoDTO> guardarPedido(@RequestBody PedidoDTO pedido){
+
+        LocalDate fechaActual = LocalDate.now();
+        fechaActual = fechaActual.plusDays(3);
+
+        pedido.setFechaEntrega(fechaActual);
         pedidoServicio.guardar(pedido);
         return new ResponseEntity<>(pedido, HttpStatus.CREATED);
     }

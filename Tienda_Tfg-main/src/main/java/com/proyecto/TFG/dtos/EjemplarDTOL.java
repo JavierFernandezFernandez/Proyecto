@@ -1,19 +1,20 @@
 package com.proyecto.TFG.dtos;
 
-import com.proyecto.TFG.modelos.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DireccionDTO {
+public class EjemplarDTOL {
 
     private long Id;
-    private String ciudad;
-    private String direccion;
-    private UsuarioDTOL usuario;
-
+    private String serie;
+    private Date fechaVenta;
+    private Date fechaCompra;
+    private int unidades;
 
 }

@@ -19,11 +19,11 @@ export class DataComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.getUserByEmail(localStorage.getItem('email') as string)
     .subscribe((response:Usuario) => {
-      this.email = response.email;
-      this.nombre = response.nombre;
-      this.telefono = response.telefono;
+      this.email = response.email as string;
+      this.nombre = response.nombre as string;
+      this.telefono = response.telefono as string;
     })
-    
+
   }
 }
 

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from 'src/app/models/Producto.model';
 import { API_URL } from 'src/app/config';
@@ -9,6 +9,7 @@ import { API_URL } from 'src/app/config';
 })
 export class ProductService {
   private url: string = API_URL+'/producto/';
+  private headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('token') as string}`});
 
   constructor(private http:HttpClient) {}
 
@@ -22,4 +23,9 @@ export class ProductService {
   get4RandomProducts():Observable<Producto[]> {
     return this.http.get<Producto[]>(this.url+'random/4')
   }
+
+  getProductByName(name: string): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.url}nombre/${name}`)
+  }
+
 }

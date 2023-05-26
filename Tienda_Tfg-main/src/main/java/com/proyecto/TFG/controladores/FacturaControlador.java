@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,6 +37,9 @@ public class FacturaControlador {
 
     @PostMapping("/guardar")
     public ResponseEntity<FacturaDTO> guardarFactura(@RequestBody FacturaDTO factura){
+
+        factura.setFecha(LocalDate.now());
+
         facturaServicio.guardar(factura);
         return new ResponseEntity<>(factura, HttpStatus.CREATED);
     }

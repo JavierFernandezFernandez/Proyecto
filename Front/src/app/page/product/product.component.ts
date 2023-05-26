@@ -1,9 +1,13 @@
+import { UsuarioService } from './../../auth/services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/Producto.model';
 import { ProductService } from '../services/product/product.service';
 import { Router } from '@angular/router';
 import { CommentService } from '../services/comment/comment.service';
-import { Comment } from 'src/app/models/Comment.model';
+import { Comentario } from 'src/app/models/Comentario.model';
+import { Usuario } from 'src/app/models/Usuario.model';
+import { catchError, pipe, throwError } from 'rxjs';
+
 
 @Component({
   selector: 'app-product',
@@ -11,40 +15,68 @@ import { Comment } from 'src/app/models/Comment.model';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  id: string = '';
+  idProducto: string = '';
   product: Producto = new Producto();
-  comments: Comment[] = [];
+  comments: Comentario[] = [];
+
   averageNote: number = 0;
+  totalPrice: number = 0;
 
   constructor(
     private productService: ProductService,
+    private commentService: CommentService,
+    private usuarioService: UsuarioService,
     private router: Router,
-    private commentService: CommentService
   ) { }
 
   ngOnInit(): void {
-    const urlSplitted = this.router.url.split("/");
-    this.id = urlSplitted[urlSplitted.length - 1];
+    this.averageNote= 0;
+    const urlSplitted: string[] = this.router.url.split("/");
+    this.idProducto = urlSplitted[urlSplitted.length - 1];
     this.initializeProduct();
     this.initializeComments();
   }
-  initializeProduct() {
-    this.productService.getProductById(this.id).subscribe((response: Producto) => {
+  postComment(stars: HTMLInputElement, title: HTMLInputElement, messaje: HTMLTextAreaElement) {
+    
+    if (localStorage.getItem("email")) {
+      this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
+        .subscribe((user: Usuario) => {
+          this.commentService.createComment(title.value, messaje.value, Number(stars.value), user.id as number, Number(this.idProducto))
+            .pipe(catchError(error => {
+              return error.messaje;
+            }))
+            .subscribe((comment) => {
+              console.log("Comment created")
+              this.ngOnInit();
+            })
+        })
+    } else {
+      console.log("Inicia sesion para escribir el comentario")
+    }
+  }
+  private initializeProduct() {
+    this.productService.getProductById(this.idProducto).subscribe((response: Producto) => {
       this.product = response;
+      if (this.product.precio && this.product.iva) {
+        this.totalPrice = Number((this.product.precio + (this.product.precio % this.product.iva)).toFixed(2))
+      }
     })
   }
 
-  initializeComments() {
-    this.commentService.getCommentsByProduct(this.id).subscribe((response: Comment[]) => {
-      this.comments = response
-      console.log(response)
-      if (this.comments.length > 0) {
-        for (const comment of this.comments) {
-          this.averageNote += comment.puntuacion
+  private initializeComments() {
+    this.commentService.getCommentsByProduct(this.idProducto)
+      .subscribe((response: Comentario[]) => {
+        this.comments = response
+        console.log(response)
+        if (this.comments.length > 0) {
+          for (const comment of this.comments) {
+            if (comment.puntuacion) this.averageNote += comment.puntuacion
+          }
+          this.averageNote /= this.comments.length
         }
-        this.averageNote /= this.comments.length
-      }
-    });
+      });
   }
+
+
 
 }

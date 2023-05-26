@@ -1,3 +1,4 @@
+import { ProductService } from './../../page/services/product/product.service';
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../services/layout.service';
 import { Router } from '@angular/router';
@@ -10,20 +11,28 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
 
-  constructor(private layoutService: LayoutService,private router: Router) {}
+  constructor(
+    private layoutService: LayoutService,
+    private router: Router,
+    private productService:ProductService
+  ) { }
 
   ngOnInit(): void {
     this.layoutService.isLoggedIn.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
   }
-  closeSesion(){
+  closeSesion() {
     localStorage.clear();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
   }
 
-  getAcutualRoute():string{
+  getAcutualRoute(): string {
     return this.router.url
+  }
+
+  search(therm: HTMLInputElement){
+    this.router.navigate([`/search/${therm.value}`]);
   }
 }

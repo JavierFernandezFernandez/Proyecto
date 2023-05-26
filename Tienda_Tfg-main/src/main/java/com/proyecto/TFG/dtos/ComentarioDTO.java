@@ -2,58 +2,20 @@ package com.proyecto.TFG.dtos;
 
 import com.proyecto.TFG.modelos.Producto;
 import com.proyecto.TFG.modelos.Usuario;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ComentarioDTO {
 
     private long Id;
+    private String  titulo;
     private String  mensaje;
     private int puntuacion;
-    private Producto producto;
-    private Usuario usuario;
-
-    public ComentarioDTO(){
-
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public int getPuntuacion() {
-        return puntuacion;
-    }
-
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    private ProductoDTOL producto;
+    private UsuarioDTOL usuario;
 
 }

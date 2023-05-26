@@ -24,12 +24,12 @@ public class ComentarioControlador {
     }
 
     @GetMapping("/usuario/{usuarioId}")
-    public List<ComentarioDTO> obtenerComentariosByUsuario(long usuarioId){
+    public List<ComentarioDTO> obtenerComentariosByUsuario(@PathVariable long usuarioId){
         return comentarioServicio.findByUsuarioId(usuarioId);
     }
 
     @GetMapping("/producto/{productoId}")
-    public List<ComentarioDTO> obtenerComentariosByProducto(long productoId){
+    public List<ComentarioDTO> obtenerComentariosByProducto(@PathVariable long productoId){
         return comentarioServicio.findByProductoId(productoId);
     }
 

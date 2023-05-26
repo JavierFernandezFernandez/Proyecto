@@ -1,11 +1,11 @@
 export class Producto {
-  nombre: string;
-  precio: number;
-  iva: number;
-  descripcion: string;
-  marca: Marca;
-  categoria: Categoria;
-  id: number;
+  nombre?: string;
+  precio?: number;
+  iva?: number;
+  descripcion?: string;
+  marca?: Marca;
+  categoria?: Categoria;
+  id?: number;
   constructor() {
     this.id = -1,
       this.nombre = '',
@@ -26,13 +26,13 @@ export class Producto {
 }
 
 export interface Categoria {
-  id: number;
-  nombre: string;
-  descripcion: string;
+  id?: number;
+  nombre?: string;
+  descripcion?: string;
 }
 
 export interface Marca {
-  id: number;
-  nombre: string;
-  descripcion: string;
+  id?: number;
+  nombre?: string;
+  descripcion?: string;
 }

@@ -16,7 +16,6 @@
 .min-vh-20 {
   min-height: 20vh !important;
 }
-
 .w-12 {
   width: 12% !important;
 }
@@ -37,8 +36,11 @@
 .cursor-p{
   cursor: pointer;
 }
+.img-search{
+  height: 250px;
+}
 @media (min-width: 1200px) {
-  .display-7 {
+  .display-6 {
     font-size: 2rem;
   }
 }

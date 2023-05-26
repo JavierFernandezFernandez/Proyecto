@@ -37,13 +37,17 @@ public class RolControlador {
         return ResponseEntity.ok(rolId);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<RolDTO> actualizarRol(@PathVariable long id, @RequestBody RolDTO rol){
-        RolDTO rolId = rolServicio.obtenerPorId(id);
-        rolId.setRol(rol.getRol());
+    @PatchMapping("/{id}")
+    public ResponseEntity<RolDTO> actualizarRolParcial(@PathVariable long id, @RequestBody RolDTO rol){
 
-        RolDTO rolAtc = rolServicio.guardar(rolId);
-        return new ResponseEntity<>(rolAtc, HttpStatus.CREATED);
+        RolDTO rolId = rolServicio.obtenerPorId(id);
+
+        if(rol.getRol() != null) {
+            rolId.setRol(rol.getRol());
+        }
+
+        RolDTO rolActualizado = rolServicio.guardar(rolId);
+        return new ResponseEntity<>(rolActualizado, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

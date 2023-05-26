@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuario")
@@ -36,14 +38,37 @@ public class UsuarioControlador {
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable long id){
-        UsuarioDTO clienteId = usuarioServicio.obtenerPorId(id);
-        return ResponseEntity.ok(clienteId);
+        UsuarioDTO usuarioId = usuarioServicio.obtenerPorId(id);
+        return ResponseEntity.ok(usuarioId);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable long id, @RequestBody UsuarioDTO usuario){
-        usuarioServicio.guardar(usuario);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+    public ResponseEntity<UsuarioDTO> actualizarUsuarioParcial(@PathVariable long id, @RequestBody UsuarioDTO usuario){
+
+        UsuarioDTO usuarioId = usuarioServicio.obtenerPorId(id);
+
+        if(usuario.getNombre() != null) {
+            usuarioId.setNombre(usuario.getNombre());
+        }
+        if(usuario.getPassword() != null) {
+            usuarioId.setPassword(new BCryptPasswordEncoder(8).encode(usuario.getPassword()));
+        }
+        if(usuario.getEmail() != null) {
+            usuarioId.setEmail(usuario.getEmail());
+        }
+        if(usuario.getTelefono() != null) {
+            usuarioId.setTelefono(usuario.getTelefono());
+        }
+        if(usuario.getCesta() != null) {
+            usuarioId.setCesta(usuario.getCesta());
+        }
+        if(usuario.getRol() != null) {
+            usuarioId.setRol(usuario.getRol());
+        }
+
+        UsuarioDTO usuarioActualizado = usuarioServicio.guardar(usuarioId);
+        return new ResponseEntity<>(usuarioActualizado, HttpStatus.CREATED);
+
     }
 
     @DeleteMapping("/{id}")

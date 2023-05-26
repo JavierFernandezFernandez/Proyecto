@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormaPagoDTO {
+public class FormaPagoUsuarioDTOL {
 
-    private long id;
-    private String tipo;
+    private long Id;
+    private String datos;
 
 }

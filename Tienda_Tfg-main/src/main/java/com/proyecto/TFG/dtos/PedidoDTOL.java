@@ -1,15 +1,18 @@
 package com.proyecto.TFG.dtos;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormaPagoDTO {
+public class PedidoDTOL {
 
-    private long id;
-    private String tipo;
+    private long Id;
+    private LocalDate fechaEntrega;
 
 }

@@ -1,19 +1,18 @@
 package com.proyecto.TFG.dtos;
 
-import com.proyecto.TFG.modelos.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoriaDTO {
+public class UsuarioDTOL {
 
-    private long id;
+    private long Id;
     private String nombre;
-    private String descripcion;
-
+    private String email;
+    private String telefono;
+    private String password;
+    private String cesta;
 }

@@ -1,12 +1,18 @@
 package com.proyecto.TFG.modelos;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name  = "Productos", catalog = "tfg")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name  = "productos", catalog = "tfg")
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = -2397774858653723668L;
@@ -43,89 +49,5 @@ public class Producto implements Serializable {
 
     @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comentario> comentarios;
-
-    public Producto(){
-
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public double getIva() {
-        return iva;
-    }
-
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
-
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public List<Ejemplar> getEjemplares() {
-        return ejemplares;
-    }
-
-    public void setEjemplares(List<Ejemplar> ejemplares) {
-        this.ejemplares = ejemplares;
-    }
-
-    public List<LineaFactura> getLineaFacturas() {
-        return lineaFacturas;
-    }
-
-    public void setLineaFacturas(List<LineaFactura> lineaFacturas) {
-        this.lineaFacturas = lineaFacturas;
-    }
-
-    public List<LineaPedido> getLineaPedidos() {
-        return lineaPedidos;
-    }
-
-    public void setLineaPedidos(List<LineaPedido> lineaPedidos) {
-        this.lineaPedidos = lineaPedidos;
-    }
 
 }
