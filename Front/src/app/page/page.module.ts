@@ -22,6 +22,13 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     PageRoutingModule,
     FormsModule
+  ],
+  bootstrap:[
+    HomeComponent,
+    ProductComponent,
+    ShoppingCartComponent,
+    CarrouselMarcasComponent,
+    SearchedProductsComponent,
   ]
 
 })

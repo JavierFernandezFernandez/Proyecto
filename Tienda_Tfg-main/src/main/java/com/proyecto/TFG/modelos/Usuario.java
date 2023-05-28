@@ -35,19 +35,19 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "Roles_Id")
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Factura> facturas;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Direccion> direcciones;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<FPUsuario> FPUsuario;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Pedido> pedidos;
 
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Comentario> comentarios;
 
 }

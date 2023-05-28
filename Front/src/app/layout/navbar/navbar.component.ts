@@ -1,7 +1,7 @@
-import { ProductService } from './../../page/services/product/product.service';
 import { Component, OnInit } from '@angular/core';
-import { LayoutService } from '../services/layout.service';
 import { Router } from '@angular/router';
+import { LayoutService } from 'src/app/services/layout/layout.service';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +10,12 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
+
+  items: string[] = [
+    'The first choice!',
+    'And another choice for you.',
+    'but wait! A third!'
+  ];
 
   constructor(
     private layoutService: LayoutService,
@@ -26,6 +32,7 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     this.isLoggedIn = false;
     this.router.navigate(['/']);
+    location.reload()
   }
 
   getAcutualRoute(): string {

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_URL } from 'src/app/config';
+import { API_URL, GET_HEADERS } from 'src/app/config';
 import { Comentario } from 'src/app/models/Comentario.model';
 import { Producto } from 'src/app/models/Producto.model';
 import { Usuario } from 'src/app/models/Usuario.model';
@@ -14,11 +14,7 @@ export class CommentService {
   private headers = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-    const token = localStorage.getItem('token');
-    console.log(token)
-    if (token) {
-      this.headers = this.headers.set('Authorization', `Bearer ${token}`);
-    }
+    this.headers = GET_HEADERS(this.headers)
   }
 
   getCommentsByProduct(idProduct: string): Observable<Comentario[]> {

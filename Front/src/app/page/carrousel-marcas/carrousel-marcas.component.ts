@@ -29,7 +29,7 @@ export class CarrouselMarcasComponent implements OnInit {
 
   ngOnInit(): void {
     this.marcasCarrousel = this.inicializarMarcasCarrousel();
-    console.log(JSON.stringify(this.marcasCarrousel));
+    //console.log(JSON.stringify(this.marcasCarrousel));
     this.marcas = this.marcasCarrousel._element.children[0].children;
     // console.log(this.marcas);
     // console.log(this.marcasCarrousel);

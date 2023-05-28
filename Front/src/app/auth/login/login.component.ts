@@ -1,11 +1,11 @@
-import { LayoutService } from './../../layout/services/layout.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { UsuarioService } from './../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
 import { catchError } from 'rxjs';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { LayoutService } from 'src/app/services/layout/layout.service';
 
 @Component({
   selector: 'app-login',
@@ -49,13 +49,12 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.usuarioService.login(this.email.value, this.password.value)
         .pipe(catchError(error => {
-          console.log(error.message);
           return error.message
         }))
         .subscribe(
           (response: RespuestaLogin | string) => {
             if (!(typeof response === 'string')) {
-              this.emailOrPasswordIncorrect = true;
+              this.emailOrPasswordIncorrect = false;
               const token = response.body.Authorization;
               localStorage.setItem('token', token);
               localStorage.setItem('email', this.email.value);

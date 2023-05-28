@@ -16,37 +16,165 @@
           <input
             type="text"
             class="form-control mb-3 w-100"
-            value="{{email}}"
+            [(ngModel)]="email"
             [readOnly]="!editing"
           />
           <input
             type="text"
             class="form-control my-3 w-100"
-            value="{{nombre}}"
+            [(ngModel)]="name"
             [readonly]="!editing"
           />
           <input
             type="number"
             class="form-control my-3 w-100"
-            value="{{telefono}}"
+            [(ngModel)]="phone"
             [readonly]="!editing"
           />
+          <!-- Boton cambiar contraseña -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#changePassword"
+          >
+            Cambiar contrase&ntilde;a
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="changePassword"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="changePasswordLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="changePasswordLabel">
+                    Modal title
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                  <div
+                    class="alert alert-info mt-2"
+                    [hidden]="!editPasswordCorrect"
+                  >
+                  Contrase&ntilde;a modificada correctamente
+                  </div>
+                </div>
+                <!-- Formulario -->
+                <form [formGroup]="form" (ngSubmit)="changePassword()">
+                  <div class="modal-body">
+                    <div class="mb-4">
+                      <label for="actualPassword">Contrase&ntilde;a</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        formControlName="actualPassword"
+                      />
+                      <div
+                        class="alert alert-danger mt-2"
+                        [hidden]="
+                          actualPassword.valid || actualPassword.pristine
+                        "
+                      >
+                        <span *ngIf="actualPassword.errors?.['required']">
+                          La contrase&ntilde;a es obligatoria
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4">
+                      <label for="newPassword">Nueva contrase&ntilde;a</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        formControlName="newPassword"
+                      />
+                      <div
+                        class="alert alert-danger mt-2"
+                        [hidden]="newPassword.valid || newPassword.pristine"
+                      >
+                        <span *ngIf="newPassword.errors?.['required']">
+                          La contrase&ntilde;a es obligatoria
+                        </span>
+                        <span *ngIf="newPassword.errors?.['minlength']">
+                          La contrase&ntilde;a es demasiado corta
+                        </span>
+                        <span *ngIf="newPassword.errors?.['maxlength']">
+                          La contrase&ntilde;a es demasiado larga
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4">
+                      <label for="confirmPassword"
+                        >Confirmar contrase&ntilde;a</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        formControlName="confirmPassword"
+                      />
+                      <div
+                        class="alert alert-danger mt-2"
+                        [hidden]="
+                          confirmPassword.valid || confirmPassword.pristine
+                        "
+                      >
+                        <span *ngIf="confirmPassword.errors?.['required']">
+                          Confirmar la contrase&ntilde;a es obligatoria
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary w-100 btn-lg"
+                      data-bs-dismiss="modal"
+                      [disabled]="!form.valid"
+                    >
+                      Cambiar contrase&ntilde;a
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="ms-4 col-4">
           <!-- Modo visualizacion -->
           <span *ngIf="!editing">
-            <button class="btn btn-secondary" type="submit" (click)="editing=true">
+            <button class="btn btn-secondary" type="submit" (click)="edit()">
               <span class="">Editar</span>
             </button>
-            <br/>
+            <br />
           </span>
           <!-- Modo edicion -->
           <span *ngIf="editing">
-            <button class="btn btn-secondary mb-3" type="submit" (click)="editing=false">
+            <button
+              class="btn btn-secondary mb-3"
+              type="submit"
+              (click)="saveEdit()"
+            >
               <span class="">Guardar</span>
             </button>
             <br />
-            <button class="btn btn-secondary" type="submit" (click)="editing=false">
+            <button
+              class="btn btn-secondary"
+              type="submit"
+              (click)="cancelEdit()"
+            >
               <span class="">Cancelar</span>
             </button>
           </span>

@@ -47,7 +47,7 @@
           <div class="dropdown text-end float-start">
             <a
               class="d-block link-dark text-decoration-none dropdown-toggle"
-              id="dropdownUser1"
+              id="userDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
@@ -60,14 +60,15 @@
               />
             </a>
             <ul
-              class="dropdown-menu text-small"
-              aria-labelledby="dropdownUser1"
+              class="dropdown-menu"
+              aria-labelledby="userDropdown"
             >
-              <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li>
-              <li><a class="dropdown-item" href="#">Configuración</a></li>
               <li>
                 <a class="dropdown-item" href="/auth/data-user">Mis perfil</a>
               </li>
+              <li><a class="dropdown-item" href="#">Lista de deseos</a></li>
+              <li><a class="dropdown-item" href="/auth/orders">Pedidos</a></li>
+              <li><a class="dropdown-item" href="/auth/reviews">Opiniones</a></li>
               <li><hr class="dropdown-divider" /></li>
               <li>
                 <a class="dropdown-item" href="#" (click)="closeSesion()"
@@ -110,7 +111,7 @@
           Dropdown button
         </button>
 
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" id="dropdown">
           <li><a class="dropdown-item" href="#">Action</a></li>
           <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -131,7 +132,7 @@
           height="26"
           fill="currentColor"
           class="bi bi-search z-1 position-relative text-dark"
-          style="right: 33px; top: 5px;"
+          style="right: 33px; top: 5px"
           viewBox="0 0 16 16"
         >
           <path

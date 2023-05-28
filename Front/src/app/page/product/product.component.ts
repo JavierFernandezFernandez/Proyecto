@@ -1,12 +1,12 @@
-import { UsuarioService } from './../../auth/services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/Producto.model';
-import { ProductService } from '../services/product/product.service';
 import { Router } from '@angular/router';
-import { CommentService } from '../services/comment/comment.service';
+import { CommentService } from '../../services/comment/comment.service';
 import { Comentario } from 'src/app/models/Comentario.model';
 import { Usuario } from 'src/app/models/Usuario.model';
 import { catchError, pipe, throwError } from 'rxjs';
+import { ProductService } from 'src/app/services/product/product.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class ProductComponent implements OnInit {
 
   averageNote: number = 0;
   totalPrice: number = 0;
+  stars: string = '1';
+  cuantity: number = 1;
 
   constructor(
     private productService: ProductService,
@@ -30,18 +32,17 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.averageNote= 0;
+    this.averageNote = 0;
     const urlSplitted: string[] = this.router.url.split("/");
     this.idProducto = urlSplitted[urlSplitted.length - 1];
     this.initializeProduct();
     this.initializeComments();
   }
-  postComment(stars: HTMLInputElement, title: HTMLInputElement, messaje: HTMLTextAreaElement) {
-    
+  postComment(title: HTMLInputElement, messaje: HTMLTextAreaElement) {
     if (localStorage.getItem("email")) {
       this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
         .subscribe((user: Usuario) => {
-          this.commentService.createComment(title.value, messaje.value, Number(stars.value), user.id as number, Number(this.idProducto))
+          this.commentService.createComment(title.value, messaje.value, Number(this.stars), user.id as number, Number(this.idProducto))
             .pipe(catchError(error => {
               return error.messaje;
             }))
@@ -50,10 +51,20 @@ export class ProductComponent implements OnInit {
               this.ngOnInit();
             })
         })
+
     } else {
       console.log("Inicia sesion para escribir el comentario")
     }
   }
+
+  lessCuantity(){
+    if (this.cuantity > 1) this.cuantity--;
+  }
+
+  moreCuantity(){
+    if (true) this.cuantity++; //modificar con el stock
+  }
+
   private initializeProduct() {
     this.productService.getProductById(this.idProducto).subscribe((response: Producto) => {
       this.product = response;

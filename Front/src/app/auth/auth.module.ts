@@ -9,7 +9,7 @@ import { PaymentMethodsComponent } from './payment-methods/payment-methods.compo
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 @NgModule({
@@ -27,7 +27,18 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ],
+  bootstrap:[
+    DataComponent,
+    OrdersComponent,
+    ReviewsComponent,
+    PaymentMethodsComponent,
+    CustomerServiceComponent,
+    LoginComponent,
+    RegistrationComponent,
+    SidebarComponent
+  ]
 
 })
 export class AuthModule { }

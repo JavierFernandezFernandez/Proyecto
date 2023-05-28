@@ -7,6 +7,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
+
 
 @NgModule({
   declarations: [
@@ -18,9 +22,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
+
   ],
   providers: [
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    NavbarComponent,
+    FooterComponent,
+  ]
 })
 export class AppModule { }

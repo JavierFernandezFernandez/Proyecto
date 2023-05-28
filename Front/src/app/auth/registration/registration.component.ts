@@ -1,21 +1,16 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from '../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { fromEvent, merge } from 'rxjs';
-
-interface FormControls {
-  [key: string]: any;
-}
-
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
-  form = this.formB.group({
+  form:FormGroup = this.formB.group({
     name: ['', [
       Validators.required,
       Validators.minLength(4),

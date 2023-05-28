@@ -14,20 +14,32 @@
           {{ totalPrice }}
         </p>
         <span class="" style="line-height: 2">Cantidad:</span>
-        <div class="input-group float-end quantity-selector">
-          <button class="btn btn-outline-secondary" type="button">-</button>
+        <div class="ms-1 input-group float-end quantity-selector">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="lessCuantity()"
+          >
+            -
+          </button>
           <input
             type="text"
             class="form-control text-center"
             aria-label="Example text with two button addons"
-            value="1"
+            [(ngModel)]="cuantity"
           />
-          <button class="btn btn-outline-secondary" type="button">+</button>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="moreCuantity()"
+          >
+            +
+          </button>
         </div>
         <br /><br />
         <span>Disponivilidad:</span>
         <br /><br />
-        <span>Marca:</span>
+        <span>Marca: {{ product.marca?.nombre }}</span>
       </div>
       <div class="mt-4">
         <button type="button" class="btn btn-primary btn-lg me-2">
@@ -48,7 +60,9 @@
     <div class="row">
       <div class="col-2">
         <h2>Comentarios</h2>
-        <h3><span class="textStar">&starf;</span>{{ averageNote.toFixed(1) }} de 5</h3>
+        <h3>
+          <span class="textStar">&starf;</span>{{ averageNote.toFixed(1) }} de 5
+        </h3>
         <p>{{ comments.length }} comentarios</p>
       </div>
       <!-- Button añadir comentario -->
@@ -89,18 +103,48 @@
             ></button>
           </div>
           <!-- Formulario -->
-          <form id="form" (ngSubmit)="postComment(stars, title, messaje)">
+          <form id="form" (ngSubmit)="postComment(title, messaje)">
             <div class="modal-body">
               <p class="clasificacion">
-                <input id="radio1" type="radio" name="option" #stars value="5" />
+                <input
+                  id="radio1"
+                  type="radio"
+                  name="option"
+                  [(ngModel)]="stars"
+                  value="5"
+                />
                 <label for="radio1">&starf;</label>
-                <input id="radio2" type="radio" name="option" #stars value="4" />
+                <input
+                  id="radio2"
+                  type="radio"
+                  name="option"
+                  [(ngModel)]="stars"
+                  value="4"
+                />
                 <label for="radio2">&starf;</label>
-                <input id="radio3" type="radio" name="option" #stars value="3" />
+                <input
+                  id="radio3"
+                  type="radio"
+                  name="option"
+                  [(ngModel)]="stars"
+                  value="3"
+                />
                 <label for="radio3">&starf;</label>
-                <input id="radio4" type="radio" name="option" #stars value="2" />
+                <input
+                  id="radio4"
+                  type="radio"
+                  name="option"
+                  [(ngModel)]="stars"
+                  value="2"
+                />
                 <label for="radio4">&starf;</label>
-                <input id="radio5" type="radio" name="option" #stars value="1" checked/>
+                <input
+                  id="radio5"
+                  type="radio"
+                  name="option"
+                  [(ngModel)]="stars"
+                  value="1"
+                />
                 <label for="radio5">&starf;</label>
               </p>
               <div class="form-floating">
@@ -127,7 +171,12 @@
               </div>
             </div>
             <div class="modal-footer text-center">
-              <button type="submit" class="btn btn-primary w-100 btn-lg" data-bs-dismiss="modal">
+              <button
+                type="submit"
+                class="btn btn-primary w-100 btn-lg"
+                data-bs-dismiss="modal"
+                [disabled]="!title.value || !messaje.value"
+              >
                 Publicar comentario
               </button>
             </div>
@@ -135,21 +184,23 @@
         </div>
       </div>
     </div>
-   <div class="mx-0 mb-1 row">
-     <div
-       class="card w-48 min-vh-20 m-2"
-       style="width: 18rem"
-       *ngFor="let comment of comments"
-     >
-       <div class="card-body">
-         <span class="fw-bold">{{ comment.usuario?.nombre }}</span>
-         <h5 class="card-title">{{ comment.titulo }}</h5>
-         <h5 class="card-title"><span class="commentStar">&starf;</span>{{ comment.puntuacion }}</h5>
-         <p class="card-text">
-           {{ comment.mensaje }}
-         </p>
-       </div>
-     </div>
-   </div>
+    <div class="mx-0 mb-1 row">
+      <div
+        class="card w-48 min-vh-20 m-2"
+        style="width: 18rem"
+        *ngFor="let comment of comments"
+      >
+        <div class="card-body">
+          <span class="fw-bold">{{ comment.usuario?.nombre }}</span>
+          <h5 class="card-title">{{ comment.titulo }}</h5>
+          <h5 class="card-title">
+            <span class="commentStar">&starf;</span>{{ comment.puntuacion }}
+          </h5>
+          <p class="card-text">
+            {{ comment.mensaje }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

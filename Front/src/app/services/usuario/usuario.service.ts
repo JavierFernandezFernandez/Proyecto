@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { API_URL } from 'src/app/config';
+import { API_URL, GET_HEADERS } from 'src/app/config';
 import { Usuario } from 'src/app/models/Usuario.model';
 
 @Injectable({
@@ -9,9 +9,11 @@ import { Usuario } from 'src/app/models/Usuario.model';
 })
 export class UsuarioService {
   url = API_URL + '/usuario/';
-  headers = new HttpHeaders({'Authorization': `Bearer ${localStorage.getItem('token') as string}`});
+  headers = new HttpHeaders();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.headers = GET_HEADERS(this.headers)
+  }
 
   saveUser(
     name: string,
@@ -40,7 +42,11 @@ export class UsuarioService {
     );
   }
   getUserByEmail(email: string): Observable<Usuario> {
-    return this.http.get<Usuario>(this.url + `email/${localStorage.getItem('email')}`,{headers: this.headers})
+    return this.http.get<Usuario>(`${this.url}email/${localStorage.getItem('email')}`, { headers: this.headers })
+  }
+
+  updateUser(id: number, usuario: Usuario): Observable<any> {
+    return this.http.patch<Usuario>(this.url + id, usuario, {headers: this.headers});
   }
 
   getToken(): String | null {

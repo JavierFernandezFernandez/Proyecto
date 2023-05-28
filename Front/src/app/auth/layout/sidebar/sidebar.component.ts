@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
 
   constructor(private router:Router){}
-  
+
   ngOnInit(): void {
     if(!localStorage.getItem('token')){
       this.router.navigate(['/']);
@@ -17,6 +18,8 @@ export class SidebarComponent implements OnInit {
   }
   cerrarSesion(){
     localStorage.clear();
+    const seconds = interval(1000)
     this.router.navigate(['/']);
+    location.reload()
   }
 }
