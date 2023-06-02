@@ -8,11 +8,11 @@ import { Usuario } from 'src/app/models/Usuario.model';
   providedIn: 'root',
 })
 export class UsuarioService {
-  url = API_URL + '/usuario/';
-  headers = new HttpHeaders();
+  private url = API_URL + '/usuario/';
+  private headers: HttpHeaders
 
   constructor(private http: HttpClient) {
-    this.headers = GET_HEADERS(this.headers)
+    this.headers = GET_HEADERS()
   }
 
   saveUser(
@@ -28,7 +28,7 @@ export class UsuarioService {
       telefono: phone,
       password: password,
       rol: null,
-    };
+    } as Usuario;
     return this.http.post<Usuario>(this.url + 'guardar', usuario);
   }
 
@@ -46,7 +46,7 @@ export class UsuarioService {
   }
 
   updateUser(id: number, usuario: Usuario): Observable<any> {
-    return this.http.patch<Usuario>(this.url + id, usuario, {headers: this.headers});
+    return this.http.patch<Usuario>(this.url + id, usuario, { headers: this.headers });
   }
 
   getToken(): String | null {

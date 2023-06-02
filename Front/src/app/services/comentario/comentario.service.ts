@@ -9,12 +9,12 @@ import { Usuario } from 'src/app/models/Usuario.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CommentService {
+export class ComentarioService {
   private url = API_URL + '/comentario/'
-  private headers = new HttpHeaders();
+  private headers
 
   constructor(private http: HttpClient) {
-    this.headers = GET_HEADERS(this.headers)
+    this.headers = GET_HEADERS()
   }
 
   getCommentsByProduct(idProduct: string): Observable<Comentario[]> {
@@ -22,15 +22,15 @@ export class CommentService {
   }
 
   createComment(title:string,message:string,stars:number,userId:number,productId:number){
-    const user: Usuario = {id:userId}
-    const product: Producto = {id:productId}
+    const user: Usuario = {id:userId} as Usuario;
+    const product: Producto = {id:productId} as Producto;
     const comment: Comentario= {
       titulo:title,
       mensaje:message,
       puntuacion:stars,
       producto:product,
       usuario:user
-    }
+    } as Comentario
     return this.http.post(this.url+'guardar',comment,{headers:this.headers})
   }
 }

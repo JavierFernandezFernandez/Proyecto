@@ -27,7 +27,7 @@ public class DireccionControlador {
     }
 
     @GetMapping("/usuario/{usuarioId}")
-    public List<DireccionDTO> obtenerDireccionesByUsusario(Long usuarioId){
+    public List<DireccionDTO> obtenerDireccionesByUsusario(@PathVariable Long usuarioId){
         return direccionServicio.findByUsuarioId(usuarioId);
     }
 

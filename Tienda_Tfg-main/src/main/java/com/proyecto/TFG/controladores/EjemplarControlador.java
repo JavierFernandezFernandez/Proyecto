@@ -27,7 +27,7 @@ public class EjemplarControlador {
     }
 
     @GetMapping("/producto/{productoId}")
-    public List<EjemplarDTO> obtenerEjemplaresByProducto(Long productoId){
+    public List<EjemplarDTO> obtenerEjemplaresByProducto(@PathVariable Long productoId){
         return ejemplarServicio.findByProductoId(productoId);
     }
 

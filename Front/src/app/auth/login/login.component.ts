@@ -23,16 +23,10 @@ export class LoginComponent implements OnInit {
     ]],
     password: ['', [
       Validators.required,
-      Validators.minLength(8),
       Validators.maxLength(255),
     ]],
   });
-  get email(): FormControl {
-    return this.form.get('email') as FormControl;
-  }
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
-  }
+
   constructor(
     private usuarioService: UsuarioService,
     private formB: FormBuilder,
@@ -44,7 +38,12 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/'])
     }
   }
-
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
+  }
+  get password(): FormControl {
+    return this.form.get('password') as FormControl;
+  }
   login(event: SubmitEvent) {
     if (this.form.valid) {
       this.usuarioService.login(this.email.value, this.password.value)

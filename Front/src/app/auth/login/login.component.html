@@ -1,6 +1,6 @@
-<div class="container min-vh-75 py-4 px-40">
+<div class="container py-4 px-40">
   <div
-    class="container-fluid border-start border-end min-vh-50 position-static mt-5"
+    class="container-fluid border-start border-end min-vh-50 position-static mt-5 pt-5"
   >
     <form [formGroup]="form" (ngSubmit)="login($event)">
       <h2 class="">Iniciar sesi&oacute;n</h2>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
+        <label for="password" class="form-label">Contrase&ntilde;a</label>
         <input
           type="password"
           class="form-control"
@@ -40,13 +40,10 @@
           [hidden]="password.valid || password.pristine"
         >
           <span *ngIf="password.errors?.['required']">
-            La contraseña es obligatoria
-          </span>
-          <span *ngIf="password.errors?.['minlength']">
-            La contraseña es demasiado corta
+            La contrase&ntilde;a es obligatoria
           </span>
           <span *ngIf="password.errors?.['maxlength']">
-            La contraseña es demasiado larga
+            La contrase&ntilde;a es demasiado larga
           </span>
         </div>
       </div>

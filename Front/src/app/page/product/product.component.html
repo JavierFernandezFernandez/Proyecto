@@ -39,15 +39,18 @@
         <br /><br />
         <span>Disponivilidad:</span>
         <br /><br />
-        <span>Marca: {{ product.marca?.nombre }}</span>
+        <span>Marca: {{ product.marca.nombre }}</span>
       </div>
       <div class="mt-4">
-        <button type="button" class="btn btn-primary btn-lg me-2">
+        <button type="button" class="btn btn-info btn-lg me-2">
           Comprar
         </button>
-        <button type="button" class="btn btn-primary btn-lg ms-2">
+        <button type="button" class="btn btn-info btn-lg ms-2" (click)="addToCart()">
           Añadir al carrito
         </button>
+        <div class="alert-info" *ngIf="addCartSuccess">
+          <p>Producto añadido al carrito</p>
+        </div>
       </div>
     </div>
   </div>
@@ -191,7 +194,7 @@
         *ngFor="let comment of comments"
       >
         <div class="card-body">
-          <span class="fw-bold">{{ comment.usuario?.nombre }}</span>
+          <span class="fw-bold">{{ comment.usuario.nombre }}</span>
           <h5 class="card-title">{{ comment.titulo }}</h5>
           <h5 class="card-title">
             <span class="commentStar">&starf;</span>{{ comment.puntuacion }}

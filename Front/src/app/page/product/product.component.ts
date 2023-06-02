@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/Producto.model';
 import { Router } from '@angular/router';
-import { CommentService } from '../../services/comment/comment.service';
+import { ComentarioService } from '../../services/comentario/comentario.service';
 import { Comentario } from 'src/app/models/Comentario.model';
 import { Usuario } from 'src/app/models/Usuario.model';
 import { catchError, pipe, throwError } from 'rxjs';
@@ -16,7 +16,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class ProductComponent implements OnInit {
   idProducto: string = '';
-  product: Producto = new Producto();
+  product: Producto = {} as Producto;
   comments: Comentario[] = [];
 
   averageNote: number = 0;
@@ -24,9 +24,11 @@ export class ProductComponent implements OnInit {
   stars: string = '1';
   cuantity: number = 1;
 
+  addCartSuccess = false;
+
   constructor(
     private productService: ProductService,
-    private commentService: CommentService,
+    private commentService: ComentarioService,
     private usuarioService: UsuarioService,
     private router: Router,
   ) { }
@@ -57,11 +59,11 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  lessCuantity(){
+  lessCuantity() {
     if (this.cuantity > 1) this.cuantity--;
   }
 
-  moreCuantity(){
+  moreCuantity() {
     if (true) this.cuantity++; //modificar con el stock
   }
 
@@ -88,6 +90,31 @@ export class ProductComponent implements OnInit {
       });
   }
 
+  addToCart() {
+    if (localStorage.getItem("token") && localStorage.getItem("email")) {
+      this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
+        .subscribe((response: Usuario) => {
+          if (response.cesta) {
+            let cart: Producto[] = JSON.parse(response.cesta);
+            cart.push(this.product);
+            response.cesta = JSON.stringify(cart);
+            const user: Usuario = { cesta: response.cesta } as Usuario
+            this.usuarioService.updateUser(response.id as number, user)
+              .pipe(catchError((err) => {
+                return err.messaje
+              }))
+              .subscribe((response: Usuario | string) => {
+                if (!(typeof response === 'string')) {
+                  this.addCartSuccess = true;
+                  console.log(response);
+                }
+              });
+          }
+        })
+    } else {
 
+    }
+
+  }
 
 }

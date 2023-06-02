@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "lineaspedidio", catalog = "tfg")
+@Table(name = "lineaspedido", catalog = "tfg")
 public class LineaPedido implements Serializable {
 
     private static final long serialVersionUID = -5767527261396068126L;

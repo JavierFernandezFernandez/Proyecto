@@ -1,13 +1,14 @@
 export interface Usuario {
-  nombre?: string;
-  email?: string;
-  telefono?: string;
-  password?: string;
-  rol?: Rol | null;
-  id?: number;
+  nombre: string;
+  email: string;
+  telefono: string;
+  password: string;
+  rol: Rol | null;
+  cesta: string;
+  id: number;
 }
 
 export interface Rol {
-  id?: number;
-  rol?: string;
+  id: number;
+  rol: string;
 }

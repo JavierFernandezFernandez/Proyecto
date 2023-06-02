@@ -21,6 +21,8 @@ export class DataComponent implements OnInit {
   originalName: string = '';
   originalPhone: string = '';
 
+  cursorNotAllowed: string = 'cursor-not-allowed';
+
   editCorrect: boolean = false;
   editPasswordCorrect: boolean = false;
 
@@ -70,6 +72,7 @@ export class DataComponent implements OnInit {
 
   edit() {
     this.editing = true;
+    this.cursorNotAllowed = ''
     this.originalEmail = this.email;
     this.originalName = this.name;
     this.originalPhone = this.phone;
@@ -80,7 +83,7 @@ export class DataComponent implements OnInit {
       email: this.email,
       nombre: this.name,
       telefono: this.phone
-    }
+    } as Usuario;
     this.usuarioService.updateUser(this.id, user)
       .pipe(catchError((error) => {
         return error.message
@@ -88,6 +91,7 @@ export class DataComponent implements OnInit {
       .subscribe((response: Usuario | string) => {
         if (typeof response !== 'string') {
           this.editing = false;
+          this.cursorNotAllowed = 'cursor-not-allowed'
           this.email = response.email as string;
           this.name = response.nombre as string;
           this.phone = response.telefono as string;
@@ -99,6 +103,7 @@ export class DataComponent implements OnInit {
 
   cancelEdit() {
     this.editing = false;
+    this.cursorNotAllowed = 'cursor-not-allowed'
     this.email = this.originalEmail;
     this.name = this.originalName;
     this.phone = this.originalPhone;
@@ -114,7 +119,7 @@ export class DataComponent implements OnInit {
           if (!(typeof response === 'string')) {
             this.passwordIncorrect = false;
             if (this.newPassword.value === this.confirmPassword.value) {
-              const password: Usuario = { password: this.newPassword.value }
+              const password: Usuario = { password: this.newPassword.value } as Usuario
               this.usuarioService.updateUser(this.id, password)
                 .pipe(catchError(error => {
                   return error.message
@@ -133,6 +138,5 @@ export class DataComponent implements OnInit {
           }
         });
   }
-
 }
 
