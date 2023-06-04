@@ -16,8 +16,8 @@ export class FormaPagoUsuarioService {
   constructor(private http: HttpClient) {
     this.headers = GET_HEADERS()
   }
-  getUserPaymentMethodByUserId(userId: number): Observable<FormaPagoUsuario> {
-    return this.http.get<FormaPagoUsuario>(`${this.url}usuario/${userId}`, { headers: this.headers })
+  getUserPaymentMethodByUserId(userId: number): Observable<FormaPagoUsuario[]> {
+    return this.http.get<FormaPagoUsuario[]>(`${this.url}usuario/${userId}`, { headers: this.headers })
   }
 
   addUserPaymentMethod(id: number, datos: string, usuario: Usuario, formaPago: FormaPago): Observable<FormaPagoUsuario> {

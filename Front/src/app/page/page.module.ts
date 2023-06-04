@@ -8,6 +8,7 @@ import { CarrouselMarcasComponent } from './carrousel-marcas/carrousel-marcas.co
 import { SearchedProductsComponent } from './searched-products/searched-products.component';
 import { FormsModule } from '@angular/forms';
 import { ProcessOrderComponent } from './process-order/process-order.component';
+import { NgbCollapse, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,11 +20,14 @@ import { ProcessOrderComponent } from './process-order/process-order.component';
     CarrouselMarcasComponent,
     SearchedProductsComponent,
     ProcessOrderComponent,
+
   ],
   imports: [
     CommonModule,
     PageRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    NgbCollapse
   ],
   bootstrap:[
     HomeComponent,
@@ -31,6 +35,7 @@ import { ProcessOrderComponent } from './process-order/process-order.component';
     ShoppingCartComponent,
     CarrouselMarcasComponent,
     SearchedProductsComponent,
+    ProcessOrderComponent,
   ]
 
 })

@@ -6,7 +6,7 @@ export interface Producto {
   marca: Marca;
   categoria: Categoria;
   id: number;
-  cuantity?: number
+  quantity?: number
 }
 
 export interface Categoria {

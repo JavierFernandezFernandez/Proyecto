@@ -17,15 +17,17 @@ export class DireccionService {
     this.headers = GET_HEADERS();
   }
 
-  getAddressByUserId(userId: number): Observable<Direccion> {
-    return this.http.get<Direccion>(`${this.url}usuario/${userId}`,{headers:this.headers})
+  getAddressByUserId(userId: number): Observable<Direccion[]> {
+    return this.http.get<Direccion[]>(`${this.url}usuario/${userId}`,{headers:this.headers})
   }
 
-  addAddress(id: number, ciudad: string, direccion:string, usuario:Usuario):  Observable<Direccion> {
+  addAddress(id: number, nombre:string, ciudad: string, direccion:string, codigoPostal:string, usuario:Usuario):  Observable<Direccion> {
     const address: Direccion = {
       id: id,
+      nombre:nombre,
       ciudad: ciudad,
       direccion: direccion,
+      cp:codigoPostal,
       usuario: usuario
     };
     return this.http.post<Direccion>(this.url + 'guardar', address, {headers:this.headers});

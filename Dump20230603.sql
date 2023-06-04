@@ -29,7 +29,7 @@ CREATE TABLE `categorias` (
   `Nombre` varchar(45) DEFAULT NULL,
   `Descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (13,'Categoria1','123456789'),(14,'Categoria2','123456789'),(15,'Categoria3','123456789'),(16,'Categoria4','123456789');
+INSERT INTO `categorias` VALUES (13,'Categoria1','123456789'),(14,'Categoria2','123456789'),(15,'Categoria3','123456789'),(16,'Categoria4','123456789'),(17,'Categoria5','123456789');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `comentarios` (
   KEY `comentarios_ibfk_2` (`Usuarios_Id`),
   CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`Productos_Id`) REFERENCES `productos` (`Id`),
   CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`Usuarios_Id`) REFERENCES `usuarios` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (1,NULL,'Excelente producto. Rápido y eficiente.',5,10,21),(2,NULL,'El ordenador es muy potente y cumple con todas mis expectativas.',4,10,22),(3,NULL,'Buena relación calidad-precio. Recomendado.',4,10,23),(4,NULL,'El ordenador es muy silencioso y el envío fue rápido.',4,10,24),(5,NULL,'El diseño del ordenador es elegante y moderno.',5,10,25),(6,NULL,'El producto llegó en perfectas condiciones. Muy satisfecho.',5,10,26),(7,NULL,'aaaaaaaaaaaaaaaaaaaaaaaaaa',10,17,22);
+INSERT INTO `comentarios` VALUES (1,NULL,'Excelente producto. Rápido y eficiente.',5,10,21),(2,NULL,'El ordenador es muy potente y cumple con todas mis expectativas.',4,10,22),(3,NULL,'Buena relación calidad-precio. Recomendado.',4,10,23),(4,NULL,'El ordenador es muy silencioso y el envío fue rápido.',4,10,24),(5,NULL,'El diseño del ordenador es elegante y moderno.',5,10,25),(6,NULL,'El producto llegó en perfectas condiciones. Muy satisfecho.',5,10,26),(7,NULL,'aaaaaaaaaaaaaaaaaaaaaaaaaa',10,17,22),(8,'hopa','aaaaaaaaaaaaaaaaaaaaaaaaaa',10,17,22);
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,13 +83,15 @@ DROP TABLE IF EXISTS `direcciones`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `direcciones` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `Ciudad` varchar(45) NOT NULL,
-  `Direccion` varchar(255) NOT NULL,
+  `Nombre` varchar(45) DEFAULT NULL,
+  `Ciudad` varchar(45) DEFAULT NULL,
+  `Direccion` varchar(255) DEFAULT NULL,
+  `CP` varchar(5) DEFAULT NULL,
   `Usuarios_Id` int NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_Direcciones_Usuarios1_idx` (`Usuarios_Id`),
   CONSTRAINT `fk_Direcciones_Usuarios1` FOREIGN KEY (`Usuarios_Id`) REFERENCES `usuarios` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,6 +100,7 @@ CREATE TABLE `direcciones` (
 
 LOCK TABLES `direcciones` WRITE;
 /*!40000 ALTER TABLE `direcciones` DISABLE KEYS */;
+INSERT INTO `direcciones` VALUES (2,NULL,'nerpio','alguna',NULL,22);
 /*!40000 ALTER TABLE `direcciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,11 +118,14 @@ CREATE TABLE `ejemplares` (
   `Compra` date DEFAULT NULL,
   `Unidades` int NOT NULL,
   `Productos_Id` int NOT NULL,
+  `Tiendas_Id` int DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `NumSerie_UNIQUE` (`Serie`),
   KEY `fk_Ejemplares_Productos1_idx` (`Productos_Id`),
-  CONSTRAINT `fk_Ejemplares_Productos1` FOREIGN KEY (`Productos_Id`) REFERENCES `productos` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+  KEY `Tienda_idx` (`Tiendas_Id`),
+  CONSTRAINT `fk_Ejemplares_Productos1` FOREIGN KEY (`Productos_Id`) REFERENCES `productos` (`Id`),
+  CONSTRAINT `Tienda` FOREIGN KEY (`Tiendas_Id`) REFERENCES `tiendas` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +134,38 @@ CREATE TABLE `ejemplares` (
 
 LOCK TABLES `ejemplares` WRITE;
 /*!40000 ALTER TABLE `ejemplares` DISABLE KEYS */;
+INSERT INTO `ejemplares` VALUES (9,'123456789232',NULL,NULL,50,9,1),(10,'1234567892',NULL,NULL,50,9,2),(11,'1234567891',NULL,NULL,50,9,3),(12,'123456789',NULL,NULL,50,9,1),(13,'12345679',NULL,NULL,50,9,2),(14,'1234579',NULL,NULL,50,9,3),(15,'123579',NULL,NULL,50,9,1),(16,'2',NULL,NULL,50,10,2),(17,'3',NULL,NULL,50,10,1),(18,'33',NULL,NULL,50,10,3),(19,'333',NULL,NULL,50,10,2),(20,'3333',NULL,NULL,50,10,3),(21,'33332',NULL,NULL,50,11,1),(22,'332332',NULL,NULL,50,11,1),(23,'3323322',NULL,NULL,50,11,2),(24,'33223322',NULL,NULL,50,11,3),(26,'4',NULL,NULL,50,12,1),(27,'44',NULL,NULL,50,12,2),(28,'444',NULL,NULL,50,12,3),(29,'4444',NULL,NULL,50,12,1),(30,'41444',NULL,NULL,50,13,2),(31,'411444',NULL,NULL,50,13,3),(32,'4114414',NULL,NULL,50,13,1),(33,'41144141',NULL,NULL,50,13,1);
 /*!40000 ALTER TABLE `ejemplares` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleados`
+--
+
+DROP TABLE IF EXISTS `empleados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `empleados` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Telefono` varchar(45) NOT NULL,
+  `Password` varchar(1000) NOT NULL,
+  `Roles_Id` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `rol_idx` (`Roles_Id`),
+  CONSTRAINT `rol` FOREIGN KEY (`Roles_Id`) REFERENCES `roles` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleados`
+--
+
+LOCK TABLES `empleados` WRITE;
+/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+INSERT INTO `empleados` VALUES (1,'Usuario17','Usuario17@gmail.com','123456789','$2a$08$dWVUDPKDhtSEI4Wae7.uSeuddPMURBNqWz9bOAV2BK2qK.otnTWNi',13);
+/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,14 +179,17 @@ CREATE TABLE `facturas` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Observaciones` varchar(255) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
-  `Usuarios_Id` int NOT NULL,
-  `Direcciones_Id` int NOT NULL,
+  `Usuarios_Id` int DEFAULT NULL,
+  `Direcciones_Id` int DEFAULT NULL,
+  `Empleados_Id` int DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_Facturas_Usuarios1_idx` (`Usuarios_Id`),
   KEY `fk_Facturas_Direcciones1_idx` (`Direcciones_Id`),
+  KEY `empleado_idx` (`Empleados_Id`),
+  CONSTRAINT `empleado` FOREIGN KEY (`Empleados_Id`) REFERENCES `empleados` (`Id`),
   CONSTRAINT `fk_Facturas_Direcciones1` FOREIGN KEY (`Direcciones_Id`) REFERENCES `direcciones` (`Id`),
   CONSTRAINT `fk_Facturas_Usuarios1` FOREIGN KEY (`Usuarios_Id`) REFERENCES `usuarios` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,6 +198,7 @@ CREATE TABLE `facturas` (
 
 LOCK TABLES `facturas` WRITE;
 /*!40000 ALTER TABLE `facturas` DISABLE KEYS */;
+INSERT INTO `facturas` VALUES (2,'PATATAS APATATAS ATAS ATAS PATAS PATAS PAPA PATATAS','2023-05-25',22,2,NULL),(3,'PATATAS APATATAS ATAS ATAS PATAS PATAS PAPA PATATAS','2023-05-25',23,2,NULL);
 /*!40000 ALTER TABLE `facturas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +213,7 @@ CREATE TABLE `formaspagos` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `Tipo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,6 +222,7 @@ CREATE TABLE `formaspagos` (
 
 LOCK TABLES `formaspagos` WRITE;
 /*!40000 ALTER TABLE `formaspagos` DISABLE KEYS */;
+INSERT INTO `formaspagos` VALUES (3,'Tarjeta'),(4,'bizun');
 /*!40000 ALTER TABLE `formaspagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +243,7 @@ CREATE TABLE `fpusuarios` (
   KEY `fk_FormasPagosUsuarios_FormasPagos1_idx` (`Formaspagos_Id`),
   CONSTRAINT `fk_F.P.Usuarios_Usuarios1` FOREIGN KEY (`Usuarios_Id`) REFERENCES `usuarios` (`Id`),
   CONSTRAINT `fk_FormasPagosUsuarios_FormasPagos1` FOREIGN KEY (`Formaspagos_Id`) REFERENCES `formaspagos` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,6 +252,7 @@ CREATE TABLE `fpusuarios` (
 
 LOCK TABLES `fpusuarios` WRITE;
 /*!40000 ALTER TABLE `fpusuarios` DISABLE KEYS */;
+INSERT INTO `fpusuarios` VALUES (1,'12312w31212321321',21,3);
 /*!40000 ALTER TABLE `fpusuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +276,7 @@ CREATE TABLE `lineasfactura` (
   KEY `fk_LineasPedidos_Facturas1_idx` (`Facturas_Id`),
   CONSTRAINT `fk_LineasPedidos_Facturas1` FOREIGN KEY (`Facturas_Id`) REFERENCES `facturas` (`Id`),
   CONSTRAINT `fk_LineasPedidos_Productos1` FOREIGN KEY (`Productos_Id`) REFERENCES `productos` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,6 +285,7 @@ CREATE TABLE `lineasfactura` (
 
 LOCK TABLES `lineasfactura` WRITE;
 /*!40000 ALTER TABLE `lineasfactura` DISABLE KEYS */;
+INSERT INTO `lineasfactura` VALUES (1,21,15.75,3,'B',3,9),(2,10,25.5,2,'C',2,10),(3,16,8.99,8,'D',3,11),(4,21.5,12.49,4,'E',2,12),(5,20,100,20,'129309812',2,11);
 /*!40000 ALTER TABLE `lineasfactura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +312,7 @@ CREATE TABLE `lineaspedido` (
   CONSTRAINT `fk_LineasPedido_Facturas1` FOREIGN KEY (`Facturas_Id`) REFERENCES `facturas` (`Id`),
   CONSTRAINT `fk_LineasPedido_Pedidos1` FOREIGN KEY (`Pedidos_Id`) REFERENCES `pedidos` (`Id`),
   CONSTRAINT `fk_LineasPedido_Productos1` FOREIGN KEY (`Productos_Id`) REFERENCES `productos` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,6 +321,7 @@ CREATE TABLE `lineaspedido` (
 
 LOCK TABLES `lineaspedido` WRITE;
 /*!40000 ALTER TABLE `lineaspedido` DISABLE KEYS */;
+INSERT INTO `lineaspedido` VALUES (1,20,20,100,NULL,1,11,2),(3,20,20,100,NULL,3,11,2);
 /*!40000 ALTER TABLE `lineaspedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +370,7 @@ CREATE TABLE `pedidos` (
   CONSTRAINT `fk_Pedidos_Direcciones1` FOREIGN KEY (`Direcciones_Id`) REFERENCES `direcciones` (`Id`),
   CONSTRAINT `fk_Pedidos_FormasPagos1` FOREIGN KEY (`Formaspagos_Id`) REFERENCES `formaspagos` (`Id`),
   CONSTRAINT `fk_Pedidos_Usuarios1` FOREIGN KEY (`Usuarios_Id`) REFERENCES `usuarios` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,6 +379,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+INSERT INTO `pedidos` VALUES (1,'2023-06-01',19,2,3),(3,'2023-06-01',19,2,3),(7,'2023-05-28',19,2,3),(8,'2023-05-28',21,2,3);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,6 +441,31 @@ INSERT INTO `roles` VALUES (11,'Rol1'),(12,'Rol2'),(13,'Rol3');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tiendas`
+--
+
+DROP TABLE IF EXISTS `tiendas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tiendas` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(255) NOT NULL,
+  `Ubicacion` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tiendas`
+--
+
+LOCK TABLES `tiendas` WRITE;
+/*!40000 ALTER TABLE `tiendas` DISABLE KEYS */;
+INSERT INTO `tiendas` VALUES (1,'tienda1','mi casa'),(2,'tienda2','mi casa'),(3,'tienda3','mi casa');
+/*!40000 ALTER TABLE `tiendas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -422,7 +493,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (19,'Usuario10','Usuario10@gmail.com','123456789','$2a$08$wVoJfMBnOkaeuKGc181CgOl5zsuR3j8vn3vzS42oX9qqGvyaHDAzK',NULL,11),(21,'Usuario11','Usuario11@gmail.com','123456789','$2a$08$adJ5A0qYNsK7SxnZGiUGEOEB8b0sK9YBIQsHrn3dykFt2ZNqj5BjK',NULL,11),(22,'Usuario12','Usuario12@gmail.com','123456789','$2a$08$apP6JvdSGe84u0rr8iESl.kI9uyV6sGL6uCAGJqFz7tDtFpcy0NwS',NULL,11),(23,'Usuario13','Usuario13@gmail.com','123456789','$2a$08$btPN60B8HDRPXvAaBJEyr.OAr0svmbTZAR34vSnEoxG4Abd32AHn2',NULL,11),(24,'Usuario14','Usuario14@gmail.com','123456789','$2a$08$M0uJGwtjhCMlCpYTOlkyQOn2vcFmTCZ9dxCrGLn/OlvSqW0LX.Gea',NULL,12),(25,'Usuario15','Usuario15@gmail.com','123456789','$2a$08$SwkSKYJIElRSQfygmtDRy.T61qfjkLzdXvgOLBEkxjohbZiUPuyHa',NULL,12),(26,'Usuario16','Usuario16@gmail.com','123456789','$2a$08$B.5HRnUS4./zdRXsLKmvmuUA.w/QoyZerdTzqhjepv/Ik5.dt0K0a',NULL,13),(27,'Javier','javdez32@gmail.com','693018044','$2a$08$hzZdoym16JBIZQnMDXTBNumoyXlI3Fl8XqxCLk/QggI9JmUc7kunO',NULL,NULL);
+INSERT INTO `usuarios` VALUES (19,'Javier Fernández Fernández Fernández','dsdfsdfdsf','123456789','$2a$08$wVoJfMBnOkaeuKGc181CgOl5zsuR3j8vn3vzS42oX9qqGvyaHDAzK',NULL,11),(21,'Usuario11','Usuario11@gmail.com','123456789','$2a$08$adJ5A0qYNsK7SxnZGiUGEOEB8b0sK9YBIQsHrn3dykFt2ZNqj5BjK',NULL,11),(22,'Usuario12','Usuario12@gmail.com','123456789','$2a$08$apP6JvdSGe84u0rr8iESl.kI9uyV6sGL6uCAGJqFz7tDtFpcy0NwS',NULL,11),(23,'Usuario13','Usuario13@gmail.com','123456789','$2a$08$btPN60B8HDRPXvAaBJEyr.OAr0svmbTZAR34vSnEoxG4Abd32AHn2',NULL,11),(24,'Usuario14','Usuario14@gmail.com','123456789','$2a$08$M0uJGwtjhCMlCpYTOlkyQOn2vcFmTCZ9dxCrGLn/OlvSqW0LX.Gea',NULL,12),(25,'Usuario15','Usuario15@gmail.com','123456789','$2a$08$SwkSKYJIElRSQfygmtDRy.T61qfjkLzdXvgOLBEkxjohbZiUPuyHa',NULL,12),(26,'Usuario16','Usuario16@gmail.com','123456789','$2a$08$B.5HRnUS4./zdRXsLKmvmuUA.w/QoyZerdTzqhjepv/Ik5.dt0K0a',NULL,13),(27,'Javier','javdez32@gmail.com','693018044','$2a$08$hzZdoym16JBIZQnMDXTBNumoyXlI3Fl8XqxCLk/QggI9JmUc7kunO',NULL,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -435,4 +506,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-24 19:26:16
+-- Dump completed on 2023-06-03 21:12:08

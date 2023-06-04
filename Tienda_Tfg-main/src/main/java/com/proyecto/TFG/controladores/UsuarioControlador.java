@@ -40,10 +40,8 @@ public class UsuarioControlador {
     public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable long id){
         UsuarioDTO usuarioId = usuarioServicio.obtenerPorId(id);
 
-        if(usuarioId.getCesta() == null){
-
+        if(usuarioId.getCesta() == null || usuarioId.getCesta() == ""){
             usuarioId.setCesta("[]");
-
         }
 
         return ResponseEntity.ok(usuarioId);
@@ -96,10 +94,8 @@ public class UsuarioControlador {
     public ResponseEntity<UsuarioDTO> obtenerUsuarioByEmail(@PathVariable String email){
         UsuarioDTO clienteId = usuarioServicio.findByEmail(email);
         clienteId.setPassword(null);
-        if(clienteId.getCesta() == null){
-
+        if(clienteId.getCesta() == null || clienteId.getCesta() == ""){
             clienteId.setCesta("[]");
-
         }
         return ResponseEntity.ok(clienteId);
     }

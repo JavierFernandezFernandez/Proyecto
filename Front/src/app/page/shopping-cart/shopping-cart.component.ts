@@ -1,3 +1,4 @@
+import { ProductService } from 'src/app/services/product/product.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Producto } from 'src/app/models/Producto.model';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
+    private productService: ProductService,
     private router: Router
   ) { }
 
@@ -27,37 +29,32 @@ export class ShoppingCartComponent implements OnInit {
           this.idUser = response.id
           this.cart = JSON.parse(response.cesta as string);
           for (const product of this.cart) {
-            if (!product.cuantity) {
-              product.cuantity = 1
+            if (!product.quantity) {
+              product.quantity = 1
             }
           }
         })
     }
   }
   priceWithIva(product: Producto): number {
-    if (product.precio && product.iva) {
-      if (product.cuantity) {
-        return (product.precio + (product.precio / product.iva)) * product.cuantity;
-      }
-      return (product.precio + (product.precio / product.iva));
-    }
-    return 0;
+    return this.productService.getPriceWithIva(product)
   }
+
   lessQuantity(input: HTMLInputElement, product: Producto) {
     if (Number(input.value) > 1) {
       input.value = String(Number(input.value) - 1);
-      product.cuantity = Number(input.value);
+      product.quantity = Number(input.value);
     }
   }
   moreQuantity(input: HTMLInputElement, product: Producto) {
     input.value = String(Number(input.value) + 1);
-    product.cuantity = Number(input.value);
+    product.quantity = Number(input.value);
   }
   totalPrice() {
     let totalPrice: number = 0;
     for (const product of this.cart) {
-      if (product?.cuantity) {
-        totalPrice += this.priceWithIva(product) * product?.cuantity;
+      if (product?.quantity) {
+        totalPrice += this.priceWithIva(product) * product?.quantity;
       } else {
         totalPrice += this.priceWithIva(product)
       }

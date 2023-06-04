@@ -15,8 +15,8 @@ import java.io.Serializable;
 public class LineaFacturaDTO{
 
     private long id;
-    private double iva;
     private double precio;
+    private double iva;
     private int unidades;
     private String serie;
     private ProductoDTOL producto;

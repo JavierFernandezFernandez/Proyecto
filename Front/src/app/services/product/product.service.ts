@@ -30,4 +30,14 @@ export class ProductService {
     return this.http.get<Producto[]>(`${this.url}nombre/${name}`)
   }
 
+  getPriceWithIva(product: Producto): number {
+    if (product.precio && product.iva) {
+      if (product.quantity) {
+        return (product.precio + (product.precio / product.iva)) * product.quantity;
+      }
+      return (product.precio + (product.precio / product.iva));
+    }
+    return 0;
+  }
+
 }

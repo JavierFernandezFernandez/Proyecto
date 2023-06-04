@@ -32,7 +32,7 @@
             type="text"
             class="form-control text-center"
             aria-label="Example text with two button addons"
-            value="1"
+            value="{{ product.quantity}}"
             #quantity
           />
           <button
@@ -67,7 +67,7 @@
       <div class="text-center my-2">
         <button
         type="button"
-        class="btn btn-primary btn-lg me-2 w-100"
+        class="btn btn-info btn-lg me-2 w-100"
         (click)="confirmOrder()">
           Tramitar pedido
         </button>

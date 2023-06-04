@@ -1,4 +1,157 @@
-<div class="row border-top border-bottom">
-  <h4>Direcci&oacute;n</h4>
-  
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-3">
+          <p class="fs-cusotom-4 fw-bold">Direcci&oacute;n de env&iacute;o</p>
+        </div>
+        <div class="col-8">
+          <!-- Direccion no seleccionada-->
+          <div class="row d-flex position-relative">
+            <div *ngIf="!selectedAddress">
+              <!-- <button
+                type="button"
+                class="btn btn-info w-auto"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseAddress"
+                aria-expanded="false"
+                aria-controls="collapseAddress"
+              >
+                Seleccionar direcci&oacute;n
+              </button> -->
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                (click)="collapse.toggle()"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseExample"
+              >
+                Toggle with Function
+              </button>
+            </div>
+            <!-- Direccion seleccionada -->
+            <div *ngIf="selectedAddress">
+              <ul class="list-unstyled fw-semibold mt-2">
+                <li>Javier Fernández</li>
+                <li>C/ Extemadura 20</li>
+                <li>Bullas, 30180</li>
+              </ul>
+
+              <div class="position-absolute end-0">
+                <button type="button" class="btn btn-info w-auto mt-2">
+                  Cambiar direccion
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Collapse de direcciones -->
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+              <div class="card">
+                <div class="card-body">
+                  You can collapse this card by clicking one Toggle button
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <p class="fs-cusotom-4 fw-bold">M&eacute;todo de pago</p>
+        </div>
+        <div class="col-8 d-flex position-relative">
+          <!-- Metodo de pago  no seleccionada
+          <div *ngIf="!selectedAddress">
+            <button
+              type="button"
+              class="btn btn-info w-auto"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Seleccionar direcci&oacute;n
+            </button>
+          </div> -->
+          <!-- Metodo de pago seleccionada -->
+          <ul class="list-unstyled fw-semibold mt-2">
+            <li>forma de pago</li>
+            <li>datos</li>
+          </ul>
+
+          <div class="position-absolute end-0">
+            <button
+              type="button"
+              class="btn btn-info w-auto mt-2"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Cambiar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11">
+          <p class="fs-cusotom-4 fw-bold">Productos</p>
+          <div class="row col-auto">
+            <div
+              class="rounded-2 border shopping-basket-product mb-2"
+              *ngFor="let product of cart"
+            >
+              <div class="float-start w-50">
+                <img
+                  src="../../../assets/img/familia-pccom-500x500.webp"
+                  alt=""
+                  class="w-25 me-4 float-start my-1 rounded"
+                />
+                <div class="row">
+                  <h3 class="float-start p-0">{{ product.nombre }}</h3>
+                </div>
+                <div calss="row">
+                  <h5 class="float-start">
+                    {{ priceWithIva(product).toFixed(2) }}€
+                  </h5>
+                </div>
+                <br />
+                <div calss="row">
+                  <input
+                    type="text"
+                    class="form-control text-center quantity-display mt-2"
+                    aria-label="Example text with two button addons"
+                    value="Cant: {{ product.quantity }}"
+                    #quantity
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 rounded-2 border">
+      <h3>Resumen</h3>
+      <div class="border-top border-bottom border-1 py-2">
+        <div class="fw-bold">
+          <div class="display-7 fw-bold">
+            <span>Productos</span
+            ><span class="float-end">{{ totalPrice() }}€</span>
+          </div>
+          <div class="fw-bold">
+            <span>Envio</span><span class="float-end">0€</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="display-7 fw-bold">
+          <span>Total</span><span class="float-end">{{ totalPrice() }}€</span>
+        </div>
+      </div>
+      <div class="text-center my-2">
+        <button type="button" class="btn btn-primary btn-lg me-2 w-100">
+          Comprar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

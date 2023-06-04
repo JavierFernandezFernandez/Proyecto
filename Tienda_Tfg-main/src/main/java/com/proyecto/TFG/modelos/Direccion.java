@@ -25,6 +25,10 @@ public class Direccion implements Serializable {
     private String ciudad;
     @Column(name = "Direccion")
     private String direccion;
+    @Column(name = "Nombre")
+    private String nombre;
+    @Column(name = "CP")
+    private String cp;
     @ManyToOne()
     @JoinColumn(name = "Usuarios_Id")
     private Usuario usuario;

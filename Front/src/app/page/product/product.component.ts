@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/models/Producto.model';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Producto, Marca, Categoria } from 'src/app/models/Producto.model';
 import { Router } from '@angular/router';
 import { ComentarioService } from '../../services/comentario/comentario.service';
 import { Comentario } from 'src/app/models/Comentario.model';
@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/models/Usuario.model';
 import { catchError, pipe, throwError } from 'rxjs';
 import { ProductService } from 'src/app/services/product/product.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { ViewportScroller } from '@angular/common';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 export class ProductComponent implements OnInit {
   idProducto: string = '';
   product: Producto = {} as Producto;
+  brand: Marca = {} as Marca;
   comments: Comentario[] = [];
 
   averageNote: number = 0;
@@ -30,16 +32,19 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private commentService: ComentarioService,
     private usuarioService: UsuarioService,
+    private viewportScroller: ViewportScroller,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.viewportScroller.scrollToAnchor('top');
     this.averageNote = 0;
     const urlSplitted: string[] = this.router.url.split("/");
     this.idProducto = urlSplitted[urlSplitted.length - 1];
     this.initializeProduct();
     this.initializeComments();
   }
+
   postComment(title: HTMLInputElement, messaje: HTMLTextAreaElement) {
     if (localStorage.getItem("email")) {
       this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
@@ -70,6 +75,7 @@ export class ProductComponent implements OnInit {
   private initializeProduct() {
     this.productService.getProductById(this.idProducto).subscribe((response: Producto) => {
       this.product = response;
+      this.brand = response.marca;
       if (this.product.precio && this.product.iva) {
         this.totalPrice = Number((this.product.precio + (this.product.precio % this.product.iva)).toFixed(2))
       }
@@ -91,10 +97,16 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
+    //console.log('addToCart llamado')
     if (localStorage.getItem("token") && localStorage.getItem("email")) {
       this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
         .subscribe((response: Usuario) => {
-          if (response.cesta) {
+          //console.log(response.cesta)
+          if (response.cesta != null || response.cesta != undefined) {
+            if (response.cesta == '') {
+              response.cesta = '[]';
+            }
+            //console.log(response.cesta+'dentro')
             let cart: Producto[] = JSON.parse(response.cesta);
             cart.push(this.product);
             response.cesta = JSON.stringify(cart);
@@ -106,13 +118,13 @@ export class ProductComponent implements OnInit {
               .subscribe((response: Usuario | string) => {
                 if (!(typeof response === 'string')) {
                   this.addCartSuccess = true;
-                  console.log(response);
+                  //console.log(response);
                 }
               });
           }
         })
     } else {
-
+      console.log('no logeado')
     }
 
   }
