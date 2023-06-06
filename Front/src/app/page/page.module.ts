@@ -8,7 +8,9 @@ import { CarrouselMarcasComponent } from './carrousel-marcas/carrousel-marcas.co
 import { SearchedProductsComponent } from './searched-products/searched-products.component';
 import { FormsModule } from '@angular/forms';
 import { ProcessOrderComponent } from './process-order/process-order.component';
-import { NgbCollapse, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAddAddressComponent } from '../layout/modal-add-address/modal-add-address.component';
+import { ModalAddUserPaymentMethodComponent } from '../layout/modal-add-user-payment-method/modal-add-user-payment-method.component';
 
 
 
@@ -20,14 +22,14 @@ import { NgbCollapse, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CarrouselMarcasComponent,
     SearchedProductsComponent,
     ProcessOrderComponent,
-
   ],
   imports: [
     CommonModule,
     PageRoutingModule,
     FormsModule,
     NgbModule,
-    NgbCollapse
+    ModalAddAddressComponent,
+    ModalAddUserPaymentMethodComponent
   ],
   bootstrap:[
     HomeComponent,

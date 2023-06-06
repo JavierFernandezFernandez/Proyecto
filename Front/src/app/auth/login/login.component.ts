@@ -1,7 +1,6 @@
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
 import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
 import { catchError } from 'rxjs';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
