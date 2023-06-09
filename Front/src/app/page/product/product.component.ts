@@ -1,3 +1,4 @@
+import { Ejemplar } from 'src/app/models/Ejemplar.model';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Producto, Marca, Categoria } from 'src/app/models/Producto.model';
 import { Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { catchError, pipe, throwError } from 'rxjs';
 import { ProductService } from 'src/app/services/product/product.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { ViewportScroller } from '@angular/common';
+import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
 
 
 @Component({
@@ -24,7 +26,8 @@ export class ProductComponent implements OnInit {
   averageNote: number = 0;
   totalPrice: number = 0;
   stars: string = '1';
-  cuantity: number = 1;
+  quantity: number = 1;
+  numberUnits: number = 0;
 
   addCartSuccess = false;
 
@@ -32,6 +35,7 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private commentService: ComentarioService,
     private usuarioService: UsuarioService,
+    private ejemplarService: EjemplarService,
     private viewportScroller: ViewportScroller,
     private router: Router,
   ) { }
@@ -65,20 +69,22 @@ export class ProductComponent implements OnInit {
   }
 
   lessCuantity() {
-    if (this.cuantity > 1) this.cuantity--;
+    if (this.quantity > 1) this.quantity--;
   }
 
   moreCuantity() {
-    if (true) this.cuantity++; //modificar con el stock
+    if (true) this.quantity++; //modificar con el stock
   }
 
   private initializeProduct() {
-    this.productService.getProductById(this.idProducto).subscribe((response: Producto) => {
+    this.productService.getProductById(this.idProducto)
+    .subscribe((response: Producto) => {
       this.product = response;
       this.brand = response.marca;
       if (this.product.precio && this.product.iva) {
         this.totalPrice = Number((this.product.precio + (this.product.precio % this.product.iva)).toFixed(2))
       }
+      this.countStok()
     })
   }
 
@@ -86,7 +92,7 @@ export class ProductComponent implements OnInit {
     this.commentService.getCommentsByProduct(this.idProducto)
       .subscribe((response: Comentario[]) => {
         this.comments = response
-        console.log(response)
+        //console.log(response)
         if (this.comments.length > 0) {
           for (const comment of this.comments) {
             if (comment.puntuacion) this.averageNote += comment.puntuacion
@@ -118,7 +124,6 @@ export class ProductComponent implements OnInit {
               .subscribe((response: Usuario | string) => {
                 if (!(typeof response === 'string')) {
                   this.addCartSuccess = true;
-                  //console.log(response);
                 }
               });
           }
@@ -127,6 +132,13 @@ export class ProductComponent implements OnInit {
       console.log('no logeado')
     }
 
+  }
+
+  private countStok(){
+    this.ejemplarService.getUnitsByProductId(this.product.id)
+    .subscribe((response:Ejemplar[]) => {
+      this.numberUnits = response.length
+    })
   }
 
 }

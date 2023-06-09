@@ -26,12 +26,25 @@ public class FacturaControlador {
     }
 
     @GetMapping("/usuario/{usuarioId}")
-    public List<FacturaDTO> obtenerFacturasByUsuario(Long usuarioId){
+    public List<FacturaDTO> obtenerFacturasByUsuario(@PathVariable Long usuarioId){
         return facturaServicio.findByUsuarioId(usuarioId);
     }
 
+    @GetMapping("/usuario/end/{usuarioId}")
+    public FacturaDTO obtenerEndFacturaByUsuario(@PathVariable Long usuarioId){
+        List<FacturaDTO> facturasUsusario = facturaServicio.findByUsuarioId(usuarioId);
+
+        int indice = facturasUsusario.size() -1;
+
+        System.out.println(indice);
+
+        FacturaDTO factura =  facturasUsusario.get(indice);
+
+        return factura;
+    }
+
     @GetMapping("/direccion/{direccionId}")
-    public List<FacturaDTO> obtenerFacturasByDireccionId(Long direccionId){
+    public List<FacturaDTO> obtenerFacturasByDireccionId(@PathVariable Long direccionId){
         return facturaServicio.findByDireccionId(direccionId);
     }
 

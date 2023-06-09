@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-7">
       <!-- Direcciones -->
-      <div class="row">
+      <div class="row mb-1">
         <div class="col-3">
           <p class="fs-cusotom-4 fw-bold">Direcci&oacute;n de env&iacute;o</p>
         </div>
@@ -74,7 +74,7 @@
                     <ng-template #modalAddress let-modal>
                       <app-modal-add-address
                         [modal]="modal"
-                        [idUser]="idUser"
+                        [user]="user"
                         (selectedAddress)="onSelectedAddressChange($event)"
                       ></app-modal-add-address>
                     </ng-template>
@@ -88,7 +88,7 @@
                     [attr.aria-expanded]="!isCollapsedAddress"
                     aria-controls="collapseExample"
                     (click)="selectAddress()"
-                    [disabled]="roundedAddressId == 0"
+                    [disabled]="!roundedAddressId"
                   >
                     Enviar a esta direcci&oacute;n
                   </button>
@@ -99,46 +99,38 @@
         </div>
       </div>
       <!-- Metodo de pago -->
-      <div class="row">
+      <div class="row mb-1">
         <div class="col-3">
           <p class="fs-cusotom-4 fw-bold">M&eacute;todo de pago</p>
         </div>
         <div class="col-8">
           <div class="d-flex position-relative">
             <!-- Metodo de pago  no seleccionada-->
-            <div *ngIf="!selectedAddress">
-              <!--<button
-                type="button"
-                class="btn btn-info w-auto"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              >
-                Seleccionar direcci&oacute;n
-              </button>-->
+            <div *ngIf="!selectedUserPaymentMethod">
               <button
                 type="button"
                 class="btn btn-info"
                 (click)="collapseUserPaymentMethod.toggle()"
                 [attr.aria-expanded]="!isCollapsedUserPaymentMethod"
               >
-                Seleccionar direcci&oacute;n
+                Seleccionar m&eacute;todo de pago
               </button>
             </div>
             <!-- Metodo de pago seleccionada -->
-            <div *ngIf="selectedAddress">
+            <div *ngIf="selectedUserPaymentMethod">
               <ul class="list-unstyled fw-semibold mt-2">
-                <li>forma de pago</li>
-                <li>datos</li>
+                <li>{{ selectedUserPaymentMethod.datos }}</li>
+                <li>{{ selectedUserPaymentMethod.formaPago.tipo }}</li>
               </ul>
 
-              <div class="position-absolute end-0">
+              <div class="position-absolute end-0 top-0">
                 <button
                   type="button"
                   class="btn btn-info w-auto mt-2"
                   (click)="collapseUserPaymentMethod.toggle()"
                   [attr.aria-expanded]="!isCollapsedUserPaymentMethod"
                 >
-                  Cambiar
+                  Cambiar metodo de pago
                 </button>
               </div>
             </div>
@@ -157,18 +149,24 @@
                         type="radio"
                         name="method"
                         value="{{ method.id }}"
-                        [(ngModel)]="roundedAddressId"
+                        [(ngModel)]="roundedUserPaymentMethodId"
                       />
-                      {{ method.datos + "," + method.formaPago.type }}
+                      {{ method.datos + "," + method.formaPago.tipo }}
                     </li>
                     <button
                       class="btn btn-info w-auto"
                       (click)="openVerticallyCentered(modalUserPaymentMethod)"
                     >
-                      Añadir direcci&oacute;n
+                      Añadir m&eacute;todo de pago
                     </button>
                     <ng-template #modalUserPaymentMethod let-modal>
-                      <app-modal-add-user-payment-method>
+                      <app-modal-add-user-payment-method
+                        [modal]="modal"
+                        [user]="user"
+                        (selectedUserPaymentMethod)="
+                          onSelectedUserPaymentMethodChange($event)
+                        "
+                      >
                       </app-modal-add-user-payment-method>
                     </ng-template>
                   </ul>
@@ -180,8 +178,8 @@
                     (click)="collapseUserPaymentMethod.toggle()"
                     [attr.aria-expanded]="!isCollapsedUserPaymentMethod"
                     aria-controls="collapseExample"
-                    (click)="selectAddress()"
-                    [disabled]="roundedUserPaymentMethodId == 0"
+                    (click)="selectUserPaymentMethod()"
+                    [disabled]="!roundedUserPaymentMethodId"
                   >
                     Usar este metodo de pago
                   </button>
@@ -231,28 +229,35 @@
       </div>
       <!-- Resumen -->
     </div>
-    <div class="col-4 rounded-2 border">
-      <h3>Resumen</h3>
-      <div class="border-top border-bottom border-1 py-2">
-        <div class="fw-bold">
-          <div class="display-7 fw-bold">
-            <span>Productos</span
-            ><span class="float-end">{{ totalPrice() }}€</span>
-          </div>
+    <div class="col-4">
+      <div class="rounded-2 border p-2">
+        <h3>Resumen</h3>
+        <div class="border-top border-bottom border-1 py-2">
           <div class="fw-bold">
-            <span>Envio</span><span class="float-end">0€</span>
+            <div class="display-7 fw-bold">
+              <span>Productos</span
+              ><span class="float-end">{{ totalPrice() }}€</span>
+            </div>
+            <div class="fw-bold">
+              <span>Envio</span><span class="float-end">0€</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="display-7 fw-bold">
-          <span>Total</span><span class="float-end">{{ totalPrice() }}€</span>
+        <div>
+          <div class="display-7 fw-bold">
+            <span>Total</span><span class="float-end">{{totalPrice()}}€</span>
+          </div>
         </div>
-      </div>
-      <div class="text-center my-2">
-        <button type="button" class="btn btn-primary btn-lg me-2 w-100">
-          Comprar
-        </button>
+        <div class="text-center my-2">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg me-2 w-100"
+            (click)="makePurchase()"
+            [disabled]="!selectedAddress || !selectedUserPaymentMethod"
+          >
+            Comprar
+          </button>
+        </div>
       </div>
     </div>
   </div>

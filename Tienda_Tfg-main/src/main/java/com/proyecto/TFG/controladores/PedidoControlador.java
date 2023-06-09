@@ -1,7 +1,6 @@
 package com.proyecto.TFG.controladores;
 
 import com.proyecto.TFG.dtos.PedidoDTO;
-import com.proyecto.TFG.modelos.Pedido;
 import com.proyecto.TFG.servicios.PedidoServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +30,19 @@ public class PedidoControlador {
         return pedidoServicio.findByUsuarioId(usuarioId);
     }
 
+    @GetMapping("/usuario/end/{usuarioId}")
+    public PedidoDTO obtenerEndFacturaByUsuario(@PathVariable Long usuarioId){
+        List<PedidoDTO> pedidosUsusario = pedidoServicio.findByUsuarioId(usuarioId);
+
+        int indice = pedidosUsusario.size() -1;
+
+        System.out.println(indice);
+
+        PedidoDTO pedido =  pedidosUsusario.get(indice);
+
+        return pedido;
+    }
+
     @GetMapping("/direccion/{direccionId}")
     public List<PedidoDTO> obtenerPedidosByDireccion(Long direccionId){
         return pedidoServicio.findByDireccionId(direccionId);
@@ -45,6 +57,9 @@ public class PedidoControlador {
     public ResponseEntity<PedidoDTO> guardarPedido(@RequestBody PedidoDTO pedido){
 
         LocalDate fechaActual = LocalDate.now();
+
+        pedido.setFecha(fechaActual);
+
         fechaActual = fechaActual.plusDays(3);
 
         pedido.setFechaEntrega(fechaActual);

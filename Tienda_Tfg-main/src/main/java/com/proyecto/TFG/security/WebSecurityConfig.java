@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/producto/listar", "/producto/{id}","/usuario/guardar","/login","/producto/random/{num}","/producto/random/categoria/{id}/{num}",
-                        "/producto/random/marca/{id}/{num}","/producto/nombre/{texto}","/media/{filename:.+}","/comentario/producto/{productoId}","/comentario/usuario/{usuarioId}","/comentario/listar")
+                        "/producto/random/marca/{id}/{num}","/producto/nombre/{texto}","/media/{filename:.+}","/comentario/producto/{productoId}","/comentario/usuario/{usuarioId}","/comentario/listar","/ejemplar/producto/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

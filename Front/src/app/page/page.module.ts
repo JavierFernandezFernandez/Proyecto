@@ -11,6 +11,7 @@ import { ProcessOrderComponent } from './process-order/process-order.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAddAddressComponent } from '../layout/modal-add-address/modal-add-address.component';
 import { ModalAddUserPaymentMethodComponent } from '../layout/modal-add-user-payment-method/modal-add-user-payment-method.component';
+import { CorrectPurchaseComponent } from './correct-purchase/correct-purchase.component';
 
 
 
@@ -22,6 +23,7 @@ import { ModalAddUserPaymentMethodComponent } from '../layout/modal-add-user-pay
     CarrouselMarcasComponent,
     SearchedProductsComponent,
     ProcessOrderComponent,
+    CorrectPurchaseComponent,
   ],
   imports: [
     CommonModule,

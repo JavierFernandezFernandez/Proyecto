@@ -11,22 +11,20 @@ import { Usuario } from 'src/app/models/Usuario.model';
 })
 export class FormaPagoUsuarioService {
   private url = API_URL + '/formaPagoUsuario/'
-  private headers: HttpHeaders
+  private headers: HttpHeaders = GET_HEADERS()
 
-  constructor(private http: HttpClient) {
-    this.headers = GET_HEADERS()
-  }
+  constructor(private http: HttpClient) {}
   getUserPaymentMethodByUserId(userId: number): Observable<FormaPagoUsuario[]> {
-    return this.http.get<FormaPagoUsuario[]>(`${this.url}usuario/${userId}`, { headers: this.headers })
+    // console.log(`${this.url}usuario/${userId}`)
+    return this.http.get<FormaPagoUsuario[]>(`${this.url}usuario/${userId}`, { headers:this.headers })
   }
 
-  addUserPaymentMethod(id: number, datos: string, usuario: Usuario, formaPago: FormaPago): Observable<FormaPagoUsuario> {
+  addUserPaymentMethod(datos: string, usuario: Usuario, formaPago: FormaPago): Observable<FormaPagoUsuario> {
     const userPaymentMethod: FormaPagoUsuario = {
-      id: id,
       datos: datos,
       usuario: usuario,
       formaPago: formaPago
-    }
+    } as FormaPagoUsuario;
 
     return this.http.post<FormaPagoUsuario>(this.url+'guardar',userPaymentMethod,{headers:this.headers});
   }

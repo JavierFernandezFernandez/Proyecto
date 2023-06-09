@@ -1,3 +1,4 @@
+import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Producto } from 'src/app/models/Producto.model';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/Usuario.model';
 import { catchError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Ejemplar } from 'src/app/models/Ejemplar.model';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -19,6 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private productService: ProductService,
+    private ejemplarService: EjemplarService,
     private router: Router
   ) { }
 
@@ -44,11 +47,20 @@ export class ShoppingCartComponent implements OnInit {
     if (Number(input.value) > 1) {
       input.value = String(Number(input.value) - 1);
       product.quantity = Number(input.value);
+      this.saveCart();
     }
   }
   moreQuantity(input: HTMLInputElement, product: Producto) {
-    input.value = String(Number(input.value) + 1);
-    product.quantity = Number(input.value);
+    this.ejemplarService.getUnitsByProductId(product.id)
+      .subscribe((response: Ejemplar[]) => {
+        if (response.length > Number(input.value)) {
+          input.value = String(Number(input.value) + 1);
+          product.quantity = Number(input.value);
+          this.saveCart();
+        }
+      })
+
+
   }
   totalPrice() {
     let totalPrice: number = 0;
@@ -61,9 +73,20 @@ export class ShoppingCartComponent implements OnInit {
     }
     return totalPrice.toFixed(2)
   }
+
+  removeProduct(product: Producto) {
+    const index = this.cart.findIndex((p: Producto) => p.id === product.id)
+    if (index !== -1) {
+      console.log(this.cart[index])
+      this.cart.splice(index, 1);
+      this.saveCart()
+    }
+  }
+
   confirmOrder() {
-    const usuer: Usuario = { cesta: JSON.stringify(this.cart) } as Usuario;
-    this.usuarioService.updateUser(this.idUser, usuer)
+    const user: Usuario = { cesta: JSON.stringify(this.cart) } as Usuario;
+
+    this.usuarioService.updateUser(this.idUser, user)
       .pipe(catchError((error) => {
         return error.message
       }))
@@ -74,5 +97,19 @@ export class ShoppingCartComponent implements OnInit {
           console.log(response)
         }
       })
+  }
+  private saveCart() {
+    const user: Usuario = { cesta: JSON.stringify(this.cart) } as Usuario;
+
+    this.usuarioService.updateUser(this.idUser, user)
+      .pipe(catchError((error) => {
+        return error.message
+      }))
+      .subscribe((response: Usuario | string) => {
+        if (typeof response === 'string') {
+          console.log(response)
+        }
+      })
+
   }
 }
