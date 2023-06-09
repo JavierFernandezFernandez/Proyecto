@@ -26,7 +26,7 @@
             type="text"
             class="form-control text-center"
             aria-label="Example text with two button addons"
-            [(ngModel)]="cuantity"
+            [(ngModel)]="quantity"
           />
           <button
             class="btn btn-outline-secondary"
@@ -37,11 +37,11 @@
           </button>
         </div>
         <br /><br />
-        <span>Disponivilidad:</span>
+        <span>Disponivilidad:{{numberUnits}}</span>
         <br /><br />
         <span>Marca: {{ brand.nombre }}</span>
       </div>
-      <div class="mt-4">
+      <div class="mt-4" *ngIf="numberUnits > 0">
         <button type="button" class="btn btn-info btn-lg me-2">
           Comprar
         </button>
@@ -51,6 +51,9 @@
         <div class="alert-info" *ngIf="addCartSuccess">
           <p>Producto añadido al carrito</p>
         </div>
+      </div>
+      <div class="mt-4" *ngIf="numberUnits <= 0">
+        <h3>Sin stock</h3>
       </div>
     </div>
   </div>

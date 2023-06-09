@@ -11,11 +11,9 @@ import { Usuario } from 'src/app/models/Usuario.model';
 })
 export class ComentarioService {
   private url = API_URL + '/comentario/'
-  private headers
+  private headers:HttpHeaders = GET_HEADERS()
 
-  constructor(private http: HttpClient) {
-    this.headers = GET_HEADERS()
-  }
+  constructor(private http: HttpClient) {}
 
   getCommentsByProduct(idProduct: string): Observable<Comentario[]> {
     return this.http.get<Comentario[]>(`${this.url}producto/${idProduct}`)

@@ -4,11 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/services/layout/layout.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
@@ -26,8 +28,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private layoutService: LayoutService,
     private router: Router,
-    private productService:ProductService,
-    private usuarioService: UsuarioService
+    private productService: ProductService,
+    private usuarioService: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -47,18 +49,18 @@ export class NavbarComponent implements OnInit {
     return this.router.url
   }
 
-  search(therm: HTMLInputElement){
+  search(therm: HTMLInputElement) {
     therm.value.trim();
-    if(therm.value != ''){
+    if (therm.value != '') {
       this.router.navigate([`/search/${therm.value}`]);
     }
   }
-  getName(){
-    if(localStorage.getItem('email')){
-    this.usuarioService.getUserByEmail(localStorage.getItem('email') as string)
-    .subscribe((response:Usuario)=>{
-      this.name = response.nombre as string;
-    })
+  getName() {
+    if (localStorage.getItem('email')) {
+      this.usuarioService.getUserByEmail(localStorage.getItem('email') as string)
+        .subscribe((response: Usuario) => {
+          this.name = response.nombre as string;
+        })
     }
   }
 }

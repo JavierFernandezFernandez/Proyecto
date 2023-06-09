@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
     private List<Direccion> direcciones;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<FPUsuario> FPUsuario;
+    private List<FormaPagoUsuario> FormaPagoUsuario;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Pedido> pedidos;

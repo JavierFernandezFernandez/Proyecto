@@ -26,17 +26,17 @@ public class LineaPedidoControlador {
     }
 
     @GetMapping("/factura/{facturaId}")
-    public List<LineaPedidoDTO> obtenerLineasPedidoByFactura(Long facturaId){
+    public List<LineaPedidoDTO> obtenerLineasPedidoByFactura(@PathVariable Long facturaId){
         return lineaPedidoServicio.findByFacturaId(facturaId);
     }
 
     @GetMapping("/pedido/{pedidoId}")
-    public List<LineaPedidoDTO> obtenerLineasPedidoByPedido(Long pedidoId){
+    public List<LineaPedidoDTO> obtenerLineasPedidoByPedido(@PathVariable Long pedidoId){
         return lineaPedidoServicio.findByPedidoId(pedidoId);
     }
 
     @GetMapping("/producto/{productoId}")
-    public List<LineaPedidoDTO> obtenerLineasPedidoByProducto(Long productoId){
+    public List<LineaPedidoDTO> obtenerLineasPedidoByProducto(@PathVariable Long productoId){
         return lineaPedidoServicio.findByProductoId(productoId);
     }
 

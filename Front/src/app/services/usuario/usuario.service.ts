@@ -9,11 +9,9 @@ import { Usuario } from 'src/app/models/Usuario.model';
 })
 export class UsuarioService {
   private url = API_URL + '/usuario/';
-  private headers: HttpHeaders
+  private headers: HttpHeaders = GET_HEADERS()
 
-  constructor(private http: HttpClient) {
-    this.headers = GET_HEADERS()
-  }
+  constructor(private http: HttpClient) {}
 
   saveUser(
     name: string,

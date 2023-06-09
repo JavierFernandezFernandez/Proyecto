@@ -18,7 +18,7 @@ import { Usuario } from 'src/app/models/Usuario.model';
 })
 export class ModalAddAddressComponent {
   @Input('modal') modal: any;
-  @Input('idUser') idUser: number = 0;
+  @Input('user') user: Usuario = {} as Usuario;
   @Output() selectedAddress: EventEmitter<Direccion> = new EventEmitter<Direccion>();
 
   form = this.formBuilder.group({
@@ -55,7 +55,7 @@ export class ModalAddAddressComponent {
   }
 
   createAddress() {
-    this.direccionService.addAddress(this.name.value, this.city.value, this.address.value, this.cp.value, { id: this.idUser } as Usuario)
+    this.direccionService.addAddress(this.name.value, this.city.value, this.address.value, this.cp.value, { id: this.user.id } as Usuario)
     .subscribe((response:Direccion)=>{
       console.log(JSON.stringify(response));
       this.selectedAddress.emit(response)

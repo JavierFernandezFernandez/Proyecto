@@ -16,7 +16,8 @@ import java.util.Date;
 @Table(name  = "Ejemplares", catalog = "tfg")
 public class Ejemplar implements Serializable {
 
-    private static final long serialVersionUID = 714605479005170543L;
+    private static final long serialVersionUID = -4788740436125805820L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", unique = true, nullable = true)
@@ -29,6 +30,11 @@ public class Ejemplar implements Serializable {
     private Date fechaCompra;
     @Column(name = "Unidades")
     private int unidades;
+    @Column(name = "Estado")
+    private String estado;
+    @ManyToOne()
+    @JoinColumn(name = "Tiendas_Id")
+    private Tienda tienda;
     @ManyToOne()
     @JoinColumn(name = "Productos_Id")
     private Producto producto;

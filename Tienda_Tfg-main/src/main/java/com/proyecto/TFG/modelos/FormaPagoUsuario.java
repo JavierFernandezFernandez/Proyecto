@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name  = "fpusuarios", catalog = "tfg")
-public class FPUsuario implements Serializable {
+public class FormaPagoUsuario implements Serializable {
 
     private static final long serialVersionUID = 4104961599731493478L;
 

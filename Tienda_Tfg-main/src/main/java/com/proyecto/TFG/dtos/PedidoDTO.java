@@ -14,6 +14,7 @@ public class PedidoDTO {
 
     private long Id;
     private LocalDate fechaEntrega;
+    private LocalDate fecha;
     private UsuarioDTO usuario;
     private DireccionDTOL direccion;
     private FormaPagoDTO formaPago;

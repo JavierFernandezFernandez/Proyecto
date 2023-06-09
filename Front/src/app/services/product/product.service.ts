@@ -9,11 +9,9 @@ import { API_URL, GET_HEADERS } from 'src/app/config';
 })
 export class ProductService {
   private url: string = API_URL+'/producto/';
-  private headers: HttpHeaders
+  private headers: HttpHeaders = GET_HEADERS()
 
-  constructor(private http:HttpClient) {
-    this.headers = GET_HEADERS()
-  }
+  constructor(private http:HttpClient) {}
 
   getProductById(id: string): Observable<Producto> {
     return this.http.get<Producto>(this.url+id)

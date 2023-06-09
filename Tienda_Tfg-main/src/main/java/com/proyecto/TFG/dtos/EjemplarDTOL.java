@@ -16,5 +16,6 @@ public class EjemplarDTOL {
     private Date fechaVenta;
     private Date fechaCompra;
     private int unidades;
+    private String estado;
 
 }

@@ -1,16 +1,16 @@
 package com.proyecto.TFG.repositorios;
 
-import com.proyecto.TFG.modelos.FPUsuario;
+import com.proyecto.TFG.modelos.FormaPagoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface FormaPagoUsuarioRepositorio extends JpaRepository<FPUsuario, Long> {
+public interface FormaPagoUsuarioRepositorio extends JpaRepository<FormaPagoUsuario, Long> {
 
-    List<FPUsuario> findByUsuarioId(Long usuarioId);
+    List<FormaPagoUsuario> findByUsuarioId(Long usuarioId);
 
-    List<FPUsuario> findByFormaPagoId(Long formaPagoId);
+    List<FormaPagoUsuario> findByFormaPagoId(Long formaPagoId);
 
 }

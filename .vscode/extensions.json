@@ -3,6 +3,9 @@
         "hwencc.html-tag-wrapper",
         "angular.ng-template",
         "johnpapa.angular2",
-        "jakubstepien.angular-template-style-suggestions"
+        "jakubstepien.angular-template-style-suggestions",
+        "dannymcgee.ng-html",
+        "alexiv.vscode-angular2-files",
+        "ms-ceintl.vscode-language-pack-es"
     ]
 }

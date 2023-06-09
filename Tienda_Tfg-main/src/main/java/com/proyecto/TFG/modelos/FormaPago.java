@@ -25,7 +25,7 @@ public class FormaPago implements Serializable {
     private String tipo;
 
     @OneToMany(mappedBy = "formaPago",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FPUsuario> FPUsuarios;
+    private List<FormaPagoUsuario> FormaPagoUsuarios;
 
     @OneToMany(mappedBy = "formaPago",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;

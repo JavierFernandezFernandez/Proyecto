@@ -5,6 +5,7 @@ import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SearchedProductsComponent } from './searched-products/searched-products.component';
 import { ProcessOrderComponent } from './process-order/process-order.component';
+import { CorrectPurchaseComponent } from './correct-purchase/correct-purchase.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'process-oreder',
         component: ProcessOrderComponent
+      },
+      {
+        path: 'correct-purchase',
+        component: CorrectPurchaseComponent
       },
       {
         path: 'search/:therm',
