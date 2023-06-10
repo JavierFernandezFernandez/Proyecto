@@ -11,6 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalAddAddressComponent } from '../layout/modal-add-address/modal-add-address.component';
+import { ModalAddUserPaymentMethodComponent } from '../layout/modal-add-user-payment-method/modal-add-user-payment-method.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    ModalAddAddressComponent,
+    ModalAddUserPaymentMethodComponent
   ],
   bootstrap:[
     DataComponent,

@@ -42,8 +42,6 @@ export class ProcessOrderComponent implements OnInit {
 
   units: Ejemplar[] = [];
 
-
-
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
@@ -144,7 +142,7 @@ export class ProcessOrderComponent implements OnInit {
                       this.lineaPedidoService.addOrderLine(
                         product.precio,
                         product.iva,
-                        (product.quantity ? product.quantity : 1 ),
+                        (product.quantity ? product.quantity : 1),
                         product,
                         order,
                         invoice
@@ -182,13 +180,13 @@ export class ProcessOrderComponent implements OnInit {
                           console.log(response)
                         });
                     }
-                    forkJoin(observables).pipe(
-                      map(() => {
-                        console.log('Todos los observables se completaron');
+                    forkJoin(observables)
+                      .pipe(map(() => {
+                        //console.log('Todos los observables se completaron');
                         this.clearCart()
                         this.router.navigate(['correct-purchase'])
                       })
-                    ).subscribe();
+                      ).subscribe();
                   });
               });
           });

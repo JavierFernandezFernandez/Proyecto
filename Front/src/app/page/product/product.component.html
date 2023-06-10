@@ -26,7 +26,7 @@
             type="text"
             class="form-control text-center"
             aria-label="Example text with two button addons"
-            [(ngModel)]="quantity"
+            [(ngModel)]="product.quantity"
           />
           <button
             class="btn btn-outline-secondary"
@@ -79,6 +79,7 @@
           class="btn btn-lg btn-secondary w-auto ms-2 position-relative top-50"
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
+          (click)="openModalComment(commentModal)"
         >
           Comenta este producto
         </button>
@@ -86,16 +87,7 @@
     </div>
 
     <!-- Modal añadir comentario -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
+    <ng-template #commentModal let-modal>
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="staticBackdropLabel">
@@ -104,8 +96,7 @@
             <button
               type="button"
               class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
             ></button>
           </div>
           <!-- Formulario -->
@@ -180,7 +171,7 @@
               <button
                 type="submit"
                 class="btn btn-primary w-100 btn-lg"
-                data-bs-dismiss="modal"
+                (click)="modal.close('Close click')"
                 [disabled]="!title.value || !messaje.value"
               >
                 Publicar comentario
@@ -188,8 +179,7 @@
             </div>
           </form>
         </div>
-      </div>
-    </div>
+    </ng-template>
     <div class="mx-0 mb-1 row">
       <div
         class="card w-48 min-vh-20 m-2"

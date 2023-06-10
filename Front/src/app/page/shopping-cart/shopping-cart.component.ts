@@ -77,7 +77,7 @@ export class ShoppingCartComponent implements OnInit {
   removeProduct(product: Producto) {
     const index = this.cart.findIndex((p: Producto) => p.id === product.id)
     if (index !== -1) {
-      console.log(this.cart[index])
+      // console.log(this.cart[index])
       this.cart.splice(index, 1);
       this.saveCart()
     }

@@ -1,15 +1,16 @@
 import { Ejemplar } from 'src/app/models/Ejemplar.model';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Producto, Marca, Categoria } from 'src/app/models/Producto.model';
+import { Component, OnInit } from '@angular/core';
+import { Producto, Marca } from 'src/app/models/Producto.model';
 import { Router } from '@angular/router';
 import { ComentarioService } from '../../services/comentario/comentario.service';
 import { Comentario } from 'src/app/models/Comentario.model';
 import { Usuario } from 'src/app/models/Usuario.model';
-import { catchError, pipe, throwError } from 'rxjs';
+import { catchError } from 'rxjs';
 import { ProductService } from 'src/app/services/product/product.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { ViewportScroller } from '@angular/common';
 import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ProductComponent implements OnInit {
   averageNote: number = 0;
   totalPrice: number = 0;
   stars: string = '1';
-  quantity: number = 1;
+  //quantity: number = 1;
   numberUnits: number = 0;
 
   addCartSuccess = false;
@@ -37,6 +38,7 @@ export class ProductComponent implements OnInit {
     private usuarioService: UsuarioService,
     private ejemplarService: EjemplarService,
     private viewportScroller: ViewportScroller,
+    private modalService: NgbModal,
     private router: Router,
   ) { }
 
@@ -69,52 +71,41 @@ export class ProductComponent implements OnInit {
   }
 
   lessCuantity() {
-    if (this.quantity > 1) this.quantity--;
+    if (this.product.quantity) {
+      if (this.product.quantity > 0) {
+        this.product.quantity--;
+      }
+    }
   }
 
   moreCuantity() {
-    if (true) this.quantity++; //modificar con el stock
-  }
-
-  private initializeProduct() {
-    this.productService.getProductById(this.idProducto)
-    .subscribe((response: Producto) => {
-      this.product = response;
-      this.brand = response.marca;
-      if (this.product.precio && this.product.iva) {
-        this.totalPrice = Number((this.product.precio + (this.product.precio % this.product.iva)).toFixed(2))
+    if (this.product.quantity) {
+      if (this.product.quantity < this.numberUnits) {
+        this.product.quantity++;
       }
-      this.countStok()
-    })
+    }
   }
 
-  private initializeComments() {
-    this.commentService.getCommentsByProduct(this.idProducto)
-      .subscribe((response: Comentario[]) => {
-        this.comments = response
-        //console.log(response)
-        if (this.comments.length > 0) {
-          for (const comment of this.comments) {
-            if (comment.puntuacion) this.averageNote += comment.puntuacion
-          }
-          this.averageNote /= this.comments.length
-        }
-      });
-  }
 
   addToCart() {
-    //console.log('addToCart llamado')
     if (localStorage.getItem("token") && localStorage.getItem("email")) {
       this.usuarioService.getUserByEmail(localStorage.getItem("email") as string)
         .subscribe((response: Usuario) => {
-          //console.log(response.cesta)
           if (response.cesta != null || response.cesta != undefined) {
             if (response.cesta == '') {
               response.cesta = '[]';
             }
-            //console.log(response.cesta+'dentro')
             let cart: Producto[] = JSON.parse(response.cesta);
-            cart.push(this.product);
+            const productIndex: number = cart.findIndex((p: Producto) => p.id == this.product.id)
+            if (productIndex == -1) {
+              this.product.quantity = 1
+              cart.push(this.product);
+            } else {
+              if (cart[productIndex].quantity) {
+                (cart[productIndex].quantity as number)++;
+              }
+            }
+
             response.cesta = JSON.stringify(cart);
             const user: Usuario = { cesta: response.cesta } as Usuario
             this.usuarioService.updateUser(response.id as number, user)
@@ -129,16 +120,60 @@ export class ProductComponent implements OnInit {
           }
         })
     } else {
-      console.log('no logeado')
+      this.router.navigate(['auth/login']);
     }
 
   }
 
-  private countStok(){
+  openModalComment(content: any) {
+    if (this.checkLogin()) {
+      this.modalService.open(content);
+    }
+  }
+
+  private initializeProduct() {
+    this.productService.getProductById(this.idProducto)
+      .subscribe((response: Producto) => {
+        this.product = response;
+        this.brand = response.marca;
+        if (this.product.precio && this.product.iva) {
+          this.totalPrice = Number((this.product.precio + (this.product.precio % this.product.iva)).toFixed(2))
+        }
+        this.countStok()
+      })
+  }
+
+  private initializeComments() {
+    this.commentService.getCommentsByProduct(Number(this.idProducto))
+      .subscribe((response: Comentario[]) => {
+        this.comments = response
+        //console.log(response)
+        if (this.comments.length > 0) {
+          for (const comment of this.comments) {
+            if (comment.puntuacion) this.averageNote += comment.puntuacion
+          }
+          this.averageNote /= this.comments.length
+        }
+      });
+  }
+
+  private checkLogin(): boolean {
+    if (!(localStorage.getItem("token") && localStorage.getItem("email"))) {
+      this.router.navigate(['auth/login']);
+      return false;
+    }
+    return true;
+  }
+  private countStok() {
     this.ejemplarService.getUnitsByProductId(this.product.id)
-    .subscribe((response:Ejemplar[]) => {
-      this.numberUnits = response.length
-    })
+      .subscribe((response: Ejemplar[]) => {
+        this.numberUnits = response.length
+        if (this.numberUnits == 0) {
+          this.product.quantity = 0
+        } else {
+          this.product.quantity = 1
+        }
+      })
   }
 
 }

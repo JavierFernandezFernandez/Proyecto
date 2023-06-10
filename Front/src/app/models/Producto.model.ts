@@ -7,6 +7,7 @@ export interface Producto {
   categoria: Categoria;
   id: number;
   quantity?: number
+  addCartSuccess?: boolean;
 }
 
 export interface Categoria {

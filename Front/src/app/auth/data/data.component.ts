@@ -5,6 +5,11 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { catchError } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
+import { Direccion } from 'src/app/models/Direccion.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
+import { DireccionService } from 'src/app/services/direccion/direccion.service';
+import { FormaPagoUsuarioService } from 'src/app/services/foma-pago-usuario/forma-pago-usuario.service';
 
 @Component({
   selector: 'app-data',
@@ -13,6 +18,7 @@ import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
 })
 export class DataComponent implements OnInit {
   editing: boolean = false;
+  user:Usuario = {} as Usuario;
   id: number = 0;
   email: string = '';
   name: string = '';
@@ -25,6 +31,13 @@ export class DataComponent implements OnInit {
 
   editCorrect: boolean = false;
   editPasswordCorrect: boolean = false;
+
+  isCollapsedAddress: boolean = true;
+  addresses: Direccion[] = [];
+  isCollapsedUserPaymentMethod: boolean = true;
+  userPaymentMethods: FormaPagoUsuario[] = [];
+
+
 
   form: FormGroup = this.formBuilder.group({
     actualPassword: ['',
@@ -46,7 +59,10 @@ export class DataComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
+    private direccionService: DireccionService,
+    private formaPagoUsusarioService: FormaPagoUsuarioService,
     private formBuilder: FormBuilder,
+    private ngbModal:NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +73,17 @@ export class DataComponent implements OnInit {
         this.name = response.nombre as string;
         this.phone = response.telefono as string;
         this.id = response.id as number;
+        this.user = response
+
+        this.direccionService.getAddressByUserId(this.user.id)
+            .subscribe((response: Direccion[]) => {
+              this.addresses = response
+              
+            })
+          this.formaPagoUsusarioService.getUserPaymentMethodByUserId(this.user.id)
+            .subscribe((response: FormaPagoUsuario[]) => {
+              this.userPaymentMethods = response
+            })
       })
   }
 
@@ -138,5 +165,15 @@ export class DataComponent implements OnInit {
           }
         });
   }
+    //ng-bootstrap
+    openVerticallyCentered(content: any) {
+      this.ngbModal.open(content, { centered: true });
+    }
+    onSelectedAddressChange(address: Direccion) {
+      this.isCollapsedAddress = true;
+    }
+    onSelectedUserPaymentMethodChange(userPaymentMethod: FormaPagoUsuario) {
+      this.isCollapsedAddress = true;
+    }
 }
 

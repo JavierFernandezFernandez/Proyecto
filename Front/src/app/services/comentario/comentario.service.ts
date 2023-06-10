@@ -15,10 +15,12 @@ export class ComentarioService {
 
   constructor(private http: HttpClient) {}
 
-  getCommentsByProduct(idProduct: string): Observable<Comentario[]> {
+  getCommentsByProduct(idProduct: number): Observable<Comentario[]> {
     return this.http.get<Comentario[]>(`${this.url}producto/${idProduct}`)
   }
-
+  getCommentsByUserId(idUser: number): Observable<Comentario[]> {
+    return this.http.get<Comentario[]>(`${this.url}usuario/${idUser}`)
+  }
   createComment(title:string,message:string,stars:number,userId:number,productId:number){
     const user: Usuario = {id:userId} as Usuario;
     const product: Producto = {id:productId} as Producto;

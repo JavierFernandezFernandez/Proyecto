@@ -28,5 +28,8 @@ export class PedidoService {
   getLastUserOrder(user: Usuario): Observable<Pedido> {
     return this.http.get<Pedido>(`${this.url}usuario/end/${user.id}`, { headers: this.headers })
   }
+  getOrderByUserId(userId: number): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.url}usuario/${userId}`, {headers:this.headers})
+  }
 
 }

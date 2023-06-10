@@ -1,10 +1,10 @@
+import { CategoriaService } from './../../services/categoria/categoria.service';
+import { Categoria } from './../../models/Producto.model';
 import { Usuario } from 'src/app/models/Usuario.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/services/layout/layout.service';
-import { ProductService } from 'src/app/services/product/product.service';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,29 +14,23 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
-
   delay: boolean = false;
-
   name: string = '';
-
-  items: string[] = [
-    'The first choice!',
-    'And another choice for you.',
-    'but wait! A third!'
-  ];
-
+  categories: Categoria[] = [];
   constructor(
     private layoutService: LayoutService,
     private router: Router,
-    private productService: ProductService,
     private usuarioService: UsuarioService,
+    private categoriaService: CategoriaService
   ) { }
 
   ngOnInit(): void {
-    this.layoutService.isLoggedIn.subscribe((isLoggedIn) => {
+    this.layoutService.isLoggedIn
+    .subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
     this.getName()
+    this.getCategories()
   }
   closeSesion() {
     localStorage.clear();
@@ -55,12 +49,18 @@ export class NavbarComponent implements OnInit {
       this.router.navigate([`/search/${therm.value}`]);
     }
   }
-  getName() {
+  private getName() {
     if (localStorage.getItem('email')) {
       this.usuarioService.getUserByEmail(localStorage.getItem('email') as string)
         .subscribe((response: Usuario) => {
           this.name = response.nombre as string;
         })
     }
+  }
+  private getCategories(){
+    this.categoriaService.getCategories()
+      .subscribe((response: Categoria[]) => {
+        this.categories = response
+      })
   }
 }

@@ -47,7 +47,7 @@
               >Carrito</span
             >
           </a>
-          <div class="dropdown text-end float-start me-3" ngbDropdown >
+          <div class="dropdown text-end float-start me-3" ngbDropdown>
             <a
               class="d-block link-dark text-decoration-none dropdown-toggle cursor-pointer"
               id="userDropdown"
@@ -111,7 +111,7 @@
   <!-- SubEncabezado -->
   <div class="pt-2 pb-1 bg-white bg-opacity-50">
     <div class="container d-flex">
-      <div class="dropdown" ngbDropdown >
+      <div class="dropdown" ngbDropdown>
         <button
           class="btn btn-secondary dropdown-toggle"
           type="button"
@@ -121,10 +121,14 @@
           Categorías
         </button>
 
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="categoriesDropdown">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <ul
+          class="dropdown-menu"
+          ngbDropdownMenu
+          aria-labelledby="categoriesDropdown"
+        >
+          <li *ngFor="let categoy of categories">
+            <a class="dropdown-item disabled">{{categoy.nombre}}</a>
+          </li>
         </ul>
       </div>
 

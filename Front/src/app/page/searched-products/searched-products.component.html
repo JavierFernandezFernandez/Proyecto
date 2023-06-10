@@ -30,9 +30,12 @@
           <span class="">Comprar</span>
         </button>
         <br />
-        <button class="btn btn-secondary position-relative" style="top: 20%;"  type="button">
-          <span class="">Añadir al carrito</span>
+        <button class="btn btn-secondary position-relative" style="top: 20%;"  type="button" (click)="addToCart(product)">
+          Añadir al carrito
         </button>
+        <div class="alert-info position-relative" *ngIf="product.addCartSuccess"  style="top: 20%;">
+          <p>Producto añadido al carrito</p>
+        </div>
       </div>
     </div>
     <h2 *ngIf="products.length == 0">

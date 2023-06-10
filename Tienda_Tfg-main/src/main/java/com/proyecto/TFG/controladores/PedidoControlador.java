@@ -26,7 +26,7 @@ public class PedidoControlador {
     }
 
     @GetMapping("/usuario/{usuarioId}")
-    public List<PedidoDTO> obtenerPedidosByUsuario(Long usuarioId){
+    public List<PedidoDTO> obtenerPedidosByUsuario( @PathVariable Long usuarioId){
         return pedidoServicio.findByUsuarioId(usuarioId);
     }
 

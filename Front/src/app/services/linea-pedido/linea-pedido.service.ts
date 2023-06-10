@@ -32,6 +32,9 @@ export class LineaPedidoService {
       factura: invoice
     } as LineaPedido;
     return this.http.post<LineaPedido>(this.url + 'guardar', orderLine, { headers: this.headers })
+  }
 
+  getOrederLineByOrederId(pedidoId: number): Observable<LineaPedido[]> {
+    return this.http.get<LineaPedido[]>(`${this.url}pedido/${pedidoId}`, { headers: this.headers })
   }
 }
