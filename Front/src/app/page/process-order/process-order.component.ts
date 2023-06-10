@@ -1,37 +1,27 @@
-import { EjemplarService } from './../../services/ejemplar/ejemplar.service';
-import { Ejemplar } from 'src/app/models/Ejemplar.model';
-import { LineaPedidoService } from '../../services/linea-pedido/linea-pedido.service';
-import { LineaFacturaService } from '../../services/linea-factura/linea-factura.service';
-import { PedidoService } from './../../services/pedido/pedido.service';
-import { EjemplarService } from './../../services/ejemplar/ejemplar.service';
-import { Ejemplar } from 'src/app/models/Ejemplar.model';
-import { LineaPedidoService } from '../../services/linea-pedido/linea-pedido.service';
-import { LineaFacturaService } from '../../services/linea-factura/linea-factura.service';
-import { PedidoService } from './../../services/pedido/pedido.service';
+
 import { DireccionService } from './../../services/direccion/direccion.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Router } from '@angular/router';
-import { Producto } from 'src/app/models/Producto.model';
-import { ProductService } from 'src/app/services/product/product.service';
-import { Usuario } from 'src/app/models/Usuario.model';
-import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
-import { FormaPagoUsuarioService } from 'src/app/services/foma-pago-usuario/forma-pago-usuario.service';
-import { Direccion } from 'src/app/models/Direccion.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FacturaService } from 'src/app/services/factura/factura.service';
-import { Pedido } from 'src/app/models/Pedido.model';
-import { Factura } from 'src/app/models/Factura.model';
-import { LineaPedido } from 'src/app/models/LineaPedido.model';
-import { LineaFactura } from 'src/app/models/LineaFactura.model';
 import { Observable, catchError, forkJoin, map } from 'rxjs';
-import { FacturaService } from 'src/app/services/factura/factura.service';
-import { Pedido } from 'src/app/models/Pedido.model';
+import { Direccion } from 'src/app/models/Direccion.model';
+import { Ejemplar } from 'src/app/models/Ejemplar.model';
 import { Factura } from 'src/app/models/Factura.model';
-import { LineaPedido } from 'src/app/models/LineaPedido.model';
+import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
 import { LineaFactura } from 'src/app/models/LineaFactura.model';
-import { Observable, catchError, forkJoin, map } from 'rxjs';
+import { LineaPedido } from 'src/app/models/LineaPedido.model';
+import { Pedido } from 'src/app/models/Pedido.model';
+import { Producto } from 'src/app/models/Producto.model';
+import { Usuario } from 'src/app/models/Usuario.model';
+import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
+import { FacturaService } from 'src/app/services/factura/factura.service';
+import { FormaPagoUsuarioService } from 'src/app/services/foma-pago-usuario/forma-pago-usuario.service';
+import { LineaFacturaService } from 'src/app/services/linea-factura/linea-factura.service';
+import { LineaPedidoService } from 'src/app/services/linea-pedido/linea-pedido.service';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
+import { ProductService } from 'src/app/services/product/product.service';
+
 
 @Component({
   selector: 'app-process-order',
