@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { Comentario } from 'src/app/models/Comentario.model';
-import { Producto } from 'src/app/models/Producto.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Comentario } from 'src/app/models/Comentario';
+import { Producto } from 'src/app/models/Producto';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'

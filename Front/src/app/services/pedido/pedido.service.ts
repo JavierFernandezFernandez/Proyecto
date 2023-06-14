@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { Direccion } from 'src/app/models/Direccion.model';
-import { FormaPago } from 'src/app/models/FormaPago.model';
-import { Pedido } from 'src/app/models/Pedido.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Direccion } from 'src/app/models/Direccion';
+import { FormaPago } from 'src/app/models/FormaPago';
+import { Pedido } from 'src/app/models/Pedido';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +31,6 @@ export class PedidoService {
   getOrderByUserId(userId: number): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.url}usuario/${userId}`, {headers:this.headers})
   }
+
 
 }

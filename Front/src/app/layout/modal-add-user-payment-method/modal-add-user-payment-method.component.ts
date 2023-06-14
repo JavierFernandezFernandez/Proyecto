@@ -4,8 +4,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
-import { FormaPago } from 'src/app/models/FormaPago.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { FormaPago } from 'src/app/models/FormaPago';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-modal-add-user-payment-method',

@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { FormaPago } from 'src/app/models/FormaPago.model';
+import { FormaPago } from 'src/app/models/FormaPago';
 import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'

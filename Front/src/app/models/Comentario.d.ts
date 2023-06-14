@@ -1,5 +1,5 @@
-import { Producto } from "./Producto.model";
-import { Usuario } from "./Usuario.model";
+import { Producto } from "./Producto";
+import { Usuario } from "./Usuario";
 
 export interface Comentario {
   mensaje:    string;

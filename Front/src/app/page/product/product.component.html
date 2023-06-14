@@ -37,20 +37,23 @@
           </button>
         </div>
         <br /><br />
-        <span>Disponivilidad:{{numberUnits}}</span>
+        <span>Disponibilidad:{{ numberUnits }}</span>
         <br /><br />
         <span>Marca: {{ brand.nombre }}</span>
       </div>
       <div class="mt-4" *ngIf="numberUnits > 0">
-        <button type="button" class="btn btn-info btn-lg me-2">
-          Comprar
-        </button>
-        <button type="button" class="btn btn-info btn-lg ms-2" (click)="addToCart()">
+        <button type="button" class="btn btn-info btn-lg me-2">Comprar</button>
+        <button
+          type="button"
+          class="btn btn-info btn-lg ms-2"
+          (click)="addToCart()"
+          (click)="changeSuccessMessage()"
+        >
           Añadir al carrito
         </button>
-        <div class="alert-info" *ngIf="addCartSuccess">
+        <!-- <div class="alert-info" *ngIf="addCartSuccess">
           <p>Producto añadido al carrito</p>
-        </div>
+        </div> -->
       </div>
       <div class="mt-4" *ngIf="numberUnits <= 0">
         <h3>Sin stock</h3>
@@ -88,97 +91,97 @@
 
     <!-- Modal añadir comentario -->
     <ng-template #commentModal let-modal>
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-              Comentar producto
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              (click)="modal.dismiss('Cross click')"
-            ></button>
-          </div>
-          <!-- Formulario -->
-          <form id="form" (ngSubmit)="postComment(title, messaje)">
-            <div class="modal-body">
-              <p class="clasificacion">
-                <input
-                  id="radio1"
-                  type="radio"
-                  name="option"
-                  [(ngModel)]="stars"
-                  value="5"
-                />
-                <label for="radio1">&starf;</label>
-                <input
-                  id="radio2"
-                  type="radio"
-                  name="option"
-                  [(ngModel)]="stars"
-                  value="4"
-                />
-                <label for="radio2">&starf;</label>
-                <input
-                  id="radio3"
-                  type="radio"
-                  name="option"
-                  [(ngModel)]="stars"
-                  value="3"
-                />
-                <label for="radio3">&starf;</label>
-                <input
-                  id="radio4"
-                  type="radio"
-                  name="option"
-                  [(ngModel)]="stars"
-                  value="2"
-                />
-                <label for="radio4">&starf;</label>
-                <input
-                  id="radio5"
-                  type="radio"
-                  name="option"
-                  [(ngModel)]="stars"
-                  value="1"
-                />
-                <label for="radio5">&starf;</label>
-              </p>
-              <div class="form-floating">
-                <input
-                  type="text"
-                  class="form-control mb-4"
-                  id="floatingInput"
-                  #title
-                />
-                <label for="floatingInput">
-                  Escibe aqu&iacute; el titulo de tu comentario
-                </label>
-              </div>
-              <div class="form-floating">
-                <textarea
-                  class="form-control mb-4"
-                  id="floatingTextarea2"
-                  style="height: 100px"
-                  #messaje
-                ></textarea>
-                <label for="floatingTextarea2">
-                  Escibe aqu&iacute; tu comentario sobre el producto
-                </label>
-              </div>
-            </div>
-            <div class="modal-footer text-center">
-              <button
-                type="submit"
-                class="btn btn-primary w-100 btn-lg"
-                (click)="modal.close('Close click')"
-                [disabled]="!title.value || !messaje.value"
-              >
-                Publicar comentario
-              </button>
-            </div>
-          </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            Comentar producto
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="modal.dismiss('Cross click')"
+          ></button>
         </div>
+        <!-- Formulario -->
+        <form id="form" (ngSubmit)="postComment(title, messaje)">
+          <div class="modal-body">
+            <p class="clasificacion">
+              <input
+                id="radio1"
+                type="radio"
+                name="option"
+                [(ngModel)]="stars"
+                value="5"
+              />
+              <label for="radio1">&starf;</label>
+              <input
+                id="radio2"
+                type="radio"
+                name="option"
+                [(ngModel)]="stars"
+                value="4"
+              />
+              <label for="radio2">&starf;</label>
+              <input
+                id="radio3"
+                type="radio"
+                name="option"
+                [(ngModel)]="stars"
+                value="3"
+              />
+              <label for="radio3">&starf;</label>
+              <input
+                id="radio4"
+                type="radio"
+                name="option"
+                [(ngModel)]="stars"
+                value="2"
+              />
+              <label for="radio4">&starf;</label>
+              <input
+                id="radio5"
+                type="radio"
+                name="option"
+                [(ngModel)]="stars"
+                value="1"
+              />
+              <label for="radio5">&starf;</label>
+            </p>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control mb-4"
+                id="floatingInput"
+                #title
+              />
+              <label for="floatingInput">
+                Escibe aqu&iacute; el titulo de tu comentario
+              </label>
+            </div>
+            <div class="form-floating">
+              <textarea
+                class="form-control mb-4"
+                id="floatingTextarea2"
+                style="height: 100px"
+                #messaje
+              ></textarea>
+              <label for="floatingTextarea2">
+                Escibe aqu&iacute; tu comentario sobre el producto
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button
+              type="submit"
+              class="btn btn-primary w-100 btn-lg"
+              (click)="modal.close('Close click')"
+              [disabled]="!title.value || !messaje.value"
+            >
+              Publicar comentario
+            </button>
+          </div>
+        </form>
+      </div>
     </ng-template>
     <div class="mx-0 mb-1 row">
       <div
@@ -200,3 +203,12 @@
     </div>
   </div>
 </div>
+<ngb-alert
+  class="position-fixed bottom-0 start-50 translate-middle-x"
+  #selfClosingAlert
+  *ngIf="successMessage"
+  type="info"
+  (closed)="successMessage = ''"
+>
+{{product.nombre}} se ha añadido al carrito
+</ngb-alert>

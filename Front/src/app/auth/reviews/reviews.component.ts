@@ -1,8 +1,8 @@
 import { ComentarioService } from './../../services/comentario/comentario.service';
 import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
-import { Comentario } from 'src/app/models/Comentario.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Comentario } from 'src/app/models/Comentario';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-reviews',

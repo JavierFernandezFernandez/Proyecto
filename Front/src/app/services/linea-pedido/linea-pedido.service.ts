@@ -2,10 +2,10 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { Factura } from 'src/app/models/Factura.model';
-import { LineaPedido } from 'src/app/models/LineaPedido.model';
-import { Pedido } from 'src/app/models/Pedido.model';
-import { Producto } from 'src/app/models/Producto.model';
+import { Factura } from 'src/app/models/Factura';
+import { LineaPedido } from 'src/app/models/LineaPedido';
+import { Pedido } from 'src/app/models/Pedido';
+import { Producto } from 'src/app/models/Producto';
 
 @Injectable({
   providedIn: 'root'

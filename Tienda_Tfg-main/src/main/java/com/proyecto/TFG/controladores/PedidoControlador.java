@@ -26,7 +26,7 @@ public class PedidoControlador {
     }
 
     @GetMapping("/usuario/{usuarioId}")
-    public List<PedidoDTO> obtenerPedidosByUsuario( @PathVariable Long usuarioId){
+    public List<PedidoDTO> obtenerPedidosByUsuario(@PathVariable Long usuarioId){
         return pedidoServicio.findByUsuarioId(usuarioId);
     }
 
@@ -44,12 +44,12 @@ public class PedidoControlador {
     }
 
     @GetMapping("/direccion/{direccionId}")
-    public List<PedidoDTO> obtenerPedidosByDireccion(Long direccionId){
+    public List<PedidoDTO> obtenerPedidosByDireccion(@PathVariable Long direccionId){
         return pedidoServicio.findByDireccionId(direccionId);
     }
 
     @GetMapping("/formaPago/{formaPagoId}")
-    public List<PedidoDTO> obtenerPedidosByFormaPago(Long formaPagoId){
+    public List<PedidoDTO> obtenerPedidosByFormaPago(@PathVariable Long formaPagoId){
         return pedidoServicio.findByFormaPagoId(formaPagoId);
     }
 
@@ -73,7 +73,19 @@ public class PedidoControlador {
         return ResponseEntity.ok(pedidoId);
     }
 
-    //implementar update
+    @PatchMapping("/{id}")
+    public ResponseEntity<PedidoDTO> actualizarPedidoParcial(@PathVariable long id, @RequestBody PedidoDTO pedido){
+
+        PedidoDTO pedidoId = pedidoServicio.obtenerPorId(id);
+
+        if (pedido.getEstado() != null){
+            pedidoId.setEstado(pedido.getEstado());
+        }
+
+        PedidoDTO pedidoActualizado = pedidoServicio.guardar(pedidoId);
+        return new ResponseEntity<>(pedidoActualizado, HttpStatus.CREATED);
+
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HashMap<String, Boolean>> eliminarPedido(@PathVariable long id){

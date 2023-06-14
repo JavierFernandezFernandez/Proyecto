@@ -1,11 +1,11 @@
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Usuario } from 'src/app/models/Usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { catchError } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
-import { Direccion } from 'src/app/models/Direccion.model';
+import { RespuestaLogin } from 'src/app/models/RespuestaLogin';
+import { Direccion } from 'src/app/models/Direccion';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
 import { DireccionService } from 'src/app/services/direccion/direccion.service';
@@ -78,7 +78,7 @@ export class DataComponent implements OnInit {
         this.direccionService.getAddressByUserId(this.user.id)
             .subscribe((response: Direccion[]) => {
               this.addresses = response
-              
+
             })
           this.formaPagoUsusarioService.getUserPaymentMethodByUserId(this.user.id)
             .subscribe((response: FormaPagoUsuario[]) => {

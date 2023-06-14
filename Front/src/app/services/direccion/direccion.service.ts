@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GET_HEADERS } from 'src/app/config';
 import { API_URL } from 'src/app/config';
-import { Direccion } from 'src/app/models/Direccion.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Direccion } from 'src/app/models/Direccion';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'

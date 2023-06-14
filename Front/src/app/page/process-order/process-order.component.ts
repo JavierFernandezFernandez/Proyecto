@@ -5,22 +5,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, catchError, forkJoin, map } from 'rxjs';
-import { Direccion } from 'src/app/models/Direccion.model';
-import { Ejemplar } from 'src/app/models/Ejemplar.model';
-import { Factura } from 'src/app/models/Factura.model';
+import { Direccion } from 'src/app/models/Direccion';
+import { Ejemplar } from 'src/app/models/Ejemplar';
+import { Factura } from 'src/app/models/Factura';
 import { FormaPagoUsuario } from 'src/app/models/FormaPagoUsuarios';
-import { LineaFactura } from 'src/app/models/LineaFactura.model';
-import { LineaPedido } from 'src/app/models/LineaPedido.model';
-import { Pedido } from 'src/app/models/Pedido.model';
-import { Producto } from 'src/app/models/Producto.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { LineaFactura } from 'src/app/models/LineaFactura';
+import { LineaPedido } from 'src/app/models/LineaPedido';
+import { Pedido } from 'src/app/models/Pedido';
+import { Producto } from 'src/app/models/Producto';
+import { Usuario } from 'src/app/models/Usuario';
 import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
 import { FacturaService } from 'src/app/services/factura/factura.service';
 import { FormaPagoUsuarioService } from 'src/app/services/foma-pago-usuario/forma-pago-usuario.service';
 import { LineaFacturaService } from 'src/app/services/linea-factura/linea-factura.service';
 import { LineaPedidoService } from 'src/app/services/linea-pedido/linea-pedido.service';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
-import { ProductService } from 'src/app/services/product/product.service';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class ProcessOrderComponent implements OnInit {
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
-    private productService: ProductService,
+    private productoService: ProductoService,
     private direccionService: DireccionService,
     private formaPagoUsusarioService: FormaPagoUsuarioService,
     private facturaService: FacturaService,
@@ -93,7 +93,7 @@ export class ProcessOrderComponent implements OnInit {
   }
 
   priceWithIva(product: Producto): number {
-    return this.productService.getPriceWithIva(product)
+    return this.productoService.getPriceWithIva(product)
   }
   totalPrice() {
     let totalPrice: number = 0;
@@ -154,42 +154,43 @@ export class ProcessOrderComponent implements OnInit {
                         });
                     }
 
-                    let observables: Observable<any>[] = [];
-
+                    const observables: Observable<any>[] = [];
                     for (const unit of this.units) {
-                      let observable = this.lineaFacturaService.addInvoiceLine(
+                      const observable = this.lineaFacturaService.addInvoiceLine(
                         unit.producto.precio,
                         unit.producto.iva,
                         unit.serie,
                         unit.producto,
                         invoice
                       );
-                      observables.push(observable);
-
-                      observable
-                        .pipe(catchError(error => {
-                          return error.message
-                        }))
-                        .subscribe((response: LineaFactura | string) => {
-                          if (!(typeof response === 'string')) {
-                            const chagedParameter: Ejemplar = {
-                              estado: 'adquirido'
-                            } as Ejemplar
-                            this.ejemplarService.updateUnit(unit.id, chagedParameter)
-                              .subscribe()
-                          } else {
-                            console.log(response)
-                          }
-                          console.log(response)
-                        });
+                      observables.push(
+                        observable.pipe(
+                          catchError(error => {
+                            return error.message;
+                          })
+                        )
+                      );
                     }
+
                     forkJoin(observables)
-                      .pipe(map(() => {
-                        //console.log('Todos los observables se completaron');
+                      .subscribe((responses: (LineaFactura | string)[]) => {
+                        for (let i = 0; i < responses.length; i++) {
+                          const response = responses[i];
+                          const unit = this.units[i];
+
+                          if (!(typeof response === 'string')) {
+                            const changedParameter: Ejemplar = {
+                              estado: 'adquirido'
+                            } as Ejemplar;
+                            this.ejemplarService.updateUnit(unit.id, changedParameter).subscribe();
+                          } else {
+                            console.log(response);
+                          }
+                          console.log(response);
+                        }
                         this.clearCart()
                         this.router.navigate(['correct-purchase'])
-                      })
-                      ).subscribe();
+                      });
                   });
               });
           });
@@ -200,7 +201,7 @@ export class ProcessOrderComponent implements OnInit {
     const cart: string = JSON.stringify([])
     this.usuarioService.updateUser(this.user.id, { cesta: cart } as Usuario)
       .subscribe(() => {
-        console.log('carrito borrado');
+        //console.log('carrito borrado');
       })
   }
 

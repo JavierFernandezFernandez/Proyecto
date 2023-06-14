@@ -1,6 +1,6 @@
-import { Factura } from "./Factura.model";
-import { Pedido } from "./Pedido.model";
-import { Producto } from "./Producto.model";
+import { Factura } from "./Factura";
+import { Pedido } from "./Pedido";
+import { Producto } from "./Producto";
 
 export interface LineaPedido {
   id: number;

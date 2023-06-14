@@ -1,5 +1,5 @@
-import { FormaPago } from "./FormaPago.model";
-import { Usuario } from "./Usuario.model";
+import { FormaPago } from "./FormaPago";
+import { Usuario } from "./Usuario";
 
 export interface FormaPagoUsuario {
   id: number;

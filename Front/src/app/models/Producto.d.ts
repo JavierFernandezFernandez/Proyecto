@@ -1,3 +1,5 @@
+import { Ejemplar } from "./Ejemplar";
+
 export interface Producto {
   nombre: string;
   precio: number;
@@ -8,6 +10,7 @@ export interface Producto {
   id: number;
   quantity?: number
   addCartSuccess?: boolean;
+  units?: Ejemplar[]
 }
 
 export interface Categoria {

@@ -1,5 +1,5 @@
-import { Factura } from "./Factura.model";
-import { Producto } from "./Producto.model";
+import { Factura } from "./Factura";
+import { Producto } from "./Producto";
 
 
 export interface LineaFactura {

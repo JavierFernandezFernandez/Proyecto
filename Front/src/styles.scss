@@ -55,12 +55,25 @@
   font-size: calc(1.25rem + 0.16vw)
 }
 
+.border-gray {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(#d3d3d2), var(--bs-border-opacity)) !important;
+}
+.sticky
+    {
+        position: fixed;
+        top:0;
+        width: 100%;
+        background-color: #fff;
+        padding-right: 20px!important;
+
+    }
+
 @media (min-width: 1200px) {
   .display-6 {
     font-size: 2rem;
   }
 }
-
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

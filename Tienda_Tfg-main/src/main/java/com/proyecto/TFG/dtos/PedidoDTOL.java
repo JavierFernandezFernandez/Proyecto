@@ -15,5 +15,6 @@ public class PedidoDTOL {
     private long Id;
     private LocalDate fechaEntrega;
     private LocalDate fecha;
+    private String estado;
 
 }

@@ -1,9 +1,9 @@
-import { Direccion } from 'src/app/models/Direccion.model';
+import { Direccion } from 'src/app/models/Direccion';
 import { DireccionService } from './../../services/direccion/direccion.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-modal-add-address',

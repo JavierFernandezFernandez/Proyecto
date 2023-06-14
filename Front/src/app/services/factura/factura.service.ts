@@ -1,10 +1,10 @@
-import { Direccion } from './../../models/Direccion.model';
+import { Direccion } from '../../models/Direccion';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { Factura } from 'src/app/models/Factura.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Factura } from 'src/app/models/Factura';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,7 @@ export class FacturaService {
   getLastUserInvoice(user: Usuario): Observable<Factura> {
     return this.http.get<Factura>(`${this.url}usuario/end/${user.id}`, { headers: this.headers })
   }
-
+  getInvoiceById(id: number): Observable<Factura> {
+    return this.http.get<Factura>(this.url + id, { headers: this.headers })
+  }
 }

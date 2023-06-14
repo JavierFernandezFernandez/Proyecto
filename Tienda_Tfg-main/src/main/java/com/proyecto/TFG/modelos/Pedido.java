@@ -24,9 +24,10 @@ public class Pedido implements Serializable {
     private long Id;
     @Column(name = "Fechaentrega")
     private LocalDate fechaEntrega;
-
     @Column(name = "Fecha")
     private LocalDate fecha;
+    @Column(name = "Estado")
+    private String estado;
 
     @ManyToOne()
     @JoinColumn(name = "Usuarios_Id")

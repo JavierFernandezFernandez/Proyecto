@@ -1,7 +1,10 @@
 package com.proyecto.TFG.controladores;
 
+import com.proyecto.TFG.dtos.EjemplarDTO;
+import com.proyecto.TFG.dtos.EjemplarDTOL;
 import com.proyecto.TFG.dtos.ProductoDTO;
 import com.proyecto.TFG.modelos.Producto;
+import com.proyecto.TFG.servicios.EjemplarServicioImpl;
 import com.proyecto.TFG.servicios.ProductoServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,9 @@ public class ProductoControlador {
 
     @Autowired
     ProductoServicioImpl productoServicio;
+
+    @Autowired
+    EjemplarServicioImpl ejemplarServicio;
 
     @GetMapping("/listar")
     public List<ProductoDTO> obtenerProductos(){
@@ -50,7 +56,13 @@ public class ProductoControlador {
             Random random = new Random();
             int randomNumber = random.nextInt(numProductos);
 
-            productosRandom.add(productos.get(randomNumber));
+            List<EjemplarDTO> listaEjemplares = ejemplarServicio.findByProductoId(productos.get(randomNumber).getId());
+
+            if (listaEjemplares.size() > 0){
+                productosRandom.add(productos.get(randomNumber));
+            }else{
+                i --;
+            }
 
         }
 
@@ -70,7 +82,13 @@ public class ProductoControlador {
             Random random = new Random();
             int randomNumber = random.nextInt(numProductos);
 
-            productosRandom.add(productos.get(randomNumber));
+            List<EjemplarDTO> listaEjemplares = ejemplarServicio.findByProductoId(productos.get(randomNumber).getId());
+
+            if (listaEjemplares.size() > 0){
+                productosRandom.add(productos.get(randomNumber));
+            }else{
+                i --;
+            }
 
         }
 
@@ -90,7 +108,13 @@ public class ProductoControlador {
             Random random = new Random();
             int randomNumber = random.nextInt(numProductos);
 
+            List<EjemplarDTO> listaEjemplares = ejemplarServicio.findByProductoId(productos.get(randomNumber).getId());
+
+            if (listaEjemplares.size() > 0){
             productosRandom.add(productos.get(randomNumber));
+            }else{
+                i --;
+            }
 
         }
 

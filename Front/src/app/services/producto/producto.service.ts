@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Producto } from 'src/app/models/Producto.model';
+import { Producto } from 'src/app/models/Producto';
 import { API_URL, GET_HEADERS } from 'src/app/config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductoService {
   private url: string = API_URL+'/producto/';
   private headers: HttpHeaders = GET_HEADERS()
 

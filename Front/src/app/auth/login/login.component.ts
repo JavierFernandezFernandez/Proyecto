@@ -1,7 +1,7 @@
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RespuestaLogin } from 'src/app/models/RespuestaLogin.model';
+import { RespuestaLogin } from 'src/app/models/RespuestaLogin';
 import { catchError } from 'rxjs';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { LayoutService } from 'src/app/services/layout/layout.service';

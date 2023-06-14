@@ -2,11 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL, GET_HEADERS } from 'src/app/config';
-import { Direccion } from 'src/app/models/Direccion.model';
-import { Factura } from 'src/app/models/Factura.model';
-import { LineaFactura } from 'src/app/models/LineaFactura.model';
-import { Producto } from 'src/app/models/Producto.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Direccion } from 'src/app/models/Direccion';
+import { Factura } from 'src/app/models/Factura';
+import { LineaFactura } from 'src/app/models/LineaFactura';
+import { Producto } from 'src/app/models/Producto';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +31,9 @@ export class LineaFacturaService {
       factura: invoice
     } as LineaFactura;
     return this.http.post<LineaFactura>(this.url + 'guardar', invoiceLine, { headers: this.headers })
+  }
+
+  getInvoiceLineByInvoiceId(invoiceId: number): Observable<LineaFactura[]> {
+    return this.http.get<LineaFactura[]>(`${this.url}factura/${invoiceId}`, { headers: this.headers })
   }
 }

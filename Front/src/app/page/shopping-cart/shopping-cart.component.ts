@@ -1,12 +1,12 @@
 import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
-import { ProductService } from 'src/app/services/product/product.service';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import { Producto } from 'src/app/models/Producto.model';
+import { Producto } from 'src/app/models/Producto';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Usuario } from 'src/app/models/Usuario';
 import { catchError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Ejemplar } from 'src/app/models/Ejemplar.model';
+import { Ejemplar } from 'src/app/models/Ejemplar';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -20,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private productService: ProductService,
+    private productoService: ProductoService,
     private ejemplarService: EjemplarService,
     private router: Router
   ) { }
@@ -40,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
   priceWithIva(product: Producto): number {
-    return this.productService.getPriceWithIva(product)
+    return this.productoService.getPriceWithIva(product)
   }
 
   lessQuantity(input: HTMLInputElement, product: Producto) {

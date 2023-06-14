@@ -1,6 +1,6 @@
 import { CategoriaService } from './../../services/categoria/categoria.service';
-import { Categoria } from './../../models/Producto.model';
-import { Usuario } from 'src/app/models/Usuario.model';
+import { Categoria } from '../../models/Producto';
+import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

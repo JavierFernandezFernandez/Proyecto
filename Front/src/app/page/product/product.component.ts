@@ -1,16 +1,16 @@
-import { Ejemplar } from 'src/app/models/Ejemplar.model';
-import { Component, OnInit } from '@angular/core';
-import { Producto, Marca } from 'src/app/models/Producto.model';
+import { Ejemplar } from 'src/app/models/Ejemplar';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Producto, Marca } from 'src/app/models/Producto';
 import { Router } from '@angular/router';
 import { ComentarioService } from '../../services/comentario/comentario.service';
-import { Comentario } from 'src/app/models/Comentario.model';
-import { Usuario } from 'src/app/models/Usuario.model';
-import { catchError } from 'rxjs';
-import { ProductService } from 'src/app/services/product/product.service';
+import { Comentario } from 'src/app/models/Comentario';
+import { Usuario } from 'src/app/models/Usuario';
+import { catchError, debounceTime, Subject } from 'rxjs';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, NgIf } from '@angular/common';
 import { EjemplarService } from 'src/app/services/ejemplar/ejemplar.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -27,13 +27,20 @@ export class ProductComponent implements OnInit {
   averageNote: number = 0;
   totalPrice: number = 0;
   stars: string = '1';
-  //quantity: number = 1;
   numberUnits: number = 0;
 
-  addCartSuccess = false;
+  addCartSuccess: boolean = false;
+
+  private _success = new Subject<string>();
+
+  staticAlertClosed = true;
+  successMessage = '';
+
+  @ViewChild('staticAlert', { static: false }) staticAlert: NgbAlert = {} as NgbAlert;
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert = {} as NgbAlert;
 
   constructor(
-    private productService: ProductService,
+    private productoService: ProductoService,
     private commentService: ComentarioService,
     private usuarioService: UsuarioService,
     private ejemplarService: EjemplarService,
@@ -49,6 +56,13 @@ export class ProductComponent implements OnInit {
     this.idProducto = urlSplitted[urlSplitted.length - 1];
     this.initializeProduct();
     this.initializeComments();
+
+    this._success.subscribe((message) => (this.successMessage = message));
+    this._success.pipe(debounceTime(10000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+    });
   }
 
   postComment(title: HTMLInputElement, messaje: HTMLTextAreaElement) {
@@ -98,11 +112,10 @@ export class ProductComponent implements OnInit {
             let cart: Producto[] = JSON.parse(response.cesta);
             const productIndex: number = cart.findIndex((p: Producto) => p.id == this.product.id)
             if (productIndex == -1) {
-              this.product.quantity = 1
               cart.push(this.product);
             } else {
               if (cart[productIndex].quantity) {
-                (cart[productIndex].quantity as number)++;
+                (cart[productIndex].quantity as number) += this.product.quantity ? this.product.quantity : 0;
               }
             }
 
@@ -127,12 +140,12 @@ export class ProductComponent implements OnInit {
 
   openModalComment(content: any) {
     if (this.checkLogin()) {
-      this.modalService.open(content);
+      this.modalService.open(content, { centered: true });
     }
   }
 
   private initializeProduct() {
-    this.productService.getProductById(this.idProducto)
+    this.productoService.getProductById(this.idProducto)
       .subscribe((response: Producto) => {
         this.product = response;
         this.brand = response.marca;
@@ -174,6 +187,9 @@ export class ProductComponent implements OnInit {
           this.product.quantity = 1
         }
       })
+  }
+  public changeSuccessMessage() {
+    this._success.next(`${new Date()} - Message successfully changed.`);
   }
 
 }
